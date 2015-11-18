@@ -1,0 +1,26 @@
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	display: inline;
+}
+
+#navbar {
+	background-color: #CF2828;
+}
+
+html {
+	background-image: url("../images/hancock.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+
+#mainForm {
+	background-color: #FFFFFF;
+	z-index: 1; 
+	position: relative; 
+}
