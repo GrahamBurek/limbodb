@@ -33,14 +33,31 @@ Now());
 # creates table 'stuff' for objects containing corresponding information
 CREATE TABLE IF NOT EXISTS stuff(
 id INT PRIMARY KEY AUTO_INCREMENT,
+name TEXT NOT NULL,
 location_id INT NOT NULL,
+category SET('Electronics', 'Clothing', 'School Supplies', 'Other') NOT NULL,
+color TEXT NOT NULL,
 description TEXT NOT NULL,
 create_date DATETIME NOT NULL,
 update_date DATETIME NOT NULL,
 room TEXT,
 owner TEXT,
 finder TEXT,
-STATUS SET('found', 'lost', 'claimed') NOT NULL);
+status SET('Found', 'Lost', 'Claimed') NOT NULL);
+
+INSERT INTO users(name, location_id, category, color, description, create_date, update_date, room, owner, finder, status) VALUES(
+"iPhone Charger",
+15,
+"Electronics",
+"White",
+"Basic white Apple iPhone wall charger. Slightly frayed at one end.",
+Now(),
+Now(),
+"HC2020",
+"Jim Smith",
+NULL,
+"Lost"
+);
 
 
 # creates table 'locations' of all locations on campus

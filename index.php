@@ -6,14 +6,16 @@
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Navbar include statement: -->
-<?php 
+<!-- Require statements: -->
+<?php
+	require('includes/connect_db.php'); 
+	require('includes/helpers.php');
 	require('templates/navbar.php');
 ?>
-<!-- Main white form for pages: -->
-<div id="mainForm">
 
-<!-- Body goes here -->
+<div id="mainForm">
+	<h2> 
+
 
 </div>
 </body>

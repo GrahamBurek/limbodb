@@ -2,7 +2,7 @@
 # CONNECT TO MySQL DATABASE.
 # Otherwise fail gracefully and explain the error. 
 
-$dbc = @mysqli_connect ( 'localhost', 'root', '', 'site_db' )
+$dbc = @mysqli_connect ( 'localhost', 'root', '', 'limbo_db' )
 
 OR die ( mysqli_connect_error() ) ;
 
