@@ -14,10 +14,14 @@ require('/includes/connect_db.php');
 ?>
 <!-- Main white form for pages: -->
 <div id="mainForm">
+    <!-- Header and description -->
 <h1>Lost Item Listing</h1>
 <p>Help us find your lost item by giving us a description of it!</p>
-<form>
-   <p> <input type="text" name="listing-name"></p>
+    <!-- start form -->
+<form action = "lost-1.php">
+    <!--text field for listing name-->
+   <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
+    <!--drop down with item types -->
    <p>Item Type: <select>
         <option value="electronics">Electronic</option>
         <option value="clothing">Clothing</option>
@@ -25,10 +29,19 @@ require('/includes/connect_db.php');
         <option value="book">Book</option>
         <option value="other">Other</option>
     </select></p>
-    <p>Item Color: <input type="text" name="item-color"></p>
-    <p>Location where lost (if known): <select size="7">
+    <!-- text field for color-->
+    <p>Item Color: <input type="text" name="item-color" placeholder="Color"></p>
+    <p>Location where lost (if known): </br>
+        <!--generates drop down of locations from database-->
+    <select size="7">
         <?php dropdown_locations($dbc); ?>
         </select></p>
+    <!-- date field for when item was lost -->
+    <p>Date lost (if known): <input type="date">
+    <!-- text field for email address-->
+    <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address"> </p>
+    <!-- submit button-->
+    </p><button type="submit">Submit</button>
 </form>
 </div>
 </body>
