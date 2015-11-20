@@ -11,10 +11,16 @@
 	require('includes/connect_db.php'); 
 	require('includes/helpers.php');
 	require('templates/navbar.php');
+
+
 ?>
 
 <div id="mainForm">
-	<h2> 
+	<h2> </h2>
+
+<?php
+show_quicklinks($dbc);
+?>
 
 
 </div>

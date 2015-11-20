@@ -2,7 +2,7 @@
 
 function show_quicklinks($dbc) {
   # Create a query to 
-  $query = 'SELECT id, name, location_id, category, color, description, create_date, update_date, room, owner, finder, status FROM stuff ORDER BY update_date ASC' ;
+  $query = 'SELECT * FROM stuff ORDER BY update_date ASC' ;
 
   # Execute the query
   $results = mysqli_query( $dbc , $query ) ;
@@ -13,7 +13,7 @@ function show_quicklinks($dbc) {
   {
       # But...wait until we know the query succeed before
       # rendering the table start.
-      echo '<H1>Presidents</H1>' ;
+      echo '<h3> Current Listings </h3>';
       echo '<TABLE>';
       echo '<TR>';
       echo '<TH>Date/Time</TH>';
@@ -24,12 +24,12 @@ function show_quicklinks($dbc) {
       # For each row result, generate a table row with ID number
       while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
       {
-        $alink = '<A HREF = results.php?id=' . $row['id'] . '>' . $row['id'] . '. </A>';
+        $alink = '<A HREF = results.php?id=' . $row['id'] . '>' . $row['name'] . ' </A>';
          
         echo '<TR>' ;
-        echo '<TD ALIGN=right>' . $alink . '</TD>';  
-        #echo '<TD>' . $row['id'] . '</TD>' ;
-        echo '<TD>' . $row['lname'] . '</TD>' ;
+        echo '<TD>' . $row['update_date'] . '</TD>';  
+        echo '<TD>' . $row['status'] . '</TD>' ;
+        echo '<TD>' . $alink . '</TD>' ;
         echo '</TR>';
         
       }

@@ -3,6 +3,7 @@
 # Version 0.0.1
 
 # creates database 'limbo_db' if it does not already exist and begins using it
+DROP DATABASE IF EXISTS limbo_db;
 CREATE DATABASE IF NOT EXISTS limbo_db;
 USE limbo_db;
 
@@ -43,7 +44,8 @@ update_date DATETIME NOT NULL,
 room TEXT,
 owner TEXT,
 finder TEXT,
-status SET('Found', 'Lost', 'Claimed') NOT NULL);
+status SET('Found', 'Lost', 'Claimed') NOT NULL
+);
 
 INSERT INTO stuff(name, location_id, category, color, description, create_date, update_date, room, owner, finder, status) VALUES(
 "iPhone Charger",
@@ -109,6 +111,7 @@ INSERT INTO locations(create_date, update_date, name) VALUES
 
 # prints out users and locations
 SELECT * FROM users;
+SELECT * FROM stuff;
 SELECT * FROM locations;
 
 
