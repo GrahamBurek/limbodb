@@ -25,14 +25,13 @@ ul {
 	position: fixed;
 	width: 100%;
   	margin: 0;
-  	//padding: 20px;
   	z-index: 2;
 }
 
 #navbar li {
 	display: inline-block;
 	margin-right: 5px;
-	padding: 30px;
+	padding: 20px;
 }
 
 #navbar li:hover{
@@ -57,7 +56,16 @@ ul {
 	position: relative; 
 }
 
-#mainForm h1, p, h3 , table{
+#mainForm h1, p, h3{
 	padding-top: 10px;
 	padding-left: 10px;
+}
+
+#mainForm table, th, td{
+	border-collapse: collapse;
+	border: 1px solid;
+}
+
+#mainForm th, td {
+	padding: 10px;
 }
