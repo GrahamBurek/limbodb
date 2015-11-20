@@ -25,14 +25,19 @@ ul {
 	position: fixed;
 	width: 100%;
   	margin: 0;
-  	padding: 20px;
+  	//padding: 20px;
   	z-index: 2;
 }
 
 #navbar li {
 	display: inline-block;
 	margin-right: 5px;
-	width: 
+	padding: 30px;
+}
+
+#navbar li:hover{
+	background-color: #BE1717;
+
 }
 
 #navbar a {
@@ -50,4 +55,9 @@ ul {
 	background-color: #FFFFFF;
 	z-index: 1; 
 	position: relative; 
+}
+
+#mainForm h1, p, h3 , table{
+	padding-top: 10px;
+	padding-left: 10px;
 }

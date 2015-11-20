@@ -6,23 +6,14 @@
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Require statements: -->
-<?php
-	require('includes/connect_db.php'); 
-	require('includes/helpers.php');
+<!-- Navbar include statement: -->
+<?php 
 	require('templates/navbar.php');
-
-
 ?>
-
+<!-- Main white form for pages: -->
 <div id="mainForm">
-	<h1>Welcome to Limbo!</h1>
-	<p>Lost something? Found something? Reunite owners with their items by posting in Limbo!</p>
 
-<?php
-	show_quicklinks($dbc);
-?>
-
+<!-- Body goes here -->
 
 </div>
 </body>
