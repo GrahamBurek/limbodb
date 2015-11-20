@@ -8,6 +8,8 @@
 <body>
 <!-- Navbar include statement: -->
 <?php 
+	require('includes/connect_db.php'); 
+	require('includes/helpers.php');
 	require('templates/navbar.php');
 ?>
 <!-- Main white form for pages: -->

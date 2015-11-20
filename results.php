@@ -8,12 +8,19 @@
 <body>
 <!-- Navbar include statement: -->
 <?php 
+	require('includes/connect_db.php'); 
+	require('includes/helpers.php');
 	require('templates/navbar.php');
 ?>
 <!-- Main white form for pages: -->
 <div id="mainForm">
-
-<!-- Body goes here -->
+<?php
+	if($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
+    	if(isset($_GET['id'])){
+      		show_listing($dbc, $_GET['id']);
+    	}
+	}
+?>
 
 </div>
 </body>
