@@ -43,6 +43,7 @@ require('/includes/connect_db.php');
         <!-- submit button-->
         </p><button type="submit">Submit</button>
     </form>
+    <input type="button" onclick="location.href='index.php';" value="Back to Home" />
 </div>
 </body>
 </html>
