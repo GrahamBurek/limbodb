@@ -21,7 +21,7 @@
     	}
 	}
 ?>
-
+<input type="button" onclick="location.href='index.php';" value="Back to Home" />
 </div>
 </body>
 </html>
