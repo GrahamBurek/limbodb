@@ -77,7 +77,7 @@ function show_listing($dbc, $id) {
 function dropdown_locations($dbc)
 {
     # Create a query to
-    $query = 'SELECT name FROM locations';
+    $query = 'SELECT location_name FROM locations';
 
     # Execute the query
     $results = mysqli_query($dbc, $query);
@@ -88,7 +88,7 @@ function dropdown_locations($dbc)
         # But...wait until we know the query succeed before
         # For each row result, generate a dropdown option with location name
         while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
-            echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+            echo '<option value="' . $row['location_name'] . '">' . $row['location_name'] . '</option>';
         }
             # Free up the results in memory
             mysqli_free_result($results);
