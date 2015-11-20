@@ -45,7 +45,7 @@ owner TEXT,
 finder TEXT,
 status SET('Found', 'Lost', 'Claimed') NOT NULL);
 
-INSERT INTO users(name, location_id, category, color, description, create_date, update_date, room, owner, finder, status) VALUES(
+INSERT INTO stuff(name, location_id, category, color, description, create_date, update_date, room, owner, finder, status) VALUES(
 "iPhone Charger",
 15,
 "Electronics",

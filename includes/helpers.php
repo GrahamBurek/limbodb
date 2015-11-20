@@ -2,7 +2,7 @@
 
 function show_quicklinks($dbc) {
   # Create a query to 
-  $query = 'SELECT id, number, lname FROM stuff ORDER BY id ASC' ;
+  $query = 'SELECT id, name, location_id, category, color, description, create_date, update_date, room, owner, finder, status FROM stuff ORDER BY update_date ASC' ;
 
   # Execute the query
   $results = mysqli_query( $dbc , $query ) ;
@@ -16,8 +16,9 @@ function show_quicklinks($dbc) {
       echo '<H1>Presidents</H1>' ;
       echo '<TABLE>';
       echo '<TR>';
-      echo '<TH>ID</TH>';
-      echo '<TH>Last Name</TH>';
+      echo '<TH>Date/Time</TH>';
+      echo '<TH>Status</TH>';
+      echo '<TH>Item</TH>';
       echo '</TR>';
 
       # For each row result, generate a table row with ID number
