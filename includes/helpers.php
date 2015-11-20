@@ -2,7 +2,7 @@
 
 function show_quicklinks($dbc) {
   # Create a query to 
-  $query = 'SELECT id, item, update_date, status FROM stuff ORDER BY update_date ASC' ;
+  $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date ASC' ;
 
   # Execute the query
   $results = mysqli_query( $dbc , $query ) ;
@@ -27,7 +27,7 @@ function show_quicklinks($dbc) {
         $alink = '<A HREF = results.php?id=' . $row['id'] . '>' . $row['item'] . ' </A>';
          
         echo '<TR>' ;
-        echo '<TD>' . $row['update_date'] . '</TD>';  
+        echo '<TD>' . $row['item_date'] . '</TD>';  
         echo '<TD>' . $row['status'] . '</TD>' ;
         echo '<TD>' . $alink . '</TD>' ;
         echo '</TR>';
@@ -63,8 +63,9 @@ function show_listing($dbc, $id) {
         echo '<p>Item Name: ' . $row['item'] . '</p>';
         echo '<p>Item Category: ' . $row['category'] . '</p>';
         echo '<p>Item Color: ' . $row['color'] . '</p>';
-        echo '<p>Location where ' . strtolower($row['status']) . ': ' . $row['location_name'] . '</p>';
-        echo '<p>Date ' . strtolower($row['status']) . ': ' . $row['create_date'] .'</p>';
+        if($row['location_name']) 
+          echo '<p>Location where ' . strtolower($row['status']) . ': ' . $row['location_name'] . '</p>';
+        echo '<p>Date ' . strtolower($row['status']) . ': ' . $row['item_date'] .'</p>';
         echo '<p>Item Description: ' . $row['description'] . '</p>';
       }
 
