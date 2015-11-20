@@ -16,10 +16,10 @@
 ?>
 
 <div id="mainForm">
-	<h2> </h2>
+	<h1> </h1>
 
 <?php
-show_quicklinks($dbc);
+	show_quicklinks($dbc);
 ?>
 
 
