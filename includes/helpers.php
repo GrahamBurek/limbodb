@@ -42,6 +42,28 @@ function show_quicklinks($dbc) {
   }
 }
 
+#pull all location names from database and generate a dropdown option for each
+function dropdown_locations($dbc)
+{
+    # Create a query to
+    $query = 'SELECT name FROM locations';
+
+    # Execute the query
+    $results = mysqli_query($dbc, $query);
+    check_results($results);
+
+    # Show results
+    if ($results) {
+        # But...wait until we know the query succeed before
+        # For each row result, generate a dropdown option with location name
+        while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
+            echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+        }
+            # Free up the results in memory
+            mysqli_free_result($results);
+
+    }
+}
 # Checks the query results as a debugging aid
 function check_results($results) {
   global $dbc;
