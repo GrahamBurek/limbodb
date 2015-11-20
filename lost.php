@@ -15,8 +15,8 @@ require('/includes/connect_db.php');
 <!-- Main white form for pages: -->
 <div id="mainForm">
     <!-- Header and description -->
-<h1>Lost Item Listing</h1>
-<p>Help us find your lost item by giving us a description of it!</p>
+<h1>Lost something?</h1>
+<h3>Help us find your lost item by giving us a brief description of it!</h3>
     <!-- start form -->
 <form action = "lost-1.php">
     <!--text field for listing name-->
