@@ -61,6 +61,10 @@ ul {
 	padding-left: 10px;
 }
 
+#mainForm table {
+	margin: 5px;
+}
+
 #mainForm table, th, td{
 	border-collapse: collapse;
 	border: 1px solid;

@@ -34,7 +34,7 @@ Now());
 # creates table 'stuff' for objects containing corresponding information
 CREATE TABLE IF NOT EXISTS stuff(
 id INT PRIMARY KEY AUTO_INCREMENT,
-name TEXT NOT NULL,
+item TEXT NOT NULL,
 location_id INT,
 category SET('Electronics', 'Clothing', 'School Supplies', 'Other') NOT NULL,
 color TEXT NOT NULL,
@@ -47,7 +47,7 @@ finder TEXT,
 status SET('Found', 'Lost', 'Claimed') NOT NULL
 );
 
-INSERT INTO stuff(name, location_id, category, color, description, create_date, update_date, room, owner, finder, status) VALUES(
+INSERT INTO stuff(item, location_id, category, color, description, create_date, update_date, room, owner, finder, status) VALUES(
 "iPhone Charger",
 1,
 "Electronics",
@@ -94,11 +94,11 @@ CREATE TABLE IF NOT EXISTS locations(
 id INT PRIMARY KEY AUTO_INCREMENT,
 create_date DATETIME NOT NULL,
 update_date DATETIME NOT NULL,
-name TEXT NOT NULL);
+location_name TEXT NOT NULL);
 
 
 # populates 'locations' with all locations on campus
-INSERT INTO locations(create_date, update_date, name) VALUES
+INSERT INTO locations(create_date, update_date, location_name) VALUES
 (Now(), Now(), "Byrne House"),
 (Now(), Now(), "James A. Cannavino Libarary"),
 (Now(), Now(), "Champagnat Hall"),
