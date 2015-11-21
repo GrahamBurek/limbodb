@@ -35,7 +35,7 @@ Now());
 CREATE TABLE IF NOT EXISTS stuff(
 id INT PRIMARY KEY AUTO_INCREMENT,
 item TEXT NOT NULL,
-location_id INT,
+location_id INT NOT NULL,
 category SET('Electronics', 'Clothing', 'School Supplies', 'Other') NOT NULL,
 color TEXT NOT NULL,
 description TEXT NOT NULL,
@@ -45,12 +45,13 @@ update_date DATETIME NOT NULL,
 room TEXT,
 owner TEXT,
 finder TEXT,
-status SET('Found', 'Lost', 'Claimed') NOT NULL
+status SET('Found', 'Lost', 'Claimed') NOT NULL,
+FOREIGN KEY (location_id) REFERENCES locations(id)
 );
 
 INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, room, owner, finder, status) VALUES(
 "iPhone Charger",
-2,
+3,
 "Electronics",
 "White",
 "Basic white Apple iPhone wall charger. Slightly frayed at one end.",
@@ -64,7 +65,7 @@ NULL,
 ),
 
 ("Marist sweatshirt",
-16,
+17,
 "Clothing",
 "Red",
 "Solid red sweatshirt with the word 'Marist' across the front in block letters.",
@@ -78,7 +79,7 @@ NULL,
 ),
 
 ("Wallet with $200",
-NULL,
+1,
 "Other",
 "Black",
 "Black leather wallet holding $200 in twenties, lost somewhere on campus, not sure where.",
@@ -103,6 +104,7 @@ location_name TEXT NOT NULL);
 
 # populates 'locations' with all locations on campus
 INSERT INTO locations(create_date, update_date, location_name) VALUES
+(Now(), Now(), "Unknown/Not Sure"),
 (Now(), Now(), "Byrne House"),
 (Now(), Now(), "James A. Cannavino Libarary"),
 (Now(), Now(), "Champagnat Hall"),

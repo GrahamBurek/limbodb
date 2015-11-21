@@ -1,7 +1,7 @@
 <?php
 
 function show_quicklinks($dbc) {
-  # Create a query to 
+  # Create a query to show item quicklinks
   $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date ASC' ;
 
   # Execute the query
@@ -30,6 +30,53 @@ function show_quicklinks($dbc) {
         echo '<TD>' . $row['item_date'] . '</TD>';  
         echo '<TD>' . $row['status'] . '</TD>' ;
         echo '<TD>' . $alink . '</TD>' ;
+        echo '</TR>';
+        
+      }
+
+      # End the table
+      echo '</TABLE>';
+
+      # Free up the results in memory
+      mysqli_free_result( $results ) ;
+  }
+}
+
+function show_possible_matches_found($dbc, $item, $type, $color, $location) {
+  # Create a query to get partially matching items from database:
+  $query = "SELECT stuff.id, item, location_name, category, color FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE item LIKE '%". $item . "%'
+  OR location_name ='" . $location . "'" .
+  "OR category ='" . $type . "'" .
+  "OR color ='" . $color . "'";
+
+  # Execute the query
+  $results = mysqli_query( $dbc , $query );
+  check_results($results);
+
+  # Show results
+  if( $results )
+  {
+      # But...wait until we know the query succeed before
+      # rendering the table start.
+      echo '<h3> Possible Matches </h3>';
+      echo '<TABLE>';
+      echo '<TR>';
+      echo '<TH>Name</TH>';
+      echo '<TH>Category</TH>';
+      echo '<TH>Location</TH>';
+      echo "<TH>Color</TH>";
+      echo '</TR>';
+
+      # For each row result, generate a table row with ID number
+      while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+      {
+        $alink = '<A HREF = ql-found.php?id=' . $row['id'] . '>' . $row['item'] . ' </A>';
+        
+        echo '<TR>' ;
+        echo '<TD>' . $alink . '</TD>' ;
+        echo '<TD>' . $row['category'] . '</TD>';  
+        echo '<TD>' . $row['location_name'] . '</TD>' ;
+        echo '<TD>' . $row['color'] . '</TD>' ;
         echo '</TR>';
         
       }
@@ -104,3 +151,22 @@ function check_results($results) {
   if($results != true)
     echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>'  ;
 }
+
+# auto-populate code
+/*function connect_db(){
+
+  $dbc = @mysqli_connect ( 'localhost', 'root', '', 'limbo_db' )
+
+  OR die ( mysqli_connect_error() ) ;
+
+  # Set encoding to match PHP script encoding.
+
+  mysqli_set_charset( $dbc, 'utf8' ) ;
+
+  return $dbc;
+}
+
+function init(){
+    $dbc = connect_db();
+}
+*/

@@ -8,9 +8,9 @@
 <body>
 <!-- Navbar and database include statements: -->
 <?php
-require('/templates/navbar.php');
-require('/includes/helpers.php');
-require('/includes/connect_db.php');
+    require('/templates/navbar.php');
+    require('/includes/helpers.php');
+    require('/includes/connect_db.php');
 ?>
 <!-- Main white form for pages: -->
 <div id="mainForm">
@@ -22,7 +22,7 @@ require('/includes/connect_db.php');
         <!--text field for listing name-->
         <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
         <!--drop down with item types -->
-        <p>Item Type: <select>
+        <p>Item Type: <select name="item-type">
                 <option value="electronics">Electronic</option>
                 <option value="clothing">Clothing</option>
                 <option value="accessories">Accessories</option>
@@ -33,7 +33,7 @@ require('/includes/connect_db.php');
         <p>Item Color: <input type="text" name="item-color" placeholder="Color"></p>
         <p>Location where found: </br>
             <!--generates drop down of locations from database-->
-            <select size="7">
+            <select size="7" name="location">
                 <?php dropdown_locations($dbc); ?>
             </select></p>
         <!-- date field for when item was lost -->
