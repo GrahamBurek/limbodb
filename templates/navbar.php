@@ -1,8 +1,8 @@
 <div id="navbar">
 <ul>
-	<li><a href="index.php">Limbo Lost & Found</a></li>
-	<li><a href="index.php">Home</a></li>
-	<li><a href="found.php">Found Something?</a></li>
-	<li><a href="lost.php">Lost Something?</a></li>
+	<a href="index.php"><li>Limbo Lost & Found</li></a>
+	<a href="index.php"><li>Home</li></a>
+	<a href="found.php"><li>Found Something?</li></a>
+	<a href="lost.php"><li>Lost Something?</li></a>
 </ul>
 </div>

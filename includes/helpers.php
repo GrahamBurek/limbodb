@@ -186,6 +186,16 @@ else
 
 }
 
+# Inserts a record into the stuff table
+function insert_item($dbc, $item, $category, $color, $location, $status) {
+  $query = 'INSERT INTO stuff(item, category, color, location_id, status) VALUES ("' . $item . '" , "' . $category . '" , "' . $color . '" , "' . $location . '" , "' . $status . '" )' ;
+
+  $results = mysqli_query($dbc,$query) ;
+  check_results($results) ;
+
+  return $results ;
+}
+
 
 # auto-populate code
 /*function connect_db(){

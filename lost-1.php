@@ -36,6 +36,7 @@
     show_possible_matches($dbc, $item, $type, $color, $location, $opposite_status);
     ?>
     </form>
+    <input type="button" onclick="location.href='lost-1-2.php';" value="None of These Match" />
 </div>
 </body>
 </html>
