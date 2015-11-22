@@ -41,7 +41,7 @@ require('/includes/connect_db.php');
             <!-- text field for email address-->
         <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
         <?php image_upload()?></p>
-        <p><input type="text" name="further-description" placeholder="Further Description" ></p>
+        <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
 
         <!-- submit button-->
         </p><button type="submit" name="submit">Submit</button>
