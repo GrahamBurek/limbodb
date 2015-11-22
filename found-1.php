@@ -16,6 +16,7 @@
 	$type = $_GET['item-type'];
 	$color = $_GET['item-color'];
 	$location = $_GET['location'];
+	$opposite_status = "Lost";
 
 	# debugging code for GET variables:
 	# echo $item;
@@ -32,7 +33,7 @@
     <!-- start form -->
     <form action="found-1-2.php">
     <?php
-    show_possible_matches_found($dbc, $item, $type, $color,$location);
+    show_possible_matches($dbc, $item, $type, $color, $location, $opposite_status);
     ?>
     </form>
 </div>

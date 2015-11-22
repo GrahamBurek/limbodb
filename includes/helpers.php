@@ -21,7 +21,7 @@ function show_quicklinks($dbc) {
       echo '<TH>Item</TH>';
       echo '</TR>';
 
-      # For each row result, generate a table row with ID number
+      # For each row result, generate a table row with a link
       while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
       {
         $alink = '<A HREF = results.php?id=' . $row['id'] . '>' . $row['item'] . ' </A>';
@@ -42,12 +42,12 @@ function show_quicklinks($dbc) {
   }
 }
 
-function show_possible_matches_found($dbc, $item, $type, $color, $location) {
+function show_possible_matches($dbc, $item, $type, $color, $location, $opposite_status) {
   # Create a query to get partially matching items from database:
-  $query = "SELECT stuff.id, item, location_name, category, color FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE item LIKE '%". $item . "%'
+  $query = "SELECT stuff.id, item, location_name, category, color FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE status = '" . $opposite_status . "' AND (item LIKE '%". $item . "%'
   OR location_name ='" . $location . "'" .
   "OR category ='" . $type . "'" .
-  "OR color ='" . $color . "'";
+  "OR color ='" . $color . "')";
 
   # Execute the query
   $results = mysqli_query( $dbc , $query );
@@ -57,7 +57,7 @@ function show_possible_matches_found($dbc, $item, $type, $color, $location) {
   if( $results )
   {
       # But...wait until we know the query succeed before
-      # rendering the table start.
+      # rendering the table
       echo '<h3> Possible Matches </h3>';
       echo '<TABLE>';
       echo '<TR>';
@@ -89,6 +89,7 @@ function show_possible_matches_found($dbc, $item, $type, $color, $location) {
   }
 }
 
+# Shows a single listing from a quicklink
 function show_listing($dbc, $id) {
   # Create a query to 
   $query = 'SELECT * FROM stuff LEFT JOIN locations ON stuff.location_id=locations.id WHERE stuff.id = ' . $id;
