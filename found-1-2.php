@@ -16,7 +16,7 @@ require('/includes/connect_db.php');
 <div id="mainForm">
     <!-- Header and description -->
     <h1>Found something?</h1>
-    <h3>Help us find an owner for your found item by giving us a brief description of it!</h3>
+    <h3>Create a new listing to help find the item's owner.</h3>
     <!-- start form -->
     <form action = "found-1.php" method="post" enctype="multipart/form-data">
         <!--text field for listing name-->
