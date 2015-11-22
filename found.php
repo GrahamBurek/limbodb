@@ -6,17 +6,19 @@
     <link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
+
 <!-- Navbar and database include statements: -->
 <?php
     require('/templates/navbar.php');
     require('/includes/helpers.php');
     require('/includes/connect_db.php');
 ?>
+
 <!-- Main white form for pages: -->
 <div id="mainForm">
     <!-- Header and description -->
     <h1>Found something?</h1>
-    <h3>Help us find an owner for your found item by giving us a brief description of it!</h3>
+    <h3>Search for your item by giving us some information about it!</h3>
     <!-- start form -->
     <form action = "found-1.php">
         <!--text field for listing name-->
