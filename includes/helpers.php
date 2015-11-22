@@ -70,7 +70,7 @@ function show_possible_matches($dbc, $item, $type, $color, $location, $opposite_
       # For each row result, generate a table row with ID number
       while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
       {
-        $alink = '<A HREF = ql-found.php?id=' . $row['id'] . '>' . $row['item'] . ' </A>';
+        $alink = '<A HREF = "results.php?id=' . $row['id'] . '">' . $row['item'] . ' </A>';
         
         echo '<TR>' ;
         echo '<TD>' . $alink . '</TD>' ;
