@@ -21,7 +21,9 @@
     	}
 	}
 ?>
+<input action="action" type="button" value="Back to List" onclick="history.go(-1);" />
 <input type="button" onclick="location.href='index.php';" value="Back to Home" />
+
 </div>
 </body>
 </html>
