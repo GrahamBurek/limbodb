@@ -23,7 +23,7 @@ require('/includes/connect_db.php');
    <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
     <!--drop down with item types -->
    <p>Item Type: <select>
-        <option value="Electronics">Electronic</option>
+        <option value="Electronics">Electronics</option>
         <option value="Clothing">Clothing</option>
         <option value="School Supplies">School Supplies</option>
         <option value="Other">Other</option>
