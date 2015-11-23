@@ -26,7 +26,7 @@ require('/includes/connect_db.php');
     <h1>Lost something?</h1>
     <h3>Create a new listing to help find your lost item.</h3>
     <!-- start form -->
-    <form method="post" enctype="multipart/form-data">
+    <form action="results.php" method="post" enctype="multipart/form-data">
         <!--text field for listing name-->
         <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
         <!--drop down with item types -->
@@ -50,6 +50,7 @@ require('/includes/connect_db.php');
             <?php image_upload() ?></p>
         <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
         <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
+        <input type="text" name="status" value="Lost" hidden>
         <!-- submit button-->
         <button type="submit" name="submit">Submit</button>
     </form>

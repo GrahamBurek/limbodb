@@ -22,7 +22,7 @@
 		$color = $_POST['item-color'];
 		$descr = $_POST['further-description'];
 		$date = $_POST['date'];
-		$status = 'Found';
+		$status = $_POST['status'];
 		
 	}
 	
