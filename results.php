@@ -11,19 +11,29 @@
 	require('includes/connect_db.php'); 
 	require('includes/helpers.php');
 	require('templates/navbar.php');
+	
+	if(isset($_GET['id'])){
+		$id = $_GET['id'];
+	}
+	
 ?>
 <!-- Main white form for pages: -->
 <div id="mainForm">
 <?php
 	if($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
     	if(isset($_GET['id'])){
-      		show_listing($dbc, $_GET['id']);
+      		show_listing($dbc, $id);
     	}
 	}
 ?>
 <input action="action" type="button" value="Back to List" onclick="history.go(-1);" />
 <input type="button" onclick="location.href='index.php';" value="Back to Home" />
-
+<?php
+	if (isset($_GET['id'])) {
+		buildEmailButton($dbc, $id);
+	}
+	
+?>
 </div>
 </body>
 </html>
