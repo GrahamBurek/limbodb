@@ -182,18 +182,21 @@ function image_upload(){
 
 if(isset($_REQUEST['submit']))
 {
-    $filename=  $_FILES["imgfile"]["name"];
+    $filename =  $_FILES["imgfile"]["name"];
+    global $image;
+    $image = "uploads/$filename";
     if ((($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg")) && ($_FILES["imgfile"]["size"] < 200000))
     {
         if(file_exists($_FILES["imgfile"]["name"]))
         {
-            echo "File name exists.";
+            echo "Image file name exists.";
         }
         else
         {
             move_uploaded_file($_FILES["imgfile"]["tmp_name"],"uploads/$filename");
-            echo "Upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
-            return "uploads/$filename";
+            echo "Image upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
+
+            
         }
     }
     else
@@ -213,15 +216,16 @@ else
 }
 
 # Inserts a record into the stuff table
-function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $status) {
-  $query = 'INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, status) 
-  VALUES ("' . $item . '" , ' . $location . ' , "' . $category . '" , "' . $color . '" , "' . $descr . '" , STR_TO_DATE("' . $date . '","%Y-%m-%d"), Now(), Now(),"'. $status . '" )' ;
+function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $status, $image) {
+  $query = 'INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, status, image) 
+  VALUES ("' . $item . '" , ' . $location . ' , "' . $category . '" , "' . $color . '" , "' . $descr . '" , STR_TO_DATE("' . $date . '","%Y-%m-%d"), Now(), Now(),"'. $status . '", "'. $image . '" )' ;
 
   $results = mysqli_query($dbc, $query) ;
   check_results($results) ;
 
-  //echo $query;
+  echo $query;
   return $results;
+
 }
 
 
