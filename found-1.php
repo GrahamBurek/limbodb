@@ -49,6 +49,7 @@
 
     <input type= "hidden" name= "page" value="found-1">
     </form>
+    <input action="action" type="button" value="Back" onclick="history.go(-1);" />
     <input type="button" onclick="location.href='found-1-2.php';" value="None of These Match" />
 </div>
 </body>

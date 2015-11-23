@@ -17,12 +17,15 @@ ul {
 	margin: 0;
 	padding: 0;
 }
+
 input {
 	padding: 5px;
 }
+
 select{
 	padding: 5px;
 }
+
 textarea{
 	width:80%;
 	height:100px;

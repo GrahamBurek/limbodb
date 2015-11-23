@@ -38,8 +38,8 @@
 		echo "Success!";
 	}
 ?>
-<input action="action" type="button" value="Back to List" onclick="history.go(-1);" />
-<input type="button" onclick="location.href='index.php';" value="Back to Home" />
+<input action="action" type="button" value="Back" onclick="history.go(-1);" />
+<input type="button" onclick="location.href='index.php';" value="Home" />
 <?php
 	if (isset($_GET['id'])) {
 		buildEmailButton($dbc, $id);

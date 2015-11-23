@@ -15,7 +15,10 @@
 	$item = $_GET['listing-name'];
 	$type = $_GET['item-type'];
 	$color = $_GET['item-color'];
-	$location = $_GET['location'];
+	if(isset($_GET['location']))		
+		$location = $_GET['location'];
+	else
+		$location = "";
 	$opposite_status = "Found";
 
 	# debugging code for GET variables:
@@ -45,6 +48,7 @@
     ?>
     <input type= "hidden" name= "page" value="lost-1">
     </form>
+    <input action="action" type="button" value="Back" onclick="history.go(-1);" />
     <input type="button" onclick="location.href='lost-1-2.php';" value="None of These Match" />
 </div>
 </body>

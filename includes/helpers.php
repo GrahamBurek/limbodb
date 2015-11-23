@@ -24,7 +24,7 @@ function buildEmailButton($dbc, $id){
 
 function show_quicklinks($dbc) {
   # Create a query to show item quicklinks
-  $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date ASC';
+  $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date DESC';
 
   # Execute the query
   $results = mysqli_query($dbc , $query) ;
@@ -38,7 +38,7 @@ function show_quicklinks($dbc) {
       echo '<h3> Current Listings </h3>';
       echo '<TABLE>';
       echo '<TR>';
-      echo '<TH>Date/Time</TH>';
+      echo '<TH>Date</TH>';
       echo '<TH>Status</TH>';
       echo '<TH>Item</TH>';
       echo '</TR>';
@@ -64,9 +64,10 @@ function show_quicklinks($dbc) {
   }
 }
 
+# Searches the database to find items matching the criteria given by the user
 function show_possible_matches($dbc, $item, $type, $color, $location, $opposite_status) {
   # Create a query to get partially matching items from database:
-  $query = "SELECT stuff.id, item, location_name, category, color, item_date FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE status = '" . $opposite_status . "' AND (location_name ='" . $location . "'" .
+  $query = "SELECT stuff.id, item, location_name, category, color, item_date FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE status = '" . $opposite_status . "' AND (location_id ='" . $location . "'" .
   "OR category ='" . $type . "'" .
   "OR color ='" . $color . "')";
 
