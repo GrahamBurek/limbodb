@@ -24,8 +24,16 @@
     require( 'includes/connect_db.php' ) ;
 
     # Includes helper functions for login
-    require('includes/admin_tools.php');
-    if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {}
+
+    require( 'includes/admin_tools.php' ) ;
+    if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
+        if (isset($_GET['id'])){
+            if($_GET['id'] == -1)
+                echo '<P style=color:red>Login failed, please check your credentials.</P>' ;
+        
+        }
+
+    }
 
     /*
     if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
