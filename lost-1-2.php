@@ -18,7 +18,7 @@ require('/includes/connect_db.php');
     <h1>Lost something?</h1>
     <h3>Create a new listing to help find your lost item.</h3>
     <!-- start form -->
-    <form action = "found-1.php" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         <!--text field for listing name-->
         <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
         <!--drop down with item types -->
@@ -39,7 +39,7 @@ require('/includes/connect_db.php');
         <p>Date lost (if known): <input type="date">
             <!-- text field for email address-->
         <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
-            <?php image_upload()?></p>
+            <?php image_upload() ?></p>
         <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
 
         <!-- submit button-->

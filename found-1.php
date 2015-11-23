@@ -15,7 +15,10 @@
 	$item = $_GET['listing-name'];
 	$type = $_GET['item-type'];
 	$color = $_GET['item-color'];
-	$location = $_GET['location'];
+	if(isset($_GET['location']))		
+		$location = $_GET['location'];
+	else
+		$location = "";
 	$opposite_status = "Lost";
 
 	# debugging code for GET variables:

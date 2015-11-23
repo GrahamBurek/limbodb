@@ -44,8 +44,7 @@ function show_quicklinks($dbc) {
 
 function show_possible_matches($dbc, $item, $type, $color, $location, $opposite_status) {
   # Create a query to get partially matching items from database:
-  $query = "SELECT stuff.id, item, location_name, category, color FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE status = '" . $opposite_status . "' AND (item LIKE '%". $item . "%'
-  OR location_name ='" . $location . "'" .
+  $query = "SELECT stuff.id, item, location_name, category, color, item_date FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE status = '" . $opposite_status . "' AND (location_name ='" . $location . "'" .
   "OR category ='" . $type . "'" .
   "OR color ='" . $color . "')";
 
@@ -61,10 +60,10 @@ function show_possible_matches($dbc, $item, $type, $color, $location, $opposite_
       echo '<h3> Possible Matches </h3>';
       echo '<TABLE>';
       echo '<TR>';
-      echo '<TH>Name</TH>';
-      echo '<TH>Category</TH>';
+      echo '<TH>Item Name</TH>';
+      echo '<TH>Item Category</TH>';
       echo '<TH>Location</TH>';
-      echo "<TH>Color</TH>";
+      echo "<TH>Date</TH>";
       echo '</TR>';
 
       # For each row result, generate a table row with ID number
@@ -76,7 +75,7 @@ function show_possible_matches($dbc, $item, $type, $color, $location, $opposite_
         echo '<TD>' . $alink . '</TD>' ;
         echo '<TD>' . $row['category'] . '</TD>';  
         echo '<TD>' . $row['location_name'] . '</TD>' ;
-        echo '<TD>' . $row['color'] . '</TD>' ;
+        echo '<TD>' . $row['item_date'] . '</TD>' ;
         echo '</TR>';
         
       }
@@ -108,6 +107,7 @@ function show_listing($dbc, $id) {
       # For the result, generate a table row
       if( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
       {
+        echo '<img src="' . $row['image'] . '" />';
         echo '<p>Item Name: ' . $row['item'] . '</p>';
         echo '<p>Item Category: ' . $row['category'] . '</p>';
         echo '<p>Item Color: ' . $row['color'] . '</p>';
@@ -168,6 +168,7 @@ if(isset($_REQUEST['submit']))
         {
             move_uploaded_file($_FILES["imgfile"]["tmp_name"],"uploads/$filename");
             echo "Upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
+            return "uploads/$filename";
         }
     }
     else

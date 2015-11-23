@@ -16,11 +16,9 @@ require('/includes/connect_db.php');
 <div id="mainForm">
     <!-- Header and description -->
 <h1>Lost something?</h1>
-<h3>Help us find your lost item by giving us a brief description of it!</h3>
+<h3>Search for your lost item by giving us some information about it!</h3>
     <!-- start form -->
     <form action = "lost-1.php">
-        <!--text field for listing name-->
-        <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
         <!--drop down with item types -->
         <p>Item Type: <select name="item-type">
                 <option value="Electronics">Electronics</option>
@@ -35,10 +33,6 @@ require('/includes/connect_db.php');
             <select size="7" name="location">
                 <?php dropdown_locations($dbc); ?>
             </select></p>
-        <!-- date field for when item was lost -->
-        <p>Date lost: <input type="date">
-            <!-- text field for email address-->
-        <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address"> </p>
         <!-- submit button-->
         </p><button type="submit">Submit</button>
     </form>

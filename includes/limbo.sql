@@ -46,10 +46,11 @@ room TEXT,
 owner TEXT,
 finder TEXT,
 status SET('Found', 'Lost', 'Claimed') NOT NULL,
+image TEXT,
 FOREIGN KEY (location_id) REFERENCES locations(id)
 );
 
-INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, room, owner, finder, status) VALUES(
+INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, room, owner, finder, status, image) VALUES(
 "iPhone Charger",
 3,
 "Electronics",
@@ -61,7 +62,8 @@ Now(),
 NULL,
 "Jim Smith",
 NULL,
-"Lost"
+"Lost",
+"images/charger.jpg"
 ),
 
 ("Marist sweatshirt",
@@ -75,7 +77,8 @@ Now(),
 "HC2020",
 NULL,
 "Jane Doe",
-"Found"
+"Found",
+NULL
 ),
 
 ("Wallet with $200",
@@ -89,7 +92,8 @@ Now(),
 NULL,
 "Frank Frankinson",
 NULL,
-"Lost"
+"Lost",
+NULL
 )
 ;
 

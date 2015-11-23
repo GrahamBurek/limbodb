@@ -39,7 +39,7 @@ require('/includes/connect_db.php');
         <p>Date found: <input type="date">
             <!-- text field for email address-->
         <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
-        <?php image_upload()?></p>
+        <?php image_upload() ?></p>
         <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
 
         <!-- submit button-->
