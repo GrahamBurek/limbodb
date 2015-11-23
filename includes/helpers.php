@@ -240,6 +240,7 @@ function show_listing($dbc, $id) {
 }
 
 #pull all location names from database and generate a dropdown option for each
+#should be put inside a <select> tag
 function dropdown_locations($dbc)
 {
     # Create a query to

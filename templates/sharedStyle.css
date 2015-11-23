@@ -100,6 +100,11 @@ button{
 	border-collapse: collapse;
 	border: 1px solid;
 }
+#mainForm #admin-login table, th, td{
+	border-collapse: collapse;
+	border: 0px solid;
+}
+
 
 #mainForm th, td {
 	padding: 10px;
