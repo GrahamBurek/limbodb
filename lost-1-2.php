@@ -51,12 +51,7 @@ require('/includes/connect_db.php');
             </select></p>
 
         <!-- date field for when item was lost -->
-<<<<<<< HEAD
         <p>Date lost (if known): <input name="date" type="date">
-=======
-        <p>Date lost (if known): <input name="name" type="date">
-
->>>>>>> 12f7eacf5eb3d6a042e2c87b3d07de7be4e656e9
             <!-- text field for email address-->
         <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
             Upload an Image:<input type="file" name="imgfile"><br></p>
