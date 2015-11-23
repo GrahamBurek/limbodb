@@ -45,7 +45,8 @@ require('/includes/connect_db.php');
         <!-- submit button-->
         </p><button type="submit" name="submit">Submit</button>
     </form>
-    <input type="button" onclick="location.href='index.php';" value="Back to Home" />
+    <input action="action" type="button" value="Back" onclick="history.go(-1);" />
+    <input type="button" onclick="location.href='index.php';" value="Home" />
 </div>
 </body>
 </html>
