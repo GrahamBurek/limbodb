@@ -10,7 +10,7 @@
 <?php 
 	require('includes/connect_db.php');
 	require('includes/helpers.php');
-	require('templates/navbar.php');
+	#require('templates/navbar.php');
 
 	$item = $_GET['listing-name'];
 	$type = $_GET['item-type'];
@@ -28,6 +28,14 @@
 	# echo $location;
 	
 ?>
+<div id="navbar">
+	<ul>
+		<a href="index.php"><li>Limbo Lost & Found</li></a>
+		<a href="index.php"><li >Home</li></a>
+		<a href="found.php"><li class="current">Found Something?</li></a>
+		<a href="lost.php"><li>Lost Something?</li></a>
+	</ul>
+</div>
 <!-- Main white form for pages: -->
 <div id="mainForm">
 	<!-- Header and description -->
