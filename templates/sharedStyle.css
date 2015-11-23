@@ -96,11 +96,12 @@ button{
 	margin: 5px;
 }
 
-#mainForm table, th, td{
+#mainForm table, th, td {
 	border-collapse: collapse;
 	border: 1px solid;
 }
-#mainForm #admin-login table, th, td{
+
+#mainForm #admin_login table, th, td{
 	border-collapse: collapse;
 	border: 0px solid;
 }

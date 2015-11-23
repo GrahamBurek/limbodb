@@ -44,10 +44,10 @@ require('/includes/connect_db.php');
                 <?php dropdown_locations($dbc); ?>
             </select></p>
         <!-- date field for when item was lost -->
-        <p>Date lost (if known): <input name="name" type="date">
+        <p>Date lost (if known): <input name="date" type="date">
             <!-- text field for email address-->
         <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
-            <?php image_upload() ?></p>
+            Upload an Image:<input type="file" name="imgfile"><br></p>
         <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
         <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
         <input type="text" name="status" value="Lost" hidden>

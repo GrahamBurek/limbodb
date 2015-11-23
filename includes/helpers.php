@@ -130,7 +130,7 @@ function show_quicklinks($dbc) {
       # But...wait until we know the query succeed before
       # rendering the table start.
       echo '<h3> Current Listings </h3>';
-      echo '<TABLE>';
+      echo '<TABLE class="stuff">';
       echo '<TR>';
       echo '<TH>Date</TH>';
       echo '<TH>Status</TH>';
