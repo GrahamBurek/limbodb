@@ -23,11 +23,10 @@ require('/includes/connect_db.php');
         <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
         <!--drop down with item types -->
         <p>Item Type: <select name="item-type">
-                <option value="electronics">Electronic</option>
-                <option value="clothing">Clothing</option>
-                <option value="accessories">Accessories</option>
-                <option value="book">Book</option>
-                <option value="other">Other</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Clothing">Clothing</option>
+                <option value="School Supplies">School Supplies</option>
+                <option value="Other">Other</option>
             </select></p>
         <!-- text field for color-->
         <p>Item Color: <input type="text" name="item-color" placeholder="Color"></p>
