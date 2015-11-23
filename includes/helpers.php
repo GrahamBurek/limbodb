@@ -1,11 +1,33 @@
 <?php
 
+function buildEmailButton($dbc, $id){
+
+  // Build button differently if user is looking at a lost or a found item:
+  // Create query to find item status
+  $query = 'SELECT status FROM stuff WHERE id =' . $id; 
+  
+  $results = mysqli_query($dbc , $query);
+  check_results($results);
+
+  if($results){
+    while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
+        if ($row['status'] == "Found") {
+             echo '<input type="button" onclick="location.href=\'email.php\';" value="Claim item">';
+        } else if ($row['status'] == "Lost") {
+             echo '<input type="button" onclick="location.href=\'email.php\';" value="Found this item">';
+        } 
+     } 
+    
+  }
+
+}
+
 function show_quicklinks($dbc) {
   # Create a query to show item quicklinks
-  $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date ASC' ;
+  $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date ASC';
 
   # Execute the query
-  $results = mysqli_query( $dbc , $query ) ;
+  $results = mysqli_query($dbc , $query) ;
   check_results($results) ;
 
   # Show results
