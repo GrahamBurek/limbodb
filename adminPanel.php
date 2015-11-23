@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['pass']) && isset($_POST['pass-repeat']) && strcmp($_POST['pass'],$_POST['pass-repeat'])==0){
                 change_password($dbc, $_POST['id'], $_POST['pass']);
-                echo '<p> Success! </p>';
+                echo '<p> Password change successful! </p>';
             }else{
                 echo '<p> Please make sure passwords match </p>';
             }

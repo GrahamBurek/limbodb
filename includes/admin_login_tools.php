@@ -150,6 +150,6 @@ function change_password($dbc, $admin_id, $newpass){
     $results = mysqli_query($dbc , $query) ;
     check_results($results) ;
 
-    echo $query;
+    //echo $query;
 }
 ?>
