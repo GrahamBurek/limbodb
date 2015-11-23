@@ -49,12 +49,12 @@ require('/includes/connect_db.php');
         <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
         <?php image_upload() ?></p>
         <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
-
+        <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
         <!-- submit button-->
-        </p><button type="submit" name="submit">Submit</button>
+        <button type="submit" name="submit">Submit</button>
     </form>
-    <input action="action" type="button" value="Back" onclick="history.go(-1);" />
-    <input type="button" onclick="location.href='index.php';" value="Home" />
+
+    <!--<input type="button" onclick="location.href='index.php';" value="Home" /> -->
 </div>
 </body>
 </html>
