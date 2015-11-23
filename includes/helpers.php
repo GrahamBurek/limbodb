@@ -220,7 +220,7 @@ function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $
   $results = mysqli_query($dbc, $query) ;
   check_results($results) ;
 
-  echo $query;
+  //echo $query;
   return $results;
 }
 
