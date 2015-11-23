@@ -18,7 +18,7 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
         echo '<P style=color:red>Login failed, please check your credentials.</P>' ;
 
     else
-        load('admin.php', $pid);
+        load('adminPanel.php', $pid);
 }
 ?>
 <!-- Get inputs from the user. -->
@@ -29,7 +29,7 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
             <td>Username:</td><td><input type="text" name="username"></td>
         </tr>
         <tr>
-            <td>Password:</td><td><input type="text" name="password"></td>
+            <td>Password:</td><td><input type="password" name="password"></td>
         </tr>
     </table>
     <p><input type="submit" ></p>

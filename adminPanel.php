@@ -26,6 +26,7 @@
 <form action="adminPanel.php" method="post">
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['fromHere'] == 'yes'){
+    echo '<h3>Status successfully changed</h3>';
     update_all_stuff_admin($dbc);
     show_all_stuff_admin($dbc);
 } else {
