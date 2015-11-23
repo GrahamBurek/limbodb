@@ -15,6 +15,14 @@
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
 	}
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$item = $_POST['listing_name']; 
+		$category = $_POST['item-type'];
+		$color = $_POST['color'];
+		$location = $_POST['location'];
+		$status = 'Found';
+		
+	}
 	
 ?>
 <!-- Main white form for pages: -->
@@ -24,6 +32,10 @@
     	if(isset($_GET['id'])){
       		show_listing($dbc, $id);
     	}
+	}
+	else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		insert_item($dbc, $item, $category, $color, $location, $status);
+		echo "Success!";
 	}
 ?>
 <input action="action" type="button" value="Back to List" onclick="history.go(-1);" />

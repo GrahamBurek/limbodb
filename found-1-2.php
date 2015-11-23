@@ -18,7 +18,7 @@ require('/includes/connect_db.php');
     <h1>Found something?</h1>
     <h3>Create a new listing to help find the item's owner.</h3>
     <!-- start form -->
-    <form method="post" enctype="multipart/form-data">
+    <form action="results.php" method="post" enctype="multipart/form-data">
         <!--text field for listing name-->
         <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
         <!--drop down with item types -->
