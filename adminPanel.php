@@ -39,8 +39,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['
 
     <input type="button" onclick="location.href='index.php';" value="Home" style="width:75px;" />
     <button type="submit" name="submit">Submit Changes</button>
+    <input type="hidden" name="id" value="<?php echo($_GET['id']); ?>">
     <input type="hidden" name="fromHere" value="yes" />
 </form>
+    <form action="adminPanel.php" method="POST">
+        <?php
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(isset($_POST['pass']) && isset($_POST['pass-repeat']) && strcmp($_POST['pass'],$_POST['pass-repeat'])==0){
+                change_password($dbc, $_POST['admin_id'], $_POST['pass']);
+            }else{
+                echo '<p> Please make sure passwords match </p>';
+            }
+        }
+        ?>
+        <p>New Password: <input type="text" name="pass"></p>
+        <p>Repeat New Password: <input type="text" name="pass-repeat"></p>
+        <input type="hidden" name="admin_id" value="<?php echo($_GET['id']); ?>">
+       <button type="submit" name="pass-submit">Change Password</button></p>
+    </form>
+    <input type="button" onclick="location.href='admin_login.php';" value="Logout" />
 </div>
 
 </body>
