@@ -116,6 +116,14 @@ function show_all_stuff_admin($dbc) {
       mysqli_free_result( $results );
 }
 
+function change_password($dbc, $admin_id, $newpass){
+    $query = 'UPDATE users SET pass =\'' . $newpass . '\' WHERE user_id=\'' . $admin_id . '\'';
+
+    # Execute the query
+    $results = mysqli_query($dbc , $query) ;
+    check_results($results) ;
+}
+
 function show_quicklinks($dbc) {
   # Create a query to show item quicklinks
   $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date DESC';
