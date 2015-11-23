@@ -24,7 +24,7 @@ function buildEmailButton($dbc, $id){
 
 function show_quicklinks($dbc) {
   # Create a query to show item quicklinks
-  $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date ASC';
+  $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date DESC';
 
   # Execute the query
   $results = mysqli_query($dbc , $query) ;
