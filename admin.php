@@ -9,7 +9,7 @@
 <!-- Navbar include statement: -->
 <?php 
 	require('includes/connect_db.php'); 
-    require( 'includes/admin_login_tools.php' ) ;
+    require('includes/admin_tools.php');
 ?>
 <div id="navbar">
     <ul>
@@ -23,7 +23,7 @@
 <div id="mainForm">
 <!-- Header -->
 <h1>Administrator Panel</h1>
-<form action="adminPanel.php" method="post">
+<form action="admin.php" method="post">
 <?php
 
 if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
@@ -60,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['
     <input type="hidden" name="password" value="<?php echo($_POST['password']); ?>">
     <input type="hidden" name="fromHere" value="yes" />
 </form>
-    <form action="adminPanel.php" method="POST">
+    <form action="admin.php" method="POST">
         <?php
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['pass']) && isset($_POST['pass-repeat']) && strcmp($_POST['pass'],$_POST['pass-repeat'])==0){
@@ -71,8 +71,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['
             }
         }
         ?>
-        <p>New Password: <input type="text" name="pass"></p>
-        <p>Repeat New Password: <input type="text" name="pass-repeat"></p>
+        <p>New Password: <input type="password" name="pass"></p>
+        <p>Repeat New Password: <input type="password" name="pass-repeat"></p>
         <input type="hidden" name="id" value="<?php echo $pid; ?>">
         <input type="hidden" name="username" value="<?php echo($_POST['username']); ?>">
         <input type="hidden" name="password" value="<?php echo($_POST['password']); ?>">
