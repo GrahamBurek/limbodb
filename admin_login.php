@@ -53,6 +53,7 @@
             <td>Password:</td><td><input type="password" name="password"></td>
         </tr>
     </table>
+    <input type="hidden" name="id" value="">
     <p><input type="submit" ></p>
 </form>
     </body>
