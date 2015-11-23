@@ -44,7 +44,7 @@ require('/includes/connect_db.php');
                 <?php dropdown_locations($dbc); ?>
             </select></p>
         <!-- date field for when item was lost -->
-        <p>Date found: <input type="date">
+        <p>Date found: <input name="date" type="date">
             <!-- text field for email address-->
         <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
         <?php image_upload() ?></p>

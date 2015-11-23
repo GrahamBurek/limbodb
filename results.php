@@ -16,10 +16,12 @@
 		$id = $_GET['id'];
 	}
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		$item = $_POST['listing_name']; 
-		$category = $_POST['item-type'];
-		$color = $_POST['color'];
+		$item = $_POST['listing-name'];
 		$location = $_POST['location'];
+		$category = $_POST['item-type'];
+		$color = $_POST['item-color'];
+		$descr = $_POST['further-description'];
+		$date = $_POST['date'];
 		$status = 'Found';
 		
 	}
@@ -34,7 +36,7 @@
     	}
 	}
 	else if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		insert_item($dbc, $item, $category, $color, $location, $status);
+		insert_item($dbc, $item, $location, $category, $color, $descr, $date, $status);
 		echo "Success!";
 	}
 ?>

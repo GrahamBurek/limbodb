@@ -213,13 +213,15 @@ else
 }
 
 # Inserts a record into the stuff table
-function insert_item($dbc, $item, $category, $color, $location, $status) {
-  $query = 'INSERT INTO stuff(item, category, color, location_id, status) VALUES ("' . $item . '" , "' . $category . '" , "' . $color . '" , "' . $location . '" , "' . $status . '" )' ;
+function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $status) {
+  $query = 'INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, status) 
+  VALUES ("' . $item . '" , ' . $location . ' , "' . $category . '" , "' . $color . '" , "' . $descr . '" , STR_TO_DATE("' . $date . '","%Y-%m-%d"), Now(), Now(),"'. $status . '" )' ;
 
-  $results = mysqli_query($dbc,$query) ;
+  $results = mysqli_query($dbc, $query) ;
   check_results($results) ;
 
-  return $results ;
+  echo $query;
+  return $results;
 }
 
 
