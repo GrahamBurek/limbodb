@@ -42,10 +42,12 @@
             <select size="7" name="location">
                 <?php dropdown_locations($dbc); ?>
             </select></p>
+        <p>Date when found: <input type="date"></p>
+        <input type="button" class="back-button" onclick="location.href='index.php';" value="Back to Home" />
         <!-- submit button-->
-        </p><button type="submit">Submit</button>
+        <button type="submit">Submit</button>
     </form>
-    <input type="button" onclick="location.href='index.php';" value="Back to Home" />
+
 </div>
 </body>
 </html>
