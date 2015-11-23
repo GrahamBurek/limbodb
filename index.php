@@ -26,7 +26,7 @@
 </div>
 <div id="mainForm">
 	<h1>Welcome to Limbo!</h1>
-	<p>Lost something? Found something? Reunite owners with their items by posting in Limbo!</p>
+	<h3>Lost something? Found something? Reunite owners with their items by posting in Limbo!</h3>
 
 <?php
 	show_quicklinks($dbc);
