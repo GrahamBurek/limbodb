@@ -4,7 +4,7 @@
 require('helpers.php') ;
 
 # Loads a certain URL
-function load( $page = 'admin.php', $pid = -1 )
+function load_admin( $page, $pid)
 {
     # Begin URL with protocol, domain, and current directory.
     $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] ) ;
@@ -15,17 +15,16 @@ function load( $page = 'admin.php', $pid = -1 )
 
     # Execute redirect then quit.
     session_start( );
-
-    header( "Location: $url" ) ;
-
-    exit() ;
+    $SESSION['id'] = $pid;
+    header( "Location: $url" );
+    exit();
 }
 
-# Validates the president last name.
+# Validates the login.
 # Returns -1 if validate fails, and returns the primary key if it succeeds
-function validate($username = '', $password='')
+function validate($dbc, $username, $password)
 {
-    global $dbc;
+    //global $dbc;
 
     if(empty($username)||empty($password))
         return -1 ;

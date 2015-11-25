@@ -31,13 +31,13 @@
         $username = $_POST['username'] ;
         $password = $_POST['password'] ;
 
-        $pid = validate($username, $password) ;
+        $pid = validate($dbc, $username, $password) ;
 
         if($pid == -1)
             echo '<P style=color:red>Login failed, please check your credentials.</P>' ;
 
         else
-            load('adminPanel.php', $pid);
+            load_admin('adminPanel.php', $pid);
     }
     ?>
 <!-- Get inputs from the user. -->
