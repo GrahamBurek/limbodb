@@ -1,3 +1,8 @@
+<?php
+session_start();
+if($_SESSION['logged_in'] == true){
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,20 +31,20 @@
 <form action="admin.php" method="post">
 <?php
 
-if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
-    load('admin_login.php', $pid);
-}
+// if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
+//     load('admin_login.php', $pid);
+// }
 
-if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+// if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 
-    $username = $_POST['username'] ;
-    $password = $_POST['password'] ;
+//     $username = $_POST['username'] ;
+//     $password = $_POST['password'] ;
 
-    $pid = validate($username, $password) ;
+//     $pid = validate($username, $password) ;
 
-    if($pid == -1)
-        load('admin_login.php', $pid);
-}
+//     if($pid == -1)
+//         load('admin_login.php', $pid);
+// }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['fromHere'] == 'yes'){
     echo '<h3>Status successfully changed</h3>';
@@ -50,9 +55,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['
     show_all_stuff_admin($dbc);
 }
 ?>
-
-
-
     <input type="button" onclick="location.href='index.php';" value="Home" style="width:75px;" />
     <button type="submit" name="submit">Submit Changes</button>
     <input type="hidden" name="id" value="<?php echo($_GET['id']); ?>">
@@ -78,8 +80,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['
         <input type="hidden" name="password" value="<?php echo($_POST['password']); ?>">
        <button type="submit" name="pass-submit">Change Password</button></p>
     </form>
-    <input type="button" onclick="location.href='admin_login.php';" value="Logout" />
+    <input type="button" onclick="location.href='logout.php';" value="Logout" />
 </div>
 
 </body>
 </html>
+<?php
+
+} else {
+    header('Location: admin_login.php');
+    die("Unauthorized User!");
+}
+?>

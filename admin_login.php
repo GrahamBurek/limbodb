@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+    header('Location: admin.php');
+}
+else
+{
+     $_SESSION['logged_in'] = false;
+}
+ ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -42,17 +53,20 @@
 
         $pid = validate($dbc, $username, $password) ;
 
-        if($pid == -1)
+        if($pid == -1){
             echo '<P style=color:red>Login failed, please check your credentials.</P>' ;
+        }
 
         else
-            load_admin('admin.php', $pid);
+            $_SESSION['logged_in'] = true;
+            $_SESSION['pid'] = $pid;
+            load('admin.php');
     }
 
 ?>
 <!-- Get inputs from the user. -->
 <h1>Admin Login</h1>
-<form action="admin.php" method="POST">
+<form action="admin_login.php" method="POST">
     <table id="admin-login">
         <tr>
             <td>Username:</td><td><input type="text" name="username"></td>

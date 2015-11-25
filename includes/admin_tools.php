@@ -4,28 +4,25 @@
 require('helpers.php') ;
 
 # Loads a certain URL
-function load( $page = 'admin.php', $pid = -1 )
+function load( $page)
 {
     # Begin URL with protocol, domain, and current directory.
     $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] ) ;
 
     # Remove trailing slashes then append page name to URL and the admin id.
     $url = rtrim( $url, '/\\' ) ;
-    $url .= '/' . $page . '?id=' . $pid;
+    $url .= '/' . $page;
 
     # Execute redirect then quit.
-    session_start( );
-
-    header( "Location: $url" ) ;
-
-    exit() ;
+    header( "Location: $url" );
+    exit();
 }
 
-# Validates the president last name.
+# Validates the login.
 # Returns -1 if validate fails, and returns the primary key if it succeeds
-function validate($username = '', $password='')
+function validate($dbc, $username, $password)
 {
-    global $dbc;
+    //global $dbc;
 
     if(empty($username)||empty($password))
         return -1 ;
@@ -48,6 +45,7 @@ function validate($username = '', $password='')
 
     return intval($pid) ;
 }
+
 
 function update_all_stuff_admin($dbc){
   $query = 'SELECT * FROM stuff ORDER BY item_date DESC';

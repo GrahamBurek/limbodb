@@ -4,7 +4,7 @@
 require('helpers.php') ;
 
 # Loads a certain URL
-function load_admin( $page, $pid)
+function load( $page, $pid)
 {
     # Begin URL with protocol, domain, and current directory.
     $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] ) ;
@@ -14,8 +14,8 @@ function load_admin( $page, $pid)
     $url .= '/' . $page . '?id=' . $pid;
 
     # Execute redirect then quit.
-    session_start( );
-    $SESSION['id'] = $pid;
+    session_start();
+    $_SESSION['logged_in'] = true;
     header( "Location: $url" );
     exit();
 }
