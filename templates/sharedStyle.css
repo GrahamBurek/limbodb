@@ -1,6 +1,6 @@
 html {
 	height: 100%;
-	background-image: url("../images/hancock.jpg");
+	background-image: url("../images/hancock2-2.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -48,6 +48,7 @@ button{
 	width: 100%;
   	margin: 0;
   	z-index: 2;
+	box-shadow: 0px 3px 2px;
 }
 
 
@@ -84,7 +85,10 @@ button{
     margin-bottom: 0;
 	background-color: #FFFFFF;
 	z-index: 1; 
-	position: relative; 
+	position: relative;
+	box-shadow: 10px 0px 20px;
+	/*border-style:solid;
+	border-left-width:1px;*/
 }
 
 #mainForm h1, p, h3{

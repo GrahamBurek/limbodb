@@ -24,7 +24,16 @@
     require( 'includes/connect_db.php' ) ;
 
     # Includes helper functions for login
-    require( 'includes/admin_login_tools.php' ) ;
+
+    require( 'includes/admin_tools.php' ) ;
+    if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
+        if (isset($_GET['id'])){
+            if($_GET['id'] == -1)
+                echo '<P style=color:red>Login failed, please check your credentials.</P>' ;
+        
+        }
+
+    }
 
     if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 
@@ -39,10 +48,11 @@
         else
             load_admin('adminPanel.php', $pid);
     }
-    ?>
+
+?>
 <!-- Get inputs from the user. -->
 <h1>Admin Login</h1>
-<form action="admin_login.php" method="POST">
+<form action="admin.php" method="POST">
     <table id="admin-login">
         <tr>
             <td>Username:</td><td><input type="text" name="username"></td>
@@ -51,6 +61,7 @@
             <td>Password:</td><td><input type="password" name="password"></td>
         </tr>
     </table>
+    <input type="hidden" name="id" value="">
     <p><input type="submit" ></p>
 </form>
     </body>
