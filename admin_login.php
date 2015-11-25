@@ -46,7 +46,7 @@
             echo '<P style=color:red>Login failed, please check your credentials.</P>' ;
 
         else
-            load_admin('adminPanel.php', $pid);
+            load_admin('admin.php', $pid);
     }
 
 ?>
