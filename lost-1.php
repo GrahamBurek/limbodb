@@ -19,6 +19,7 @@ session_start();
 	$type = "";
 	$color = "";
 	$location = "";
+	$date = "";
 
 	# Set value of variables if GET variables are set:
 	if(isset($_GET['item-type'])){
@@ -31,6 +32,10 @@ session_start();
 
 	if(isset($_GET['location'])){
 		$location = $_GET['location'];
+	}
+
+	if(isset($_GET['date'])){
+		$date = $_GET['date'];
 	}
 
 	# If none of type, color, or location fields are set, send user back to lost.php:
@@ -63,13 +68,20 @@ session_start();
     <h1>Do These Sound Like the item you lost?</h1>
     <h3>If you think the item you lost matches one of these, click it to find out more about the item and confirm that it is yours. Otherwise, click "None of These Match" to post a new listing.</h3>
     <!-- start form -->
-    <form action="lost-1-2.php">
+    <form id="table" action="lost-1-2.php" method="get">
     <?php
     show_possible_matches($dbc, $type, $color, $location, $opposite_status);
     ?>
+
+    <!-- Send GET variables along to found-1-2.php -->
+    <input type="hidden" name="type" value="<?php echo $type; ?>">
+    <input type="hidden" name="color" value="<?php echo $color; ?>">
+    <input type="hidden" name="location" value="<?php echo $location; ?>">
+    <input type="hidden" name="date" value="<?php echo $date; ?>">
+
     </form>
     <input action="action" class="back-button" type="button" value="Back" onclick="history.go(-1);" style="width:75px;" />
-    <input type="button" onclick="location.href='lost-1-2.php';" value="None of These Match" style="margin-left:200px"/>
+    <button type="submit" style="margin-left:200px;" form="table">None of These Match</button>
 </div>
 </body>
 </html>

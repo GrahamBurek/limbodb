@@ -8,9 +8,31 @@
 <body>
 <!-- Navbar and database include statements: -->
 <?php
-#require('/templates/navbar.php');
 require('/includes/helpers.php');
 require('/includes/connect_db.php');
+
+# Set sticky variables to the empty string initially:
+$type = "";
+$color = "";
+$location = "";
+$date = "";
+
+if (isset($_GET['type'])) {
+    $type = $_GET['type'];
+}
+
+if (isset($_GET['color'])) {
+    $color = $_GET['color'];
+}
+
+if (isset($_GET['location'])) {
+    $location = $_GET['location'];
+}
+
+if (isset($_GET['date'])) {
+    $date = $_GET['date'];
+}
+
 ?>
 <div id="navbar">
     <ul>
@@ -35,23 +57,23 @@ require('/includes/connect_db.php');
 
         <!--drop down with item types -->
         <p>Item Type: <select name="item-type">
-                <option value="Electronics">Electronics</option>
-                <option value="Clothing">Clothing</option>
-                <option value="School Supplies">School Supplies</option>
-                <option value="Other">Other</option>
+                <option value="Electronics" <?php echo ($_GET['type'] == 'Electronics') ? "selected" : "";  ?> >Electronics</option>
+                <option value="Clothing" <?php echo ($_GET['type'] == 'Clothing') ? "selected" : "";  ?> >Clothing</option>
+                <option value="School Supplies" <?php echo ($_GET['type'] == 'School Supplies') ? "selected" : "";  ?> >School Supplies</option>
+                <option value="Other" <?php echo ($_GET['type'] == 'Other') ? "selected" : "";  ?> >Other</option>
             </select></p>
 
         <!-- text field for color-->
-        <p>Item Color: <input type="text" name="item-color" placeholder="Color"></p>
+        <p>Item Color: <input type="text" name="item-color" placeholder="Color"  <?php echo (!empty($color)) ? 'value="' . $color . '"' : ""; ?> ></p>
         <p>Location where lost (if known): </br>
 
             <!--generates drop down of locations from database-->
-            <select size="7" name="location">
-                <?php dropdown_locations($dbc); ?>
+            <select name="location">
+                 <?php dropdown_locations_selected($dbc, $location); ?>
             </select></p>
 
         <!-- date field for when item was lost -->
-        <p>Date lost (if known): <input name="date" type="date">
+        <p>Date lost: <input name="date" type="date" value="<?php echo $date; ?>">
             <!-- text field for email address-->
         <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
             Upload an Image:<input type="file" name="imgfile"><br></p>
@@ -62,8 +84,6 @@ require('/includes/connect_db.php');
         <!-- submit button-->
         <button type="submit" name="submit">Submit</button>
     </form>
-
-    <!--<input type="button" onclick="location.href='index.php';" value="Home" />-->
 </div>
 </body>
 </html>

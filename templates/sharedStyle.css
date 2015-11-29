@@ -35,6 +35,10 @@ button{
 	padding:5px;
 }
 
+#table {
+	text-align: center;
+}
+
 .back-button{
 	margin-left:20px;
 	margin-right:40px;

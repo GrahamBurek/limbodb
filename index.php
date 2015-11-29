@@ -27,12 +27,11 @@
 <div id="mainForm">
 	<h1>Welcome to Limbo!</h1>
 	<h3>Lost something? Found something? Reunite owners with their items by posting in Limbo!</h3>
-
+<div id="table">
 <?php
 	show_quicklinks($dbc);
 ?>
-
-
+</div>
 </div>
 </body>
 </html>
