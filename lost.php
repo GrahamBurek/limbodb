@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +12,8 @@
 <body>
 <!-- Navbar include statement: -->
 <?php
-#require('/templates/navbar.php');
-require('includes/helpers.php');
-require('includes/connect_db.php');
+    require('includes/helpers.php');
+    require('includes/connect_db.php');
 ?>
 <div id="navbar">
     <ul>
@@ -25,10 +28,25 @@ require('includes/connect_db.php');
     <!-- Header and description -->
 <h1>Lost something?</h1>
 <h3>Search for your lost item by giving us some information about it!</h3>
+
+    <?php 
+        # If user came back from lost-1.php, tell them to enter something before submitting:
+        if (isset($_SESSION['emptyFields'])) {
+        
+            if ($_SESSION['emptyFields'] == true) {
+                echo "<p style = color:red>Please select at least one field (type, color, or location).</p>";
+                # Only tell user error message once:
+                unset($_SESSION['emptyFields']);
+            }
+
+        }
+    ?>
+
     <!-- start form -->
-    <form action = "lost-1.php">
+    <form action = "lost-1.php" method="get">
         <!--drop down with item types -->
         <p>Item Type: <select name="item-type">
+                <option value="" disabled selected>Select One</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Clothing">Clothing</option>
                 <option value="School Supplies">School Supplies</option>
@@ -38,8 +56,11 @@ require('includes/connect_db.php');
         <p>Item Color: <input type="text" name="item-color" placeholder="Color"></p>
         <p>Location where lost: </br>
             <!--generates drop down of locations from database-->
-            <select size="7" name="location">
-                <?php dropdown_locations($dbc); ?>
+            <select name="location">
+                <?php
+                    echo "<option value='' disabled selected>Select One</option>";
+                    dropdown_locations($dbc); 
+                ?>
             </select></p>
         <p>Date when lost: <input type="date"></p>
         <input type="button" class="back-button" onclick="location.href='index.php';" value="Back to Home" />

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +10,10 @@
     <link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-
 <!-- Navbar and database include statements: -->
 <?php
-    #require('/templates/navbar.php');
-    require('/includes/helpers.php');
-    require('/includes/connect_db.php');
+    require('includes/helpers.php');
+    require('includes/connect_db.php');
 ?>
 <div id="navbar">
     <ul>
@@ -26,10 +28,25 @@
     <!-- Header and description -->
     <h1>Found something?</h1>
     <h3>See if anyone lost the item you found by giving us some information about it!</h3>
+
+    <?php 
+        # If user came back from found-1.php, tell them to enter something before submitting:
+        if (isset($_SESSION['emptyFields'])) {
+        
+            if ($_SESSION['emptyFields'] == true) {
+                echo "<p style = color:red>Please select at least one field (type, color, or location).</p>";
+                # Only tell user error message once:
+                unset($_SESSION['emptyFields']);
+            }
+
+        }
+    ?>
+
     <!-- start form -->
-    <form action = "found-1.php">
+    <form action = "found-1.php" method="get">
         <!--drop down with item types -->
         <p>Item Type: <select name="item-type">
+                <option value="" disabled selected>Select One</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Clothing">Clothing</option>
                 <option value="School Supplies">School Supplies</option>
@@ -39,10 +56,14 @@
         <p>Item Color: <input type="text" name="item-color" placeholder="Color"></p>
         <p>Location where found: </br>
             <!--generates drop down of locations from database-->
-            <select size="7" name="location">
-                <?php dropdown_locations($dbc); ?>
+            <select name="location">
+                <?php
+                    echo "<option value='' disabled selected>Select One</option>";
+                    dropdown_locations($dbc); 
+                ?>
             </select></p>
         <p>Date when found: <input type="date"></p>
+        <input type="hidden" name="submitted" value="yes">
         <input type="button" class="back-button" onclick="location.href='index.php';" value="Back to Home" />
         <!-- submit button-->
         <button type="submit">Submit</button>

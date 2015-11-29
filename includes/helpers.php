@@ -67,7 +67,7 @@ function show_quicklinks($dbc) {
 }
 
 # Searches the database to find items matching the criteria given by the user
-function show_possible_matches($dbc, $item, $type, $color, $location, $opposite_status) {
+function show_possible_matches($dbc, $type, $color, $location, $opposite_status) {
   # Create a query to get partially matching items from database:
   $query = "SELECT stuff.id, item, location_name, category, color, item_date FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE status = '" . $opposite_status . "' AND (location_id ='" . $location . "'" .
   "OR category ='" . $type . "'" .
@@ -78,38 +78,39 @@ function show_possible_matches($dbc, $item, $type, $color, $location, $opposite_
   check_results($results);
 
   # Show results
-  if( $results )
-  {
-      # But...wait until we know the query succeed before
-      # rendering the table
-      echo '<h3> Possible Matches </h3>';
-      echo '<TABLE>';
-      echo '<TR>';
-      echo '<TH>Item Name</TH>';
-      echo '<TH>Item Category</TH>';
-      echo '<TH>Location</TH>';
-      echo "<TH>Date</TH>";
-      echo '</TR>';
-
-      # For each row result, generate a table row with ID number
-      while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
-      {
-        $alink = '<A HREF = "results.php?id=' . $row['id'] . '">' . $row['item'] . ' </A>';
-        
-        echo '<TR>' ;
-        echo '<TD>' . $alink . '</TD>' ;
-        echo '<TD>' . $row['category'] . '</TD>';  
-        echo '<TD>' . $row['location_name'] . '</TD>' ;
-        echo '<TD>' . $row['item_date'] . '</TD>' ;
+  if( $results ) {
+    if (mysqli_num_rows( $results ) == 0 ) {
+        echo "<p style=color:red>No matches found in our database. Press 'None of these match' to continue.</p>";
+    } else {
+        echo '<h3> Possible Matches </h3>';
+        echo '<TABLE>';
+        echo '<TR>';
+        echo '<TH>Item Name</TH>';
+        echo '<TH>Item Category</TH>';
+        echo '<TH>Location</TH>';
+        echo "<TH>Date</TH>";
         echo '</TR>';
-        
-      }
 
-      # End the table
-      echo '</TABLE>';
+        # For each row result, generate a table row with ID number
+        while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+        {
+          $alink = '<A HREF = "results.php?id=' . $row['id'] . '">' . $row['item'] . ' </A>';
+          
+          echo '<TR>' ;
+          echo '<TD>' . $alink . '</TD>' ;
+          echo '<TD>' . $row['category'] . '</TD>';  
+          echo '<TD>' . $row['location_name'] . '</TD>' ;
+          echo '<TD>' . $row['item_date'] . '</TD>' ;
+          echo '</TR>';
+          
+        }
 
-      # Free up the results in memory
-      mysqli_free_result( $results ) ;
+        # End the table
+        echo '</TABLE>';
+
+        # Free up the results in memory
+        mysqli_free_result( $results ) ;
+    }
   }
 }
 

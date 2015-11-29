@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,15 +14,32 @@
 <?php 
 	require('includes/connect_db.php');
 	require('includes/helpers.php');
-	#require('templates/navbar.php');
 
-	$item = $_GET['listing-name'];
-	$type = $_GET['item-type'];
-	$color = $_GET['item-color'];
-	if(isset($_GET['location']))		
+	# Set initial values of variables to the empty string:
+	$type = "";
+	$color = "";
+	$location = "";
+
+	# Set value of variables if GET variables are set:
+	if(isset($_GET['item-type'])){
+		$type = $_GET['item-type'];
+	}
+
+	if(isset($_GET['item-color'])){
+		$color = $_GET['item-color'];
+	}
+
+	if(isset($_GET['location'])){
 		$location = $_GET['location'];
-	else
-		$location = "";
+	}
+
+	# If none of type, color, or location fields are set, send user back to lost.php:
+	if(empty($type) && empty($color) && empty($location)){
+		$_SESSION['emptyFields'] = true;
+		header('Location: lost.php');
+		exit("No fields set, redirecting to lost.php...");
+	}
+
 	$opposite_status = "Found";
 
 	# debugging code for GET variables:
@@ -44,12 +65,10 @@
     <!-- start form -->
     <form action="lost-1-2.php">
     <?php
-    show_possible_matches($dbc, $item, $type, $color, $location, $opposite_status);
+    show_possible_matches($dbc, $type, $color, $location, $opposite_status);
     ?>
-    <input type= "hidden" name= "page" value="lost-1">
     </form>
     <input action="action" class="back-button" type="button" value="Back" onclick="history.go(-1);" style="width:75px;" />
-
     <input type="button" onclick="location.href='lost-1-2.php';" value="None of These Match" style="margin-left:200px"/>
 </div>
 </body>
