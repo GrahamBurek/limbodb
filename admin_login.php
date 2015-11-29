@@ -1,15 +1,11 @@
 <?php
 session_start();
+# Check to see if user is already logged in. If so, move to admin panel.
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     header('Location: admin.php');
-}
-else
-{
-     $_SESSION['logged_in'] = false;
+    exit("Moved to admin panel (Already logged in).");
 }
  ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,40 +28,36 @@ else
 <div id="mainForm">
     <?php
     # Connect to MySQL server and the database
-    require( 'includes/connect_db.php' ) ;
+    require( 'includes/connect_db.php' );
 
     # Includes helper functions for login
-
-    require( 'includes/admin_tools.php' ) ;
-    if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
-        if (isset($_GET['id'])){
-            if($_GET['id'] == -1)
-                echo '<P style=color:red>Login failed, please check your credentials.</P>' ;
-        
-        }
-
-    }
-
+    require( 'includes/admin_tools.php' );
+?>
+<!-- Get inputs from the user. -->
+<h1>Admin Login</h1>
+<?php
+    # If method is POST, try to validate the submitted credentials.
     if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 
         $username = $_POST['username'] ;
         $password = $_POST['password'] ;
 
-        $pid = validate($dbc, $username, $password) ;
+        $pid = validate($dbc, $username, $password);
+        
 
         if($pid == -1){
-            echo '<P style=color:red>Login failed, please check your credentials.</P>' ;
+            echo '<P style=color:red>Login failed, please check your credentials.</P>';
         }
 
-        else
+        else {
+
             $_SESSION['logged_in'] = true;
             $_SESSION['pid'] = $pid;
             load('admin.php');
+        }
     }
 
 ?>
-<!-- Get inputs from the user. -->
-<h1>Admin Login</h1>
 <form action="admin_login.php" method="POST">
     <table id="admin-login">
         <tr>
@@ -75,7 +67,6 @@ else
             <td>Password:</td><td><input type="password" name="password"></td>
         </tr>
     </table>
-    <input type="hidden" name="id" value="">
     <p><input type="submit" ></p>
 </form>
     </body>

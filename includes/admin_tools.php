@@ -3,6 +3,21 @@
 # Includes helper functions
 require('helpers.php') ;
 
+# Gets an admin name from the database:
+function getAdmin($dbc, $id){
+  # Make database query:
+  $query = "SELECT first_name FROM users WHERE user_id='" . $id . "'";
+
+  # Execute the query
+    $results = mysqli_query( $dbc, $query ) ;
+    check_results($results);
+
+    $row = mysqli_fetch_array($results , MYSQLI_ASSOC);
+    return $row['first_name'];
+    
+}
+
+
 # Loads a certain URL
 function load( $page)
 {

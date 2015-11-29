@@ -3,14 +3,14 @@
 <head>
     <title>Limbo Lost & Found</title>
     <!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
-    <link rel="stylesheet" type="text/css" href="/templates/sharedStyle.css">
+    <link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
 <!-- Navbar include statement: -->
 <?php
 #require('/templates/navbar.php');
-require('/includes/helpers.php');
-require('/includes/connect_db.php');
+require('includes/helpers.php');
+require('includes/connect_db.php');
 ?>
 <div id="navbar">
     <ul>
