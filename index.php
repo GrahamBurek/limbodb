@@ -3,17 +3,14 @@
 <head>
 	<title>Limbo Lost & Found</title>
 	<!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
-
-	
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <!-- Require statements: -->
 <?php
 	require('includes/connect_db.php'); 
 	require('includes/helpers.php');
-	#require('templates/navbar.php');
-
 
 ?>
 <div id="navbar">
@@ -26,7 +23,9 @@
 </div>
 <div id="mainForm">
 	<h1>Welcome to Limbo!</h1>
+	<br>
 	<h3>Lost something? Found something? Reunite owners with their items by posting in Limbo!</h3>
+	<br>
 <div id="table">
 <?php
 	show_quicklinks($dbc);
