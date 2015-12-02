@@ -18,12 +18,13 @@ if($_SESSION['logged_in'] == true){
 	require('includes/connect_db.php'); 
     require('includes/admin_tools.php');
 ?>
-<div id="navbar">
+<div id="admin-navbar">
     <ul>
-        <a href="index.php"><li>Limbo Lost & Found</li></a>
-        <a href="index.php"><li>Home</li></a>
-        <a href="found.php"><li>Found Something?</li></a>
-        <a href="lost.php"><li>Lost Something?</li></a>
+        <a href="admin.php"><li>Administrator Panel</li></a>
+        <a href="manage_users.php"><li>Manage Users</li></a>
+        <a href="manage_listings.php"><li>Manage Listings</li></a>
+        <a href="logout.php" style="float:right;"><li>Logout</li></a>
+
     </ul>
 </div>
 <!-- Main white form for pages: -->
