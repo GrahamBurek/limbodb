@@ -48,7 +48,7 @@ button{
 }
 
 #navbar {
-	background-color: #CF2828;
+	background: linear-gradient(#cc0000,#732626);
 	left: 0; 
 	top: 0;
 	position: fixed;
@@ -68,12 +68,13 @@ button{
 }
 
 #navbar li:hover{
-	background-color: #BE1717;
+	background: linear-gradient(#800000,#4c1a1a);
 
 }
 
 .current{
-	background-color: #BE1717;
+	background: linear-gradient(#800000,#4c1a1a);
+
 
 }
 
