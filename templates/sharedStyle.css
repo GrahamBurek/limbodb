@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
+
 html {
 	height: 100%;
 	background-image: url("../images/hancock2-2.jpg");
@@ -5,7 +7,7 @@ html {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	position: relative;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -55,7 +57,7 @@ button{
 }
 
 #navbar {
-	background-color: #CF2828;
+	background: linear-gradient(#cc0000,#732626);
 	left: 0; 
 	top: 0;
 	position: fixed;
@@ -75,12 +77,47 @@ button{
 }
 
 #navbar li:hover{
-	background-color: #BE1717;
+	background: linear-gradient(#800000,#4c1a1a);
 
 }
 
 .current{
-	background-color: #BE1717;
+	background: linear-gradient(#800000,#4c1a1a);
+
+
+}
+#admin-navbar {
+	background-color: #333333;
+	left: 0;
+	top: 0;
+	position: fixed;
+	width: 100%;
+	margin: 0;
+	z-index: 2;
+	box-shadow: 0px 3px 2px;
+}
+
+
+#admin-navbar li {
+	display: inline-block;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:40px;
+	padding-right:40px;
+}
+
+#admin-navbar li:hover{
+	background-color: #595959;
+
+}
+#admin-navbar a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.admin-current{
+	background-color: #595959;
+
 
 }
 
@@ -101,8 +138,8 @@ button{
 	z-index: 1; 
 	position: relative;
 	box-shadow: 10px 0px 20px;
-	/*border-style:solid;
-	border-left-width:1px;*/
+	border-style:solid;
+	border: 1px solid;
 }
 
 #mainForm h1, p, h3{

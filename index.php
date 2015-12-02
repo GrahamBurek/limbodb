@@ -4,7 +4,6 @@
 	<title>Limbo Lost & Found</title>
 	<!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <!-- Require statements: -->
