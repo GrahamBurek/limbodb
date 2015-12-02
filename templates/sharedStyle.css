@@ -94,8 +94,8 @@ button{
 	z-index: 1; 
 	position: relative;
 	box-shadow: 10px 0px 20px;
-	/*border-style:solid;
-	border-left-width:1px;*/
+	border-style:solid;
+	border: 1px solid;
 }
 
 #mainForm h1, p, h3{
