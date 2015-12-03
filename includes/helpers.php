@@ -263,6 +263,7 @@ function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $
 }
 
 
+
 # auto-populate code
 /*function connect_db(){
 

@@ -50,7 +50,6 @@ if($_SESSION['logged_in'] == true){
         <input type="hidden" name="password" value="<?php echo($_POST['password']); ?>">
        <button type="submit" name="pass-submit">Change Password</button></p>
     </form>
-    <input type="button" onclick="location.href='logout.php';" value="Logout" />
 </div>
 
 </body>
