@@ -33,18 +33,27 @@ textarea{
 	width:80%;
 	height:100px;
 }
+
 button{
 	width:125px;
 	padding:5px;
+}
+
+.back-button{
+	margin-left:20px;
+	margin-right:40px;
 }
 
 #table {
 	text-align: center;
 }
 
-.back-button{
-	margin-left:20px;
-	margin-right:40px;
+#table tbody tr:nth-child(odd) {
+   background-color: #ff9999;
+}
+
+#table tbody tr:first-child {
+	background-color: #ff3333;
 }
 
 #navbar {
@@ -136,10 +145,29 @@ button{
 #mainForm h1, p, h3{
 	padding-top: 10px;
 	padding-left: 25px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
+#mainForm h1 {
+	font-size: 450%;
+}
+
+#mainForm h3 {
+	font-size: 125%;
+}
+
+
 #mainForm table {
-	margin: 5px;
+	margin-left: 20px;
+	margin-right: 20px;
+	display: block;
+}
+
+#mainForm tbody {
+	text-align: center;
+	display: table;
+	width: 100%;
 }
 
 #mainForm table, th, td {

@@ -29,7 +29,7 @@ function show_quicklinks($dbc) {
   $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date DESC';
 
   # Execute the query
-  $results = mysqli_query($dbc , $query) ;
+  $results = mysqli_query($dbc , $query);
   check_results($results) ;
 
   # Show results
@@ -37,7 +37,8 @@ function show_quicklinks($dbc) {
   {
       # But...wait until we know the query succeed before
       # rendering the table start.
-      echo '<h3> Current Listings </h3>';
+      echo '<h3> Current Listings: </h3>';
+      echo '<br>';
       echo '<TABLE class="stuff">';
       echo '<TR>';
       echo '<TH>Date</TH>';
