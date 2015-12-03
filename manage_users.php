@@ -1,11 +1,3 @@
-
-/**
- * Created by PhpStorm.
- * User: Maxim
- * Date: 12/2/2015
- * Time: 4:37 PM
- */
-
 <?php
 # Check if user has logged in to admin interface before generating page:
 session_start();
@@ -39,13 +31,17 @@ require('includes/admin_tools.php');
 <div id="mainForm">
     <h3>Here you can manage administrators or change your password.</h3>
     <form action="manage_users.php" method="POST">
-    <?php show_users($dbc);
+    <?php
 
-    update_users($dbc);
-    show_users($dbc);
 
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        update_users($dbc);
+        show_users($dbc);
+    } else {
+        show_users($dbc);
+    }
     ?>
-
     </form>
 
     <form action="manage_users.php" method="POST">

@@ -182,7 +182,7 @@ function update_users($dbc){
 
 
                 if(isset($buttonPressed)){
-                    $deleteQuery = 'DELETE FROM users WHERE id=\'' . $id . '\'';
+                    $deleteQuery = 'DELETE FROM users WHERE user_id=\'' . $id . '\'';
                     $results_delete = mysqli_query($dbc, $deleteQuery);
                     check_results($results_delete);
                 }
