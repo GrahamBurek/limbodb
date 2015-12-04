@@ -50,7 +50,7 @@ require('includes/admin_tools.php');
 
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['fromHere'] == 'yes'){
 
-            echo '<p style="color:red;">Status successfully changed</p>';
+            echo '<p style="color:green;">Status successfully changed</p>';
             update_all_stuff_admin($dbc);
             show_all_stuff_admin($dbc);
         } else {
