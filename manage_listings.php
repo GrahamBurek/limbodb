@@ -60,7 +60,7 @@ require('includes/admin_tools.php');
         ?>
         <input type="button" onclick="location.href='index.php';" value="Home" style="width:75px;" />
         <!-- <button type="submit" name="submit">Submit Changes</button> -->
-        <input type="submit" value="Submit Changes" onclick="return confirm('Are you sure you wish to submit these changes?')" />
+        <button type="submit" onclick="return confirm('Are you sure you wish to submit these changes?')">Submit Changes</button>
 
         <input type="hidden" name="id" value="<?php echo($pid); ?>">
         <input type="hidden" name="username" value="<?php echo($_POST['username']); ?>">
