@@ -50,7 +50,7 @@ if (isset($_GET['date'])) {
     <h3>Create a new listing to help find your lost item.</h3>
 
     <!-- start form -->
-    <form action="results.php" method="post" enctype="multipart/form-data">
+    <form action="results.php" method="post" enctype="multipart/form-data" class="itemform">
 
         <!--text field for listing name-->
         <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>

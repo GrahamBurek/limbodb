@@ -134,7 +134,7 @@ function show_listing($dbc, $id) {
       # For the result, generate a table row
       if( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
       {
-        echo '<img src="' . $row['image'] . '" />';
+        echo '<img src="' . $row['image'] . '" style="width:200px; height: auto; margin:50px" />';
         echo '<p>Item Name: ' . $row['item'] . '</p>';
         echo '<p>Item Category: ' . $row['category'] . '</p>';
         echo '<p>Item Color: ' . $row['color'] . '</p>';

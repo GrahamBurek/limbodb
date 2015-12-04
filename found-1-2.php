@@ -48,7 +48,7 @@ if (isset($_GET['date'])) {
     <h1>Found something?</h1>
     <h3>Create a new listing to help find the item's owner.</h3>
     <!-- start form -->
-    <form action="results.php" method="post" enctype="multipart/form-data">
+    <form action="results.php" method="post" enctype="multipart/form-data" class="itemform">
         <!--text field for listing name-->
         <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
         <!--drop down with item types -->

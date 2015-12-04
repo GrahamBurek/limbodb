@@ -43,7 +43,7 @@
     ?>
 
     <!-- start form -->
-    <form action = "found-1.php" method="get">
+    <form action = "found-1.php" method="get" class="itemform">
         <!--drop down with item types -->
         <p><select name="item-type">
                 <option value="" disabled selected>Item Type</option>
