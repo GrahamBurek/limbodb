@@ -1,28 +1,25 @@
 <?php
 # Check if user has logged in to admin interface before generating page:
 session_start();
-if($_SESSION['logged_in'] == true) {
-	$pid = $_SESSION['pid'];
-	?>
+if($_SESSION['logged_in'] == true){
+$pid = $_SESSION['pid'];
+?>
 
-	<!DOCTYPE html>
-	<html>
-	<head>
-		<title>Admin Logon Page</title>
-		<!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
-		<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
-	</head>
-	<body>
-	<!-- Navbar include statement: -->
-	<?php
-	require('includes/connect_db.php');
-	require('includes/admin_tools.php');
-	function make_new_admin($dbc)
-	{
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Logon Page</title>
+	<!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
+	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
+</head>
+<body>
+<?php
+require('includes/init_db.php');
+require('includes/admin_tools.php');
 
-
+function make_new_admin($dbc)
+{
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
 
 		if (isset($_POST['new_admin_submit']) && isset($_POST['password-repeat']) && strcmp($_POST['password'], $_POST['password-repeat']) == 0) {
 
@@ -44,6 +41,7 @@ if($_SESSION['logged_in'] == true) {
 	}
 }
 ?>
+<!-- Navbar include statement: -->
 <div id="admin-navbar">
 	<ul>
 		<a href="admin.php"><li>Administrator Panel</li></a>

@@ -1,14 +1,48 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Limbo | Listing</title>
 	<!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
+	<script type="text/javascript">
+
+	function getEmailAddress(id){
+ 		
+		var emailForm = document.createElement("form");
+		emailForm.setAttribute("method", "post");
+    	emailForm.setAttribute("action", "email.php");
+
+		var address = prompt("Please enter your email address:");
+
+		var hiddenEmailField = document.createElement("input");
+		hiddenEmailField.setAttribute("type", "hidden");
+		hiddenEmailField.setAttribute("name", "address");
+		hiddenEmailField.setAttribute("value", address);
+		emailForm.appendChild(hiddenEmailField);
+
+		var hiddenIdField = document.createElement("input");
+		hiddenIdField.setAttribute("type", "hidden");
+		hiddenIdField.setAttribute("name", "id");
+		hiddenIdField.setAttribute("value", id);
+		emailForm.appendChild(hiddenIdField);
+
+
+
+		document.body.appendChild(emailForm);
+		emailForm.submit();
+
+	}
+
+</script>
 </head>
 <body>
 <!-- Navbar include statement: -->
 <?php 
-	require('includes/connect_db.php'); 
+	require('includes/init.php'); 
 	require('includes/helpers.php');
 	require('templates/navbar.php');
 	
@@ -74,5 +108,6 @@
 	
 ?>
 </div>
+
 </body>
 </html>

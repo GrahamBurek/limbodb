@@ -9,7 +9,7 @@
 <!-- Navbar and database include statements: -->
 <?php
 require('includes/helpers.php');
-require('includes/connect_db.php');
+require('includes/init.php');
 
 # Set sticky variables to the empty string initially:
 $type = "";

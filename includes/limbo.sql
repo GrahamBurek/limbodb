@@ -43,14 +43,13 @@ item_date DATE NOT NULL,
 create_date DATE NOT NULL,
 update_date DATE NOT NULL,
 room TEXT,
-owner TEXT,
-finder TEXT,
+uploaderEmail TEXT,
 status SET('Found', 'Lost', 'Claimed') NOT NULL,
 image TEXT,
 FOREIGN KEY (location_id) REFERENCES locations(id)
 );
 
-INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, room, owner, finder, status, image) VALUES(
+INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, room, uploaderEmail, status, image) VALUES(
 "iPhone Charger",
 3,
 "Electronics",
@@ -60,8 +59,7 @@ INSERT INTO stuff(item, location_id, category, color, description, item_date, cr
 Now(),
 Now(),
 NULL,
-"Jim Smith",
-NULL,
+"graham.burek1@gmail.com",
 "Lost",
 "uploads/charger.jpg"
 ),
@@ -75,8 +73,7 @@ NULL,
 Now(),
 Now(),
 "HC2020",
-NULL,
-"Jane Doe",
+"example@example.com",
 "Found",
 "uploads/sweatshirt.jpg"
 ),
@@ -90,8 +87,7 @@ NULL,
 Now(),
 Now(),
 NULL,
-"Frank Frankinson",
-NULL,
+"generic@genericwebsite.com",
 "Lost",
 "uploads/wallet.jpg"
 ),
@@ -104,7 +100,6 @@ NULL,
 '2015-11-19',
 Now(),
 Now(),
-NULL,
 NULL,
 "Jill Person",
 "Found",
@@ -120,8 +115,7 @@ NULL,
 Now(),
 Now(),
 NULL,
-"Bob Johnson",
-NULL,
+"Bob.Johnson@email.com",
 "Lost",
 "uploads/book.png"
 ),
@@ -135,12 +129,10 @@ NULL,
 Now(),
 Now(),
 NULL,
-NULL,
-"Bill Roberts",
+"Bill.Roberts@marist.edu",
 "Found",
 "uploads/watch.jpg"
-)
-;
+);
 
 
 # creates table 'locations' of all locations on campus

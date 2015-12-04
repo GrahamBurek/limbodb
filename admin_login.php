@@ -28,7 +28,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 <div id="mainForm">
     <?php
     # Connect to MySQL server and the database
-    require( 'includes/connect_db.php' );
+    require( 'includes/init.php' );
 
     # Includes helper functions for login
     require( 'includes/admin_tools.php' );

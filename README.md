@@ -1,3 +1,3 @@
 # limbodb
 Limbo Database Project (Software Development II)
-- Always source includes/limbo.sql in mysql to make sure DB is up to date
+- Auto generates database (see init.php, limbo.sql must be in correct path).

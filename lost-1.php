@@ -12,7 +12,7 @@ session_start();
 <body>
 <!-- Navbar and database include statements: -->
 <?php 
-	require('includes/connect_db.php');
+	require('includes/init.php');
 	require('includes/helpers.php');
 
 	# Set initial values of variables to the empty string:
