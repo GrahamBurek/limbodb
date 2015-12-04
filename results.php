@@ -4,6 +4,28 @@
 	<title>Limbo | Listing</title>
 	<!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
+	<script type="text/javascript">
+
+	function getEmailAddress(){
+ 		
+		var emailForm = document.createElement("form");
+		emailForm.setAttribute("method", method);
+    	emailForm.setAttribute("action", "email.php");
+
+		var address = prompt("Please enter your email address:");
+
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "address");
+		hiddenField.setAttribute("value", address);
+		emailForm.appendChild(hiddenField);
+
+		document.body.appendChild(emailForm);
+		emailForm.submit();
+
+	}
+
+	</script>
 </head>
 <body>
 <!-- Navbar include statement: -->

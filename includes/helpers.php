@@ -12,9 +12,9 @@ function buildEmailButton($dbc, $id){
   if($results){
     while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
         if ($row['status'] == "Found") {
-             echo '<input type="button" onclick="location.href=\'email.php\';" value="Claim item">';
+             echo '<input type="button" value="Claim item" onclick="getEmailAddress()">Claim item</input>';
         } else if ($row['status'] == "Lost") {
-             echo '<input type="button" onclick="location.href=\'email.php\';" value="Found this item">';
+             echo '<input type="button" value="Found this item" onclick="getEmailAddress()">Found this item</input>';
         } 
      } 
     

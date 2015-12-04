@@ -15,7 +15,11 @@
 <!-- Main white form for pages: -->
 <div id="mainForm">
 
-<!-- Body goes here -->
+<?php 
+
+	echo '<h1>' . $_POST['address'] . '</h1>';
+
+?>
 
 </div>
 </body>
