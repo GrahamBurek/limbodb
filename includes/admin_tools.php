@@ -188,6 +188,7 @@ function update_users($dbc){
                 }
             }
         }
+
     }
 
 

@@ -32,24 +32,6 @@ if($_SESSION['logged_in'] == true){
 <!-- Header -->
 <h1>Administrator Panel</h1>
 <h3>Welcome <?php echo(getAdmin($dbc, $pid)); ?>!</h3>
-    <form action="admin.php" method="POST">
-        <?php
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_POST['pass']) && isset($_POST['pass-repeat']) && strcmp($_POST['pass'],$_POST['pass-repeat'])==0){
-                change_password($dbc, $_POST['id'], $_POST['pass']);
-                echo '<p> Password change successful! </p>';
-            } else {
-                echo '<p> Please make sure passwords match </p>';
-            }
-        }
-        ?>
-        <p>New Password: <input type="password" name="pass"></p>
-        <p>Repeat New Password: <input type="password" name="pass-repeat"></p>
-        <input type="hidden" name="id" value="<?php echo $pid; ?>">
-        <input type="hidden" name="username" value="<?php echo($_POST['username']); ?>">
-        <input type="hidden" name="password" value="<?php echo($_POST['password']); ?>">
-       <button type="submit" name="pass-submit">Change Password</button></p>
-    </form>
 </div>
 
 </body>
