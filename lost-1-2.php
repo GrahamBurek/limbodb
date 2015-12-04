@@ -53,29 +53,32 @@ if (isset($_GET['date'])) {
     <form action="results.php" method="post" enctype="multipart/form-data" class="itemform">
 
         <!--text field for listing name-->
-        <p>Listing Name: <input type="text" name="listing-name" placeholder="Listing Name"></p>
+        <p><input type="text" name="listing-name" placeholder="Listing Name"></p>
 
         <!--drop down with item types -->
-        <p>Item Type: <select name="item-type">
-                <option value="Electronics" <?php echo ($_GET['type'] == 'Electronics') ? "selected" : "";  ?> >Electronics</option>
-                <option value="Clothing" <?php echo ($_GET['type'] == 'Clothing') ? "selected" : "";  ?> >Clothing</option>
-                <option value="School Supplies" <?php echo ($_GET['type'] == 'School Supplies') ? "selected" : "";  ?> >School Supplies</option>
-                <option value="Other" <?php echo ($_GET['type'] == 'Other') ? "selected" : "";  ?> >Other</option>
-            </select></p>
+        <p><select name="item-type">
+                <option value="" disabled selected>Item Type</option>
+                <option value="Electronics" <?php echo ($type == 'Electronics') ? "selected" : "";  ?> >Electronics</option>
+                <option value="Clothing" <?php echo ($type == 'Clothing') ? "selected" : "";  ?> >Clothing</option>
+                <option value="School Supplies" <?php echo ($type == 'School Supplies') ? "selected" : "";  ?> >School Supplies</option>
+                <option value="Other" <?php echo ($type == 'Other') ? "selected" : "";  ?> >Other</option>
+            </select>
 
         <!-- text field for color-->
-        <p>Item Color: <input type="text" name="item-color" placeholder="Color"  <?php echo (!empty($color)) ? 'value="' . $color . '"' : ""; ?> ></p>
-        <p>Location where lost (if known): </br>
+        <input type="text" name="item-color" placeholder="Color"  <?php echo (!empty($color)) ? 'value="' . $color . '"' : ""; ?> ></p>
+        <p></br>
 
             <!--generates drop down of locations from database-->
             <select name="location">
-                 <?php dropdown_locations_selected($dbc, $location); ?>
+                <?php 
+                echo "<option value='' disabled selected>Location</option>";
+                dropdown_locations_selected($dbc, $location); ?>
             </select></p>
 
         <!-- date field for when item was lost -->
         <p>Date lost: <input name="date" type="date" value="<?php echo $date; ?>">
             <!-- text field for email address-->
-        <p>E-Mail Address: <input type="text" name="email" placeholder="E-Mail Address">
+        <p><input type="text" name="email" placeholder="E-Mail Address">
             Upload an Image:<input type="file" name="imgfile"><br></p>
         <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
         <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
