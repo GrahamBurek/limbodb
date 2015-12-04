@@ -63,7 +63,7 @@ NULL,
 "Jim Smith",
 NULL,
 "Lost",
-"images/charger.jpg"
+"uploads/charger.jpg"
 ),
 
 ("Marist sweatshirt",
@@ -78,7 +78,7 @@ Now(),
 NULL,
 "Jane Doe",
 "Found",
-NULL
+"uploads/sweatshirt.jpg"
 ),
 
 ("Wallet with $200",
@@ -93,7 +93,7 @@ NULL,
 "Frank Frankinson",
 NULL,
 "Lost",
-NULL
+"uploads/wallet.jpg"
 ),
 
 ("Green Earring",
@@ -108,7 +108,7 @@ NULL,
 NULL,
 "Jill Person",
 "Found",
-NULL
+"uploads/earring.jpg"
 ),
 
 ("Calculus Book",
@@ -123,7 +123,7 @@ NULL,
 "Bob Johnson",
 NULL,
 "Lost",
-NULL
+"uploads/book.png"
 ),
 
 ("Apple Watch",
@@ -138,7 +138,7 @@ NULL,
 NULL,
 "Bill Roberts",
 "Found",
-NULL
+"uploads/watch.jpg"
 )
 ;
 
