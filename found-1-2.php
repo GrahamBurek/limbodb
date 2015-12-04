@@ -78,7 +78,7 @@ if (isset($_GET['date'])) {
         <input type="text" name="status" value="Found" hidden>
         <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
         <!-- submit button-->
-        <button type="submit" name="submit">Submit</button>
+        <button type="submit" name="submit" onclick="return confirm('Are you sure all the information is correct?')">Submit</button>
     </form>
 </div>
 </body>

@@ -85,7 +85,7 @@ if (isset($_GET['date'])) {
         <input type="text" name="status" value="Lost" hidden>
 
         <!-- submit button-->
-        <button type="submit" name="submit">Submit</button>
+        <button type="submit" name="submit" onclick="return confirm('Are you sure all the information is correct?')">Submit</button>
     </form>
 </div>
 </body>
