@@ -13,36 +13,35 @@ $pid = $_SESSION['pid'];
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Navbar include statement: -->
 <?php
 require('includes/init_db.php');
 require('includes/admin_tools.php');
 
-		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+function make_new_admin($dbc)
+{
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+		if (isset($_POST['new_admin_submit']) && isset($_POST['password-repeat']) && strcmp($_POST['password'], $_POST['password-repeat']) == 0) {
 
+			$username = $_POST['username'];
+			$firstName = $_POST['first_name'];
+			$lastName = $_POST['last_name'];
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			$query = 'INSERT INTO users(username, first_name, last_name, email, pass, reg_date) VALUES("' . $username . '", "'
+				. $firstName . '", "' . $lastName . '", "' . $email . '", "' . $password . '", Now())';
 
+			# Execute the query
+			$results = mysqli_query($dbc, $query);
+			check_results($results);
 
-			if(isset($_POST['new_admin_submit']) && isset($_POST['password-repeat']) && strcmp($_POST['password'],$_POST['password-repeat'])==0){
-
-                $username = $_POST['username'];
-                $firstName = $_POST['first_name'];
-                $lastName = $_POST['last_name'];
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-				$query = 'INSERT INTO users(username, first_name, last_name, email, pass, reg_date) VALUES("' . $username . '", "'
-                . $firstName .'", "' . $lastName . '", "' . $email . '", "' . $password . '", Now())';
-
-				# Execute the query
-				$results = mysqli_query( $dbc , $query ) ;
-				check_results($results) ;
-
-			} else {
-				echo '<p> Please make sure passwords match </p>';
-			}
+		} else {
+			echo '<p> Please make sure passwords match </p>';
 		}
-
+	}
+}
 ?>
+<!-- Navbar include statement: -->
 <div id="admin-navbar">
 	<ul>
 		<a href="admin.php"><li>Administrator Panel</li></a>
@@ -61,9 +60,10 @@ require('includes/admin_tools.php');
 	<p><input type="text" name="first_name" placeholder="First Name" /></p>
 	<p><input type="text" name="last_name" placeholder="Last Name" /></p>
 	<p><input type="text" name="email" placeholder="E-mail" /></p>
-	<p><input type="text" name="password" placeholder="Password" /></p>
-	<p><input type="text" name="password-repeat" placeholder="Repeat Password"/></p>
-	<p><input type="submit" name="new_admin_submit">Submit</input></p>
+	<p><input type="password" name="password" placeholder="Password" /></p>
+	<p><input type="password" name="password-repeat" placeholder="Repeat Password"/></p>
+	<p><?php make_new_admin($dbc);?></p>
+	<p><input type="submit" name="new_admin_submit"></input></p>
 
 </form>
 </div>
