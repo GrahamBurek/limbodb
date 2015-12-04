@@ -27,7 +27,7 @@
 <div id="mainForm">
     <!-- Header and description -->
 <h1>Lost something?</h1>
-<h3>Search for your lost item by giving us some information about it!</h3>
+<h3>Search for your lost item by giving us some information about it!</h3><br><br>
 
     <?php 
         # If user came back from lost-1.php, tell them to enter something before submitting:
@@ -45,20 +45,20 @@
     <!-- start form -->
     <form action = "lost-1.php" method="get">
         <!--drop down with item types -->
-        <p>Item Type: <select name="item-type">
-                <option value="" disabled selected>Select One</option>
+        <p><select name="item-type">
+                <option value="" disabled selected>Item Type</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Clothing">Clothing</option>
                 <option value="School Supplies">School Supplies</option>
                 <option value="Other">Other</option>
-            </select></p>
+            </select>
         <!-- text field for color-->
-        <p>Item Color: <input type="text" name="item-color" placeholder="Color"></p>
-        <p>Location where lost: </br>
+        <input type="text" name="item-color" placeholder="Item Color"></p>
+        <p></br>
             <!--generates drop down of locations from database-->
             <select name="location">
                 <?php
-                    echo "<option value='' disabled selected>Select One</option>";
+                    echo "<option value='' disabled selected>Location</option>";
                     dropdown_locations($dbc); 
                 ?>
             </select></p>

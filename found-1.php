@@ -65,7 +65,7 @@ session_start();
 <!-- Main white form for pages: -->
 <div id="mainForm">
 	<!-- Header and description -->
-    <h1>Do These Sound Like the item you found?</h1>
+    <h1>Is Someone Looking for Your Item?</h1>
     <h3>If you think the item you found matches one of these, click it to find out more about the item and confirm you found it. Otherwise, click "None of These Match" to post a new listing.</h3>
     <!-- start form -->
     <form id="table" action="found-1-2.php" method="get">

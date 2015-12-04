@@ -65,7 +65,7 @@ session_start();
 <!-- Main white form for pages: -->
 <div id="mainForm">
 	<!-- Header and description -->
-    <h1>Do These Sound Like the item you lost?</h1>
+    <h1>Is Your Item Here?</h1>
     <h3>If you think the item you lost matches one of these, click it to find out more about the item and confirm that it is yours. Otherwise, click "None of These Match" to post a new listing.</h3>
     <!-- start form -->
     <form id="table" action="lost-1-2.php" method="get">
