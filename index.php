@@ -8,7 +8,7 @@
 <body>
 <!-- Require statements: -->
 <?php
-	require('includes/connect_db.php'); 
+	require('init.php'); 
 	require('includes/helpers.php');
 
 ?>

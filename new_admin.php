@@ -30,8 +30,8 @@ require('includes/admin_tools.php');
                 $lastName = $_POST['last_name'];
                 $email = $_POST['email'];
                 $password = $_POST['password'];
-				$query = 'INSERT INTO users(username, first_name, last_name, email, pass, reg_date) VALUES(' . $username . ', '
-                . $firstName .', ' . $lastName . ', ' . $email . ', ' . $password . ', Now())';
+				$query = 'INSERT INTO users(username, first_name, last_name, email, pass, reg_date) VALUES("' . $username . '", "'
+                . $firstName .'", "' . $lastName . '", "' . $email . '", "' . $password . '", Now())';
 
 				# Execute the query
 				$results = mysqli_query( $dbc , $query ) ;
