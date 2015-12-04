@@ -1,3 +1,8 @@
+<?php 
+session_start();
+if (isset($_SESSION['submittingEmail']) && $_SESSION['submittingEmail'] == true) {
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +21,30 @@
 <div id="mainForm">
 
 <?php 
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$address = $_POST['address'];
+		$id = $_POST['id'];
+		$result = sendEmail($dbc, $address, $id);
 
-	echo '<h1>' . $_POST['address'] . '</h1>';
+		if($result){
+			echo "<h1>Email was sent successfully. Wait for other user to contact you.</h1>";
+		} else {
+			echo "<h1>Email was not sent successfully. Try going back and entering your address again. If that doesn't work, contact a webmaster.</h1>";
+		}
+	 }
 
 ?>
 
 </div>
 </body>
 </html>
+
+<?php
+$_SESSION['submittingEmail'] = false;
+
+} else {
+	# Redirect to home since user is not logged in:
+    header('Location: index.php');
+    die("Not finding or claiming an item, returning home..");
+}
+?>

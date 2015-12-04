@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,26 +10,34 @@
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 	<script type="text/javascript">
 
-	function getEmailAddress(){
+	function getEmailAddress(id){
  		
 		var emailForm = document.createElement("form");
-		emailForm.setAttribute("method", method);
+		emailForm.setAttribute("method", "post");
     	emailForm.setAttribute("action", "email.php");
 
 		var address = prompt("Please enter your email address:");
 
-		var hiddenField = document.createElement("input");
-		hiddenField.setAttribute("type", "hidden");
-		hiddenField.setAttribute("name", "address");
-		hiddenField.setAttribute("value", address);
-		emailForm.appendChild(hiddenField);
+		var hiddenEmailField = document.createElement("input");
+		hiddenEmailField.setAttribute("type", "hidden");
+		hiddenEmailField.setAttribute("name", "address");
+		hiddenEmailField.setAttribute("value", address);
+		emailForm.appendChild(hiddenEmailField);
+
+		var hiddenIdField = document.createElement("input");
+		hiddenIdField.setAttribute("type", "hidden");
+		hiddenIdField.setAttribute("name", "id");
+		hiddenIdField.setAttribute("value", id);
+		emailForm.appendChild(hiddenIdField);
+
+
 
 		document.body.appendChild(emailForm);
 		emailForm.submit();
 
 	}
 
-	</script>
+</script>
 </head>
 <body>
 <!-- Navbar include statement: -->
@@ -96,5 +108,6 @@
 	
 ?>
 </div>
+
 </body>
 </html>

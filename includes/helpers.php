@@ -12,14 +12,49 @@ function buildEmailButton($dbc, $id){
   if($results){
     while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
         if ($row['status'] == "Found") {
-             echo '<input type="button" value="Claim item" onclick="getEmailAddress()">Claim item</input>';
+             echo '<button onClick="getEmailAddress(' . $id . ')"/>Claim item</button>';
         } else if ($row['status'] == "Lost") {
-             echo '<input type="button" value="Found this item" onclick="getEmailAddress()">Found this item</input>';
+             echo '<button onClick="getEmailAddress(' . $id . ')"/>Found this item</button>';
         } 
      } 
-    
+      $_SESSION['submittingEmail'] = true; 
   }
 
+}
+
+function sendEmail($dbc, $address, $id){
+
+  $query = 'SELECT * FROM stuff WHERE id=' . $id;
+
+  $results = mysqli_query($dbc , $query);
+  check_results($results);
+
+  if($results){
+    $uploaderEmail;
+    while($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
+        $uploaderEmail = $row['uploaderEmail'];
+    }
+  }
+
+  if($row['status'] == "Found") {
+
+      $subject = "Somebody claimed the - " . $row['item'] . " - you found!";
+      $message = "A Limbo user with the email address: " . $address . " claimed the item you found! Please respond to them to return the item.\r\nThanks,\r\nLimboDB";
+      $message = wordwrap($message, 70, "\r\n");
+      $headers = "From: no-reply@limbo_db.com" . "\r\n";
+
+      return mail($uploaderEmail, $subject, $message);
+
+  } else if($row['status'] == "Lost"){
+
+      $subject = "Somebody found the - " . $row['item'] . " - you lost!";
+      $message = "A Limbo user with the email address: " . $address . " found the item you lost! Please respond to them to get the item.\r\nThanks,\r\nLimboDB";
+      $message = wordwrap($message, 70, "\r\n");
+      $headers = "From: no-reply@limbo_db.com" . "\r\n";
+      
+      return mail($uploaderEmail, $subject, $message);
+
+  }
 }
 
 
