@@ -15,7 +15,7 @@ if($_SESSION['logged_in'] == true){
 <body>
 <!-- Navbar include statement: -->
 <?php 
-	require('includes/connect_db.php'); 
+	require('includes/init.php'); 
     require('includes/admin_tools.php');
 ?>
 <div id="admin-navbar">

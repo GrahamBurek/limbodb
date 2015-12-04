@@ -15,7 +15,7 @@ $pid = $_SESSION['pid'];
 <body>
 <!-- Navbar include statement: -->
 <?php
-require('includes/connect_db.php');
+require('includes/init_db.php');
 require('includes/admin_tools.php');
 
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){

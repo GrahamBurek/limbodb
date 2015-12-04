@@ -8,7 +8,7 @@
 <body>
 <!-- Require statements: -->
 <?php
-	require('init.php'); 
+	require('includes/init.php'); 
 	require('includes/helpers.php');
 
 ?>

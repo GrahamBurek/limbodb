@@ -13,7 +13,7 @@
 <!-- Navbar and database include statements: -->
 <?php
     require('includes/helpers.php');
-    require('includes/connect_db.php');
+    require('includes/init.php');
 ?>
 <div id="navbar">
     <ul>
