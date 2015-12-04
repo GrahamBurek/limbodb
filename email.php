@@ -1,6 +1,5 @@
 <?php 
-session_start();
-if (isset($_SESSION['submittingEmail']) && $_SESSION['submittingEmail'] == true) {
+if (isset($_POST['id']) && isset($_POST['address'])) {
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +23,15 @@ if (isset($_SESSION['submittingEmail']) && $_SESSION['submittingEmail'] == true)
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$address = $_POST['address'];
 		$id = $_POST['id'];
-		$result = sendEmail($dbc, $address, $id);
+		$error = sendEmail($dbc, $address, $id);
 
-		if($result){
-			echo "<h1>Email was sent successfully. Wait for other user to contact you.</h1>";
-		} else {
-			echo "<h1>Email was not sent successfully. Try going back and entering your address again. If that doesn't work, contact a webmaster.</h1>";
-		}
+		echo "<h1>" . $error . "</h1>";
+
+		// if($result){
+		// 	echo "<h1>Email was sent successfully. Wait for other user to contact you.</h1>";
+		// } else {
+		// 	echo "<h1>Email was not sent successfully. Try going back and entering your address again. If that doesn't work, contact a webmaster.</h1>";
+		// }
 	 }
 
 ?>
@@ -40,7 +41,6 @@ if (isset($_SESSION['submittingEmail']) && $_SESSION['submittingEmail'] == true)
 </html>
 
 <?php
-$_SESSION['submittingEmail'] = false;
 
 } else {
 	# Redirect to home since user is not logged in:

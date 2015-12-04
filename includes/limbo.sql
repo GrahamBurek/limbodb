@@ -101,7 +101,7 @@ NULL,
 Now(),
 Now(),
 NULL,
-"Jill Person",
+"liam.harwood1@marist.edu",
 "Found",
 "uploads/earring.jpg"
 ),

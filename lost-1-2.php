@@ -46,7 +46,7 @@ if (isset($_GET['date'])) {
 <div id="mainForm">
 
     <!-- Header and description -->
-    <h1>Lost something?</h1>
+    <h1>New Listing Creation</h1>
     <h3>Create a new listing to help find your lost item.</h3>
 
     <!-- start form -->

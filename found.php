@@ -64,7 +64,7 @@
             </select></p>
         <p>Date when found: <input type="date" name="date"></p>
         <input type="hidden" name="submitted" value="yes">
-        <input type="button" class="back-button" onclick="location.href='index.php';" value="Back to Home" />
+        <input type="button" class="back-button" onclick="window.location.href='index.php'" value="Back to Home" />
         <!-- submit button-->
         <button type="submit">Submit</button>
     </form>

@@ -45,7 +45,7 @@ if (isset($_GET['date'])) {
 <!-- Main white form for pages: -->
 <div id="mainForm">
     <!-- Header and description -->
-    <h1>Found something?</h1>
+    <h1>New Listing Creation</h1>
     <h3>Create a new listing to help find the item's owner.</h3>
     <!-- start form -->
     <form action="results.php" method="post" enctype="multipart/form-data" class="itemform">

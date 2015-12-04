@@ -1,5 +1,7 @@
 <?php
 
+require("php-mailer/class.phpmailer.php");
+
 function buildEmailButton($dbc, $id){
 
   // Build button differently if user is looking at a lost or a found item:
@@ -17,7 +19,7 @@ function buildEmailButton($dbc, $id){
              echo '<button onClick="getEmailAddress(' . $id . ')"/>Found this item</button>';
         } 
      } 
-      $_SESSION['submittingEmail'] = true; 
+      
   }
 
 }
@@ -31,30 +33,80 @@ function sendEmail($dbc, $address, $id){
 
   if($results){
     $uploaderEmail;
+
     while($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
         $uploaderEmail = $row['uploaderEmail'];
-    }
-  }
+    
 
   if($row['status'] == "Found") {
 
       $subject = "Somebody claimed the - " . $row['item'] . " - you found!";
       $message = "A Limbo user with the email address: " . $address . " claimed the item you found! Please respond to them to return the item.\r\nThanks,\r\nLimboDB";
       $message = wordwrap($message, 70, "\r\n");
-      $headers = "From: no-reply@limbo_db.com" . "\r\n";
 
-      return mail($uploaderEmail, $subject, $message);
+      $mail = new PHPMailer();
+
+      $mail->IsSMTP();                                      // Set mailer to use SMTP
+      $mail->Host = 'smtp.gmail.com';                       // Specify main server
+      $mail->SMTPAuth = true;                               // Enable SMTP authentication
+      $mail->Username = 'limbodb@gmail.com';                // SMTP username
+      $mail->Password = 'limbodbpassword';                  // SMTP password
+      $mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl' also accepted
+      $mail->Port = 465;
+      //$mail->SMTPDebug = 2;
+
+      $mail->From = 'limbodb@gmail.com';
+      $mail->FromName = 'Limbo Admin';
+      $mail->AddAddress($uploaderEmail);                    // Add a recipient
+
+      $mail->Subject = $subject;
+      $mail->Body    = $message;
+      $mail->AltBody = $message;
+
+      if(!$mail->Send()) {
+        $error = 'Mailer Error: ' . $mail->ErrorInfo;
+        return $error;
+      } else {
+        return 'Success!';
+      }
+
+
 
   } else if($row['status'] == "Lost"){
 
       $subject = "Somebody found the - " . $row['item'] . " - you lost!";
       $message = "A Limbo user with the email address: " . $address . " found the item you lost! Please respond to them to get the item.\r\nThanks,\r\nLimboDB";
       $message = wordwrap($message, 70, "\r\n");
-      $headers = "From: no-reply@limbo_db.com" . "\r\n";
-      
-      return mail($uploaderEmail, $subject, $message);
 
+      $mail = new PHPMailer();
+
+      $mail->IsSMTP();                                      // Set mailer to use SMTP
+      $mail->Host = 'smtp.gmail.com';                       // Specify main server
+      $mail->SMTPAuth = true;                               // Enable SMTP authentication
+      $mail->Username = 'limbodb@gmail.com';                // SMTP username
+      $mail->Password = 'limbodbpassword';                  // SMTP password
+      $mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl' also accepted
+      $mail->Port = 465;
+      //$mail->SMTPDebug = 2;
+
+      $mail->From = 'limbodb@gmail.com';
+      $mail->FromName = 'Limbo Admin';
+      $mail->AddAddress($uploaderEmail);                    // Add a recipient
+
+      $mail->Subject = $subject;
+      $mail->Body    = $message;
+      $mail->AltBody = $message;
+
+      if(!$mail->Send()) {
+        $error = 'Mailer Error: ' . $mail->ErrorInfo;
+        return $error;
+      } else {
+        return 'Email was successfully sent! Wait for user to contact you.';
+      }
+      
   }
+}
+}
 }
 
 
@@ -296,3 +348,4 @@ function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $
   return $results;
 
 }
+    
