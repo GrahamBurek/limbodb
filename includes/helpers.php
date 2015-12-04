@@ -257,28 +257,7 @@ function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $
   $results = mysqli_query($dbc, $query) ;
   check_results($results) ;
 
-  echo $query;
+  // echo $query;
   return $results;
 
 }
-
-
-
-# auto-populate code
-/*function connect_db(){
-
-  $dbc = @mysqli_connect ( 'localhost', 'root', '', 'limbo_db' )
-
-  OR die ( mysqli_connect_error() ) ;
-
-  # Set encoding to match PHP script encoding.
-
-  mysqli_set_charset( $dbc, 'utf8' ) ;
-
-  return $dbc;
-}
-
-function init(){
-    $dbc = connect_db();
-}
-*/
