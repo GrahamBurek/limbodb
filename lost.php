@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Limbo Lost & Found</title>
+    <title>Limbo | Lost Search</title>
     <!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
     <link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
@@ -17,10 +17,10 @@
 ?>
 <div id="navbar">
     <ul>
-        <a href="index.php"><li>Limbo Lost & Found</li></a>
-        <a href="index.php"><li >Home</li></a>
-        <a href="found.php"><li>Found Something?</li></a>
-        <a href="lost.php"><li class="current">Lost Something?</li></a>
+        <a href="index.php"><li>LIMBO Lost & Found
+        </li></a><a href="index.php"><li>Home
+        </li></a><a href="found.php"><li>Found Something?
+        </li></a><a href="lost.php"><li class="current">Lost Something?</li></a>
     </ul>
 </div>
 <!-- Main white form for pages: -->
