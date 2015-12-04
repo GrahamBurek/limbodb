@@ -32,6 +32,7 @@ if($_SESSION['logged_in'] == true){
 <!-- Header -->
 <h1>Administrator Panel</h1>
 <h3>Welcome <?php echo(getAdmin($dbc, $pid)); ?>!</h3>
+
 </div>
 
 </body>
