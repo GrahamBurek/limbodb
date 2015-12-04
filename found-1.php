@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Limbo Lost & Found</title>
+	<title>Limbo | Search Results</title>
 	<!-- Always include this link to the shared stylesheet. To add more style for a specific page or group of pages, add new link element under shared link! -->
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
@@ -55,17 +55,17 @@ session_start();
 	
 ?>
 <div id="navbar">
-	<ul>
-		<a href="index.php"><li>Limbo Lost & Found</li></a>
-		<a href="index.php"><li >Home</li></a>
-		<a href="found.php"><li class="current">Found Something?</li></a>
-		<a href="lost.php"><li>Lost Something?</li></a>
-	</ul>
+    <ul>
+        <a href="index.php"><li>LIMBO Lost & Found
+        </li></a><a href="index.php"><li>Home
+        </li></a><a href="found.php"><li class="current">Found Something?
+        </li></a><a href="lost.php"><li>Lost Something?</li></a>
+    </ul>
 </div>
 <!-- Main white form for pages: -->
 <div id="mainForm">
 	<!-- Header and description -->
-    <h1>Do These Sound Like the item you found?</h1>
+    <h1>Is Someone Looking for Your Item?</h1>
     <h3>If you think the item you found matches one of these, click it to find out more about the item and confirm you found it. Otherwise, click "None of These Match" to post a new listing.</h3>
     <!-- start form -->
     <form id="table" action="found-1-2.php" method="get">
