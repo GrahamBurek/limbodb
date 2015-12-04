@@ -67,7 +67,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
             <td>Password:</td><td><input type="password" name="password"></td>
         </tr>
     </table>
-    <p><input type="button" onclick="location.href='index.php';" value="Back to Limbo" /><input type="submit" ></p>
+    <p><input type="button" onclick="location.href='index.php';" value="Back to Limbo" /><input id="login_button" type="submit" value="Log In"></p>
 </form>
     </body>
 </html>
