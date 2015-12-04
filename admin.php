@@ -20,7 +20,7 @@ if($_SESSION['logged_in'] == true){
 ?>
 <div id="admin-navbar">
     <ul>
-        <a href="admin.php"><li>Administrator Panel</li></a>
+        <a href="admin.php" ><li class="admin-current">Administrator Panel</li></a>
         <a href="manage_users.php"><li>Manage Users</li></a>
         <a href="manage_listings.php"><li>Manage Listings</li></a>
         <a href="logout.php" style="float:right;"><li>Logout</li></a>
