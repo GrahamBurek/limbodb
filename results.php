@@ -62,6 +62,8 @@ session_start();
 	if(isset($_REQUEST['submit'])){
     	$filename =  $_FILES["imgfile"]["name"];
     	$image = "uploads/$filename";
+    	echo "blah";
+    	
     		if ((($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg")) && ($_FILES["imgfile"]["size"] < 200000))
     		{
         		if(file_exists($_FILES["imgfile"]["name"]))
@@ -70,7 +72,8 @@ session_start();
         		}
         	else
         	{
-            	move_uploaded_file($_FILES["imgfile"]["tmp_name"],"uploads/$filename");
+        		echo "blah";
+            	move_uploaded_file($_FILES["imgfile"]["tmp_name"], _DIR_ . "/uploads/$filename");
             	echo "Image upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
 		    }
     		}
