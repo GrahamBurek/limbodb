@@ -62,9 +62,8 @@ session_start();
 	if(isset($_REQUEST['submit'])){
     	$filename =  $_FILES["imgfile"]["name"];
     	$image = "uploads/$filename";
-    	echo "blah";
-    	
-    		if ((($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg")) && ($_FILES["imgfile"]["size"] < 200000))
+
+    		if ((($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg")) && ($_FILES["imgfile"]["size"] < 2000000))
     		{
         		if(file_exists($_FILES["imgfile"]["name"]))
         		{

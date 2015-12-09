@@ -1,5 +1,7 @@
 <?php
 
+require("php-mailer/class.phpmailer.php");
+
 function buildEmailButton($dbc, $id){
 
   // Build button differently if user is looking at a lost or a found item:
@@ -17,7 +19,7 @@ function buildEmailButton($dbc, $id){
              echo '<button onClick="getEmailAddress(' . $id . ')"/>Found this item</button>';
         } 
      } 
-      $_SESSION['submittingEmail'] = true; 
+      
   }
 
 }
@@ -31,32 +33,136 @@ function sendEmail($dbc, $address, $id){
 
   if($results){
     $uploaderEmail;
+
     while($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
         $uploaderEmail = $row['uploaderEmail'];
-    }
-  }
+    
 
   if($row['status'] == "Found") {
 
       $subject = "Somebody claimed the - " . $row['item'] . " - you found!";
       $message = "A Limbo user with the email address: " . $address . " claimed the item you found! Please respond to them to return the item.\r\nThanks,\r\nLimboDB";
       $message = wordwrap($message, 70, "\r\n");
-      $headers = "From: no-reply@limbo_db.com" . "\r\n";
 
-      return mail($uploaderEmail, $subject, $message);
+      $mail = new PHPMailer();
+
+      $mail->IsSMTP();                                      // Set mailer to use SMTP
+      $mail->Host = 'smtp.gmail.com';                       // Specify main server
+      $mail->SMTPAuth = true;                               // Enable SMTP authentication
+      $mail->Username = 'limbodb@gmail.com';                // SMTP username
+      $mail->Password = 'limbodbpassword';                  // SMTP password
+      $mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl' also accepted
+      $mail->Port = 465;
+      //$mail->SMTPDebug = 2;
+
+      $mail->From = 'limbodb@gmail.com';
+      $mail->FromName = 'Limbo Admin';
+      $mail->AddAddress($uploaderEmail);                    // Add a recipient
+
+      $mail->Subject = $subject;
+      $mail->Body    = $message;
+      $mail->AltBody = $message;
+
+      if(!$mail->Send()) {
+        $error = 'Mailer Error: ' . $mail->ErrorInfo;
+        return $error;
+      } else {
+        return 'Success!';
+      }
+
+
 
   } else if($row['status'] == "Lost"){
 
       $subject = "Somebody found the - " . $row['item'] . " - you lost!";
       $message = "A Limbo user with the email address: " . $address . " found the item you lost! Please respond to them to get the item.\r\nThanks,\r\nLimboDB";
       $message = wordwrap($message, 70, "\r\n");
-      $headers = "From: no-reply@limbo_db.com" . "\r\n";
-      
-      return mail($uploaderEmail, $subject, $message);
 
+      $mail = new PHPMailer();
+
+      $mail->IsSMTP();                                      // Set mailer to use SMTP
+      $mail->Host = 'smtp.gmail.com';                       // Specify main server
+      $mail->SMTPAuth = true;                               // Enable SMTP authentication
+      $mail->Username = 'limbodb@gmail.com';                // SMTP username
+      $mail->Password = 'limbodbpassword';                  // SMTP password
+      $mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl' also accepted
+      $mail->Port = 465;
+      //$mail->SMTPDebug = 2;
+
+      $mail->From = 'limbodb@gmail.com';
+      $mail->FromName = 'Limbo Admin';
+      $mail->AddAddress($uploaderEmail);                    // Add a recipient
+
+      $mail->Subject = $subject;
+      $mail->Body    = $message;
+      $mail->AltBody = $message;
+
+      if(!$mail->Send()) {
+        $error = 'Mailer Error: ' . $mail->ErrorInfo;
+        return $error;
+      } else {
+        return 'Email was successfully sent! Wait for user to contact you.';
+      }
+      
   }
 }
+}
+}
 
+
+function show_recent_quicklinks($dbc, $time){
+  if ($time == 'day') {
+    $query = 'SELECT id, item, item_date, status FROM stuff WHERE item_date >= DATE_SUB(Now(), INTERVAL 1 DAY) ORDER BY item_date DESC';
+  } else if ($time == 'week') {
+    $query = 'SELECT id, item, item_date, status FROM stuff WHERE item_date >= DATE_SUB(Now(), INTERVAL 1 WEEK) ORDER BY item_date DESC';
+  } else if ($time == 'month') {
+    $query = 'SELECT id, item, item_date, status FROM stuff WHERE item_date >= DATE_SUB(Now(), INTERVAL 1 MONTH) ORDER BY item_date DESC';
+}
+
+# Execute the query
+  $results = mysqli_query($dbc , $query);
+  check_results($results) ;
+
+  # Show results
+  if( $results )
+  {
+      # But...wait until we know the query succeed before
+      # rendering the table start.
+      echo '<h3> Current Listings: </h3>';
+      echo '<p>See results since: <select name="recent listings" onChange="reload(this)">
+                                  <option value="" disabled selected>Select One</option>
+                                  <option value="day" >1 day ago</option>
+                                  <option value="week" >1 week ago</option>
+                                  <option value="month" >1 month ago</option>
+                                  </select></p>';
+      echo '<br>';
+      echo '<TABLE class="stuff">';
+      echo '<TR>';
+      echo '<TH>Date</TH>';
+      echo '<TH>Status</TH>';
+      echo '<TH>Item</TH>';
+      echo '</TR>';
+
+      # For each row result, generate a table row with a link
+      while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+      {
+        $alink = '<A HREF = results.php?id=' . $row['id'] . '>' . $row['item'] . ' </A>';
+         
+        echo '<TR>' ;
+        echo '<TD>' . $row['item_date'] . '</TD>';  
+        echo '<TD>' . $row['status'] . '</TD>' ;
+        echo '<TD>' . $alink . '</TD>' ;
+        echo '</TR>';
+        
+      }
+
+      # End the table
+      echo '</TABLE>';
+
+      # Free up the results in memory
+      mysqli_free_result( $results ) ;
+  }
+  }
 
 
 function show_quicklinks($dbc) {
@@ -73,6 +179,12 @@ function show_quicklinks($dbc) {
       # But...wait until we know the query succeed before
       # rendering the table start.
       echo '<h3> Current Listings: </h3>';
+      echo '<p>See results since: <select name="recent listings" onChange="reload(this)">
+                                  <option value="" disabled selected>Select One</option>
+                                  <option value="day" >1 day ago</option>
+                                  <option value="week" >1 week ago</option>
+                                  <option value="month" >1 month ago</option>
+                                  </select></p>';
       echo '<br>';
       echo '<TABLE class="stuff">';
       echo '<TR>';
@@ -296,3 +408,4 @@ function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $
   return $results;
 
 }
+    

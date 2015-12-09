@@ -27,8 +27,21 @@
 	<br>
 <div id="table">
 <?php
-	show_quicklinks($dbc);
+	if (isset($_GET['time'])) {
+		$time = $_GET['time'];
+		show_recent_quicklinks($dbc,$time);
+	} else {
+		show_quicklinks($dbc);
+	}
 ?>
+
+<script type="text/javascript">
+	function reload(select){
+		var url = "index.php";
+		url = url + "?time=" + select.value;
+		window.location.assign(url);
+	}
+</script>
 </div>
 </div>
 </body>
