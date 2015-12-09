@@ -49,11 +49,14 @@ if (isset($_GET['date'])) {
     <h1>New Listing Creation</h1>
     <h3>Create a new listing to help find your lost item.</h3>
 
+    <p style="font-size:12px;"><span class="required">*</span> = Required</p>
+    <br>
+
     <!-- start form -->
     <form action="results.php" method="post" enctype="multipart/form-data" class="itemform">
 
         <!--text field for listing name-->
-        <p><input type="text" name="listing-name" placeholder="Listing Name"></p>
+        <p><input type="text" name="listing-name" placeholder="Listing Name"><span class="required">*</span></p>
 
         <!--drop down with item types -->
         <p><select name="item-type">
@@ -64,9 +67,14 @@ if (isset($_GET['date'])) {
                 <option value="Other" <?php echo ($type == 'Other') ? "selected" : "";  ?> >Other</option>
             </select>
 
+            <span class="required" style="margin-right:40px;">*</span>
+
         <!-- text field for color-->
-        <input type="text" name="item-color" placeholder="Color"  <?php echo (!empty($color)) ? 'value="' . $color . '"' : ""; ?> ></p>
+        <input type="text" name="item-color" placeholder="Color"  <?php echo (!empty($color)) ? 'value="' . $color . '"' : ""; ?> >
+            <span class="required">*</span></p>
         <p></br>
+
+
 
             <!--generates drop down of locations from database-->
             <select name="location">
@@ -75,10 +83,14 @@ if (isset($_GET['date'])) {
                 dropdown_locations_selected($dbc, $location); ?>
             </select></p>
 
+
         <!-- date field for when item was lost -->
         <p>Date lost: <input name="date" type="date" value="<?php echo $date; ?>">
+
             <!-- text field for email address-->
         <p><input type="text" name="email" placeholder="E-Mail Address">
+
+            <span class="required" style= "margin-right:45px;">*</span>
             Upload an Image:<input type="file" name="imgfile"><br></p>
         <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
         <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>

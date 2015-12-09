@@ -14,7 +14,7 @@ $pid = $_SESSION['pid'];
 </head>
 <body>
 <?php
-require('includes/init_db.php');
+require('includes/init.php');
 require('includes/admin_tools.php');
 
 function make_new_admin($dbc)
@@ -63,7 +63,7 @@ function make_new_admin($dbc)
 	<p><input type="password" name="password" placeholder="Password" /></p>
 	<p><input type="password" name="password-repeat" placeholder="Repeat Password"/></p>
 	<p><?php make_new_admin($dbc);?></p>
-	<p><input type="submit" name="new_admin_submit"></input></p>
+	<p><input type="submit" name="new_admin_submit" /></p>
 
 </form>
 </div>
