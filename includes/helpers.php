@@ -351,6 +351,39 @@ function dropdown_locations($dbc)
     }
 }
 
+/**
+ * @desc pull all location names from database and generate a dropdown option for each. Should be put inside a <select> tag. Applies sticky fields to form.
+ * @param $dbc - the database connection object
+ */
+function dropdown_locations_sticky($dbc)
+{
+    # Create a query to
+    $query = 'SELECT location_name FROM locations';
+
+    # Execute the query
+    $results = mysqli_query($dbc, $query);
+    check_results($results);
+
+    # Show results
+    if ($results) {
+        # But...wait until we know the query succeed before
+        # For each row result, generate a dropdown option with location name
+      $i = 1;
+        while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
+          if($_GET['location'] == $i){
+            echo '<option value='. $i . ' selected>' . $row['location_name'] . '</option>';
+            $i++;
+          } else {
+            echo '<option value='. $i . '>' . $row['location_name'] . '</option>';
+            $i++;
+            }
+        }
+            # Free up the results in memory
+            mysqli_free_result($results);
+
+    }
+}
+
 
 /**
  * @desc pull all location names from database and generate a sticky dropdown option for each. Should be put inside a <select> tag
