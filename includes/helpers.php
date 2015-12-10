@@ -2,9 +2,14 @@
 
 require("php-mailer/class.phpmailer.php");
 
+
+/* @desc Builds an a button that will lead to sending an email the listing poster.
+ * The button displays different text depending on whether it is a lost or found listing
+ * @param $dbc the database connection object
+ * @param $id id of the listing
+ */
 function buildEmailButton($dbc, $id){
 
-  // Build button differently if user is looking at a lost or a found item:
   // Create query to find item status
   $query = 'SELECT status FROM stuff WHERE id =' . $id; 
   
@@ -24,6 +29,12 @@ function buildEmailButton($dbc, $id){
 
 }
 
+/* @dec sends an email to the the poster of the listing in order to notify them their item has been claimed/found.
+ * @param $dbc - the database variable
+ * @param $address - the destination email address
+ * @param $id - the id of the claimed listing
+ * @return string - success or failure with error
+ */
 function sendEmail($dbc, $address, $id){
 
   $query = 'SELECT * FROM stuff WHERE id=' . $id;
@@ -109,7 +120,10 @@ function sendEmail($dbc, $address, $id){
 }
 }
 
-
+/* @ desc pulls from the database any listings from a the time period selected
+ * @param $dbc - the database connection object
+ * @param $time - how far back to search for listings. Chosen from a dropdown (day/week/month)
+ */
 function show_recent_quicklinks($dbc, $time){
   if ($time == 'day') {
     $query = 'SELECT id, item, item_date, status FROM stuff WHERE item_date >= DATE_SUB(Now(), INTERVAL 1 DAY) ORDER BY item_date DESC';
@@ -164,7 +178,9 @@ function show_recent_quicklinks($dbc, $time){
   }
   }
 
-
+/* @desc generates a table of "quick links" with some information about each item and a link to the full listing page
+ * @param $dbc - the database connection object
+ */
 function show_quicklinks($dbc) {
   # Create a query to show item quicklinks
   $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date DESC';
@@ -214,7 +230,13 @@ function show_quicklinks($dbc) {
   }
 }
 
-# Searches the database to find items matching the criteria given by the user
+/* @desc Searches the database to find items matching the criteria given by the user
+ * @param $dbc - he database connection object
+ * @param $type - item type
+ * @param $color - item color
+ * @param $location - location where item was lost
+ * @param $opposite_status - the status opposite the status of the item user is searching for
+ */
 function show_possible_matches($dbc, $type, $color, $location, $opposite_status) {
   # Create a query to get partially matching items from database:
   $query = "SELECT stuff.id, item, location_name, category, color, item_date FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE status = '" . $opposite_status . "' AND (location_id ='" . $location . "'" .
@@ -262,7 +284,11 @@ function show_possible_matches($dbc, $type, $color, $location, $opposite_status)
   }
 }
 
-# Shows a single listing from a quicklink
+/**
+ * @desc Shows a single listing from a quicklink
+ * @param $dbc - the database connection object
+ * @param $id - item ID
+ */
 function show_listing($dbc, $id) {
   # Create a query to 
   $query = 'SELECT * FROM stuff LEFT JOIN locations ON stuff.location_id=locations.id WHERE stuff.id = ' . $id;
@@ -296,8 +322,11 @@ function show_listing($dbc, $id) {
   }
 }
 
-#pull all location names from database and generate a dropdown option for each
-#should be put inside a <select> tag
+
+/**
+ * @desc pull all location names from database and generate a dropdown option for each. Should be put inside a <select> tag
+ * @param $dbc - the database connection object
+ */
 function dropdown_locations($dbc)
 {
     # Create a query to
@@ -322,7 +351,12 @@ function dropdown_locations($dbc)
     }
 }
 
-# Same as above, but creates a sticky dropdown form.
+
+/**
+ * @desc pull all location names from database and generate a sticky dropdown option for each. Should be put inside a <select> tag
+ * @param $dbc - the database connection object
+ * @param $location - location of item
+ */
 function dropdown_locations_selected($dbc, $location)
 {
     # Create a query to
@@ -351,7 +385,11 @@ function dropdown_locations_selected($dbc, $location)
     }
 }
 
-# Checks the query results as a debugging aid
+
+/**
+ * @desc Checks the query results as a debugging aid
+ * @param $results - the result of a query
+ */
 function check_results($results) {
   global $dbc;
 
