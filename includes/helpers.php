@@ -26,7 +26,7 @@ function buildEmailButton($dbc, $id){
      } 
       
   }
-
+    mysqli_free_result($results);
 }
 
 /* @dec sends an email to the the poster of the listing in order to notify them their item has been claimed/found.
@@ -118,6 +118,7 @@ function sendEmail($dbc, $address, $id){
   }
 }
 }
+    mysqli_free_result($results);
 }
 
 /* @ desc pulls from the database any listings from a the time period selected
@@ -174,8 +175,9 @@ function show_recent_quicklinks($dbc, $time){
       echo '</TABLE>';
 
       # Free up the results in memory
-      mysqli_free_result( $results ) ;
+
   }
+    mysqli_free_result( $results ) ;
   }
 
 /* @desc generates a table of "quick links" with some information about each item and a link to the full listing page
@@ -224,10 +226,9 @@ function show_quicklinks($dbc) {
 
       # End the table
       echo '</TABLE>';
-
-      # Free up the results in memory
-      mysqli_free_result( $results ) ;
   }
+  # Free up the results in memory
+    mysqli_free_result( $results ) ;
 }
 
 /* @desc Searches the database to find items matching the criteria given by the user
@@ -278,10 +279,11 @@ function show_possible_matches($dbc, $type, $color, $location, $opposite_status)
         # End the table
         echo '</TABLE>';
 
-        # Free up the results in memory
-        mysqli_free_result( $results ) ;
+
     }
   }
+  # Free up the results in memory
+    mysqli_free_result( $results ) ;
 }
 
 /**
@@ -317,9 +319,9 @@ function show_listing($dbc, $id) {
         echo '<p>Item Description: ' . $row['description'] . '</p>';
       }
 
-      # Free up the results in memory
-      mysqli_free_result( $results ) ;
   }
+  # Free up the results in memory
+    mysqli_free_result( $results ) ;
 }
 
 
@@ -345,10 +347,11 @@ function dropdown_locations($dbc)
             echo '<option value='. $i . '>' . $row['location_name'] . '</option>';
             $i++;
         }
-            # Free up the results in memory
-            mysqli_free_result($results);
+
 
     }
+    # Free up the results in memory
+    mysqli_free_result($results);
 }
 
 /**
@@ -412,10 +415,10 @@ function dropdown_locations_selected($dbc, $location)
           }
             $i++;
         }
-            # Free up the results in memory
-            mysqli_free_result($results);
 
     }
+    # Free up the results in memory
+    mysqli_free_result($results);
 }
 
 
