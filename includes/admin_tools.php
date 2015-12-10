@@ -3,7 +3,12 @@
 # Includes helper functions
 require('helpers.php') ;
 
-# Gets an admin name from the database:
+/**
+ * @desc Gets an admin name from the database
+ * @param $dbc - the database connection object
+ * @param $id - the id of the item in the database
+ * @return the first name of the admin
+ */
 function getAdmin($dbc, $id){
   # Make database query:
   $query = "SELECT first_name FROM users WHERE user_id='" . $id . "'";
@@ -18,7 +23,10 @@ function getAdmin($dbc, $id){
 }
 
 
-# Loads a certain URL
+/**
+ * @desc  Loads a certain URL
+ * @param $page the page name
+ */
 function load( $page)
 {
     # Begin URL with protocol, domain, and current directory.
@@ -33,8 +41,14 @@ function load( $page)
     exit();
 }
 
-# Validates the login.
-# Returns -1 if validate fails, and returns the primary key if it succeeds
+
+/**
+ * @desc Validates the login attempt
+ * @param $dbc - the database connection object
+ * @param $username - the admin username entered
+ * @param $password - the admin password entered
+ * @return int -1 if validate fails, and returns the primary key if it succeeds
+ */
 function validate($dbc, $username, $password)
 {
     //global $dbc;
@@ -62,6 +76,10 @@ function validate($dbc, $username, $password)
 }
 
 
+/**
+ * @desc changes the status of all items in the database the status set in the admin panel
+ * @param $dbc - the database connection object
+ */
 function update_all_stuff_admin($dbc){
   $query = 'SELECT * FROM stuff ORDER BY item_date DESC';
 
@@ -88,6 +106,10 @@ function update_all_stuff_admin($dbc){
     }
 }
 
+/**
+ * @desc generates a table of all listings with a dropdown to change status
+ * @param $dbc - the database connection object
+ */
 function show_all_stuff_admin($dbc) {
   # Create a query to show item quicklinks
   $query = 'SELECT * FROM stuff ORDER BY item_date DESC';
@@ -157,6 +179,12 @@ function show_all_stuff_admin($dbc) {
       mysqli_free_result( $results );
 }
 
+/**
+ * @desc changes the password of the currently logged in admin
+ * @param $dbc - the database connection object
+ * @param $admin_id - the id of the logged in admin
+ * @param $newpass - the new password
+ */
 function change_password($dbc, $admin_id, $newpass){
     $query = 'UPDATE users SET pass ="' . $newpass . '" WHERE user_id=' . $admin_id;
 
@@ -168,6 +196,10 @@ function change_password($dbc, $admin_id, $newpass){
 }
 
 # Checks to see if an admin should be deleted.
+/**
+ * @desc deletes the selected admin the corresponding delete button is pressed
+ * @param $dbc - the database connection object
+ */
 function update_users($dbc){
     $query = 'SELECT * FROM users';
 
@@ -194,7 +226,10 @@ function update_users($dbc){
 
 }
 
-# Shows admin users for a particular admin to manage.
+/**
+ * @desc generates a table of admins with corresponding delete buttons
+ * @param $dbc - the database connection object
+ */
 function show_users($dbc) {
     # Create a query to show all users
     $query = 'SELECT user_id, username, first_name, last_name, email, reg_date FROM users ORDER BY reg_date DESC';

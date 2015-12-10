@@ -397,6 +397,9 @@ function check_results($results) {
     echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>'  ;
 }
 
+/**
+ * @desc checks if an image file has been added to the form and uploads it to the database if it has
+ */
 function image_upload(){
 
 if(isset($_REQUEST['submit']))
@@ -434,7 +437,20 @@ else
 
 }
 
-# Inserts a record into the stuff table
+
+/**
+ * @desc Inserts a record into the stuff table
+ * @param $dbc - the database connection object
+ * @param $item - the name of the item
+ * @param $location - location the item was lost/found as selected from the dropdown
+ * @param $category - the type of item
+ * @param $color - the color of the item
+ * @param $descr - the description added by the listing poster
+ * @param $date - the date the item was lost/found
+ * @param $status - the status of the item (lost/found)
+ * @param $image - an image of the item
+ * @return bool|mysqli_result - the result of the query
+ */
 function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $status, $image) {
   $query = 'INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, status, image) 
   VALUES ("' . $item . '" , ' . $location . ' , "' . $category . '" , "' . $color . '" , "' . $descr . '" , STR_TO_DATE("' . $date . '","%Y-%m-%d"), Now(), Now(),"'. $status . '", "'. $image . '" )' ;
