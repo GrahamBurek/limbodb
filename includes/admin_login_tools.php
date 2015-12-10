@@ -45,6 +45,8 @@ function validate($dbc, $username, $password)
 
     $pid = $row [ 'user_id' ] ;
 
+    mysqli_free_result($results);
+
     return intval($pid) ;
 }
 ?>
