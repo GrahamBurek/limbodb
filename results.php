@@ -58,28 +58,28 @@ session_start();
 		$status = $_POST['status'];
 	}
 	
-	if(isset($_REQUEST['submit'])){
-    	$filename =  $_FILES["imgfile"]["name"];
-    	$image = "uploads/$filename";
+	// if(isset($_REQUEST['submit'])){
+ //    	$filename =  $_FILES["imgfile"]["name"];
+ //    	$image = "uploads/$filename";
 
-    		if ((($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg")) && ($_FILES["imgfile"]["size"] < 2000000))
-    		{
-        		if(file_exists($_FILES["imgfile"]["name"]))
-        		{
-            		echo "Image file name exists.";
-        		}
-        	else
-        	{
-        		echo "blah";
-            	move_uploaded_file($_FILES["imgfile"]["tmp_name"], _DIR_ . "/uploads/$filename");
-            	echo "Image upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
-		    }
-    		}
-   			 else
-    		{
-        		echo "invalid file.";
-    		}
-	}
+ //    		if ((($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg")) && ($_FILES["imgfile"]["size"] < 2000000))
+ //    		{
+ //        		if(file_exists($_FILES["imgfile"]["name"]))
+ //        		{
+ //            		echo "Image file name exists.";
+ //        		}
+ //        	else
+ //        	{
+ //        		echo "blah";
+ //            	move_uploaded_file($_FILES["imgfile"]["tmp_name"], _DIR_ . "/uploads/$filename");
+ //            	echo "Image upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
+	// 	    }
+ //    		}
+ //   			 else
+ //    		{
+ //        		echo "invalid file.";
+ //    		}
+	// }
 
 		
 
@@ -89,17 +89,11 @@ session_start();
 <div id="mainForm">
 <?php
 	if($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
-    	if(isset($_GET['id'])){
+    	if(isset($_GET['id'])) {
       		show_listing($dbc, $id);
     	}
 	}
-	else if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		insert_item($dbc, $item, $location, $category, $color, $descr, $date, $email, $status, $image);
-		$_SESSION['inserted'] = true;
-		header('Location: index.php');
-    	die("Unauthorized User!");
-
-	}
+	
 ?>
 <br><br>
 <input action="action" type="button" value="Back" onclick="history.go(-1);" />
