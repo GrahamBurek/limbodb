@@ -280,7 +280,7 @@ button:active, input[type=button]:active, input[type=submit]:active{
 }
 
 button:disabled{
-	background: #ECECEC;
+	background: #d9d9d9;
 	border-radius: 15px;
 	padding: 10px 20px;
 	display: inline-block;
