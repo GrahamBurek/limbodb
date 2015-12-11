@@ -199,7 +199,6 @@ function change_password($dbc, $admin_id, $newpass){
     $results = mysqli_query($dbc , $query) ;
     check_results($results) ;
 
-    mysqli_free_result($results);
 }
 
 /**
