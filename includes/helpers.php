@@ -14,9 +14,11 @@ function buildEmailButton($dbc, $id){
   // Create query to find item status
   $query = 'SELECT status FROM stuff WHERE id =' . $id; 
   
+  // Execute query
   $results = mysqli_query($dbc , $query);
   check_results($results);
 
+  // Create different button depending on lost or found
   if($results){
     while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
       if ($row['status'] == "Found") {
@@ -30,16 +32,18 @@ function buildEmailButton($dbc, $id){
  mysqli_free_result($results);
 }
 
-/* @dec sends an email to the the poster of the listing in order to notify them their item has been claimed/found.
- * @param $dbc - the database variable
+/* @dec Sends an email to the the poster of the listing in order to notify them their item has been claimed/found.
+ * @param $dbc - the database connection object
  * @param $address - the destination email address
  * @param $id - the id of the claimed listing
  * @return string - success or failure with error
  */
 function sendEmail($dbc, $address, $id){
 
+  // Create query to get all listings
   $query = 'SELECT * FROM stuff WHERE id=' . $id;
 
+  // Execute query
   $results = mysqli_query($dbc , $query);
   check_results($results);
 
@@ -119,14 +123,17 @@ function sendEmail($dbc, $address, $id){
     }
   }
 }
+# Free up the results in memory
 mysqli_free_result($results);
 }
 
-/* @ desc pulls from the database any listings from a the time period selected
+/* @ desc Pulls from the database any listings from a the time period selected
  * @param $dbc - the database connection object
  * @param $time - how far back to search for listings. Chosen from a dropdown (day/week/month)
  */
 function show_recent_quicklinks($dbc, $time){
+
+  // Creates a query with specified time interval to get listings
   if ($time == 'day') {
     $query = 'SELECT id, item, item_date, status FROM stuff WHERE item_date >= DATE_SUB(Now(), INTERVAL 1 DAY) ORDER BY item_date DESC';
   } else if ($time == 'week') {
@@ -135,9 +142,9 @@ function show_recent_quicklinks($dbc, $time){
     $query = 'SELECT id, item, item_date, status FROM stuff WHERE item_date >= DATE_SUB(Now(), INTERVAL 1 MONTH) ORDER BY item_date DESC';
   }
 
-# Execute the query
+  # Execute the query
   $results = mysqli_query($dbc , $query);
-  check_results($results) ;
+  check_results($results);
 
   # Show results
   if( $results )
@@ -175,13 +182,14 @@ function show_recent_quicklinks($dbc, $time){
       # End the table
     echo '</TABLE>';
 
-      # Free up the results in memory
+      
 
   }
+  # Free up the results in memory
   mysqli_free_result( $results ) ;
 }
 
-/* @desc generates a table of "quick links" with some information about each item and a link to the full listing page
+/* @desc Generates a table of "quick links" with some information about each item and a link to the full listing page
  * @param $dbc - the database connection object
  */
 function show_quicklinks($dbc) {
@@ -233,7 +241,7 @@ function show_quicklinks($dbc) {
 }
 
 /* @desc Searches the database to find items matching the criteria given by the user
- * @param $dbc - he database connection object
+ * @param $dbc - the database connection object
  * @param $type - item type
  * @param $color - item color
  * @param $location - location where item was lost
@@ -263,7 +271,7 @@ if( $results ) {
     echo "<TH>Date</TH>";
     echo '</TR>';
 
-        # For each row result, generate a table row with ID number
+        # For each row result, generate a table row with partial information
     while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
     {
       $alink = '<A HREF = "results.php?id=' . $row['id'] . '">' . $row['item'] . ' </A>';
@@ -283,7 +291,7 @@ if( $results ) {
 
   }
 }
-  # Free up the results in memory
+
 mysqli_free_result( $results ) ;
 }
 
@@ -293,7 +301,7 @@ mysqli_free_result( $results ) ;
  * @param $id - item ID
  */
 function show_listing($dbc, $id) {
-  # Create a query to 
+  # Create a query to find a single listing
   $query = 'SELECT * FROM stuff LEFT JOIN locations ON stuff.location_id=locations.id WHERE stuff.id = ' . $id;
 
   # Execute the query
@@ -310,6 +318,7 @@ function show_listing($dbc, $id) {
       # For the result, generate a table row
     if( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
     {
+      # Display necessary information and don't show empty information
       echo '<H1>'. $row['status'] . '</H1>' ;
       if(!($row['image'] == 'uploads/'))
         echo '<img src="' . $row['image'] . '" style="width:200px; height: auto; margin:50px" />';
@@ -317,8 +326,7 @@ function show_listing($dbc, $id) {
       echo '<p><b>Item Name:</b> ' . $row['item'] . '</p>';
       echo '<p><b>Item Category:</b> ' . $row['category'] . '</p>';
       echo '<p><b>Item Color:</b> ' . $row['color'] . '</p>';
-      if($row['location_name']) 
-        echo '<p><b>Location where ' . strtolower($row['status']) . ':</b> ' . $row['location_name'] . '</p>';
+      echo '<p><b>Location where ' . strtolower($row['status']) . ':</b> ' . $row['location_name'] . '</p>';
       echo '<p><b>Date ' . strtolower($row['status']) . ':</b> ' . $row['item_date'] .'</p>';
       if(trim($row['description']))
       echo '<p><b>Item Description:</b> ' . $row['description'] . '</p>';
@@ -331,12 +339,12 @@ function show_listing($dbc, $id) {
 
 
 /**
- * @desc pull all location names from database and generate a dropdown option for each. Should be put inside a <select> tag
+ * @desc pPull all location names from database and generate a dropdown option for each. Should be put inside a <select> tag
  * @param $dbc - the database connection object
  */
 function dropdown_locations($dbc)
 {
-    # Create a query to
+    # Create a query to grab all locations from the database
   $query = 'SELECT location_name FROM locations';
 
     # Execute the query
@@ -360,12 +368,12 @@ function dropdown_locations($dbc)
 }
 
 /**
- * @desc pull all location names from database and generate a dropdown option for each. Should be put inside a <select> tag. Applies sticky fields to form.
+ * @desc Pulls all location names from database and generate a dropdown option for each. Should be put inside a <select> tag. Applies sticky fields to form.
  * @param $dbc - the database connection object
  */
 function dropdown_locations_sticky($dbc)
 {
-    # Create a query to
+    # Create a query grab all locations from the database
   $query = 'SELECT location_name FROM locations';
 
     # Execute the query
@@ -386,7 +394,7 @@ function dropdown_locations_sticky($dbc)
         $i++;
       }
     }
-            # Free up the results in memory
+    # Free up the results in memory
     mysqli_free_result($results);
 
   }
@@ -394,7 +402,7 @@ function dropdown_locations_sticky($dbc)
 
 
 /**
- * @desc pull all location names from database and generate a sticky dropdown option for each. Should be put inside a <select> tag
+ * @desc Pull all location names from database and generate a sticky dropdown option for each. Should be put inside a <select> tag
  * @param $dbc - the database connection object
  * @param $location - location of item
  */
@@ -438,46 +446,6 @@ function check_results($results) {
     echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>'  ;
 }
 
-/**
- * @desc checks if an image file has been added to the form and uploads it to the database if it has
- */
-function image_upload(){
-
-  if(isset($_REQUEST['submit']))
-  {
-    $filename =  $_FILES["imgfile"]["name"];
-    global $image;
-    $image = "uploads/$filename";
-    if ((($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg")) && ($_FILES["imgfile"]["size"] < 200000))
-    {
-      if(file_exists($_FILES["imgfile"]["name"]))
-      {
-        echo "Image file name exists.";
-      }
-      else
-      {
-        move_uploaded_file($_FILES["imgfile"]["tmp_name"],"uploads/$filename");
-        echo "Image upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
-
-
-      }
-    }
-    else
-    {
-      echo "invalid file.";
-    }
-  }
-  else
-  {
-
-    echo '
-    Upload an Image:<input type="file" name="imgfile"><br>
-    ';
-
-  }
-
-}
-
 
 /**
  * @desc Inserts a record into the stuff table
@@ -504,15 +472,29 @@ function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $
 }
 
 
-
+/**
+ * @desc Validates user input when submitting a listing
+ * @param $item - the inputted item name
+ * @param $location - the selected location
+ * @param $category - the selected item type
+ * @param $color - the inputted item color
+ * @param $date - the selected date
+ * @param $email - the inputted email address
+ * @param bool - true for if validation succeeds, false if it fails
+ */
 function validate_listing($item, $location, $category, $color, $date, $email){
+  // Makes sure all required fields are completed
   if(empty($item) || empty($location) || empty($category) || empty($color) || empty($date) || empty($email)){
     echo "<p style='color:red;'>Please fill out all required fields.</p>";
     return false;
-  } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+  } 
+  // Makes sure the submitted email is a valid email address
+  else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
     echo "<p style='color:red;'>Invalid email.</p>";
     return false;
-  } else if(strtotime($date) > time()) {
+  } 
+  // Makes sure that the date entered is not in the future
+  else if(strtotime($date) > time()) {
     echo "<p style='color:red;'>Please enter a past date.</p>";
     return false;
   } else {
