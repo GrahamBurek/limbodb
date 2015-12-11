@@ -14,35 +14,13 @@ $pid = $_SESSION['pid'];
 </head>
 <body>
 <?php
+// Connect/populate database and include admin helper functions
 require('includes/init.php');
 require('includes/admin_tools.php');
 
-//function make_new_admin($dbc)
-//{
-//	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//
-//		if (isset($_POST['new_admin_submit']) && isset($_POST['password-repeat']) && strcmp($_POST['password'], $_POST['password-repeat']) == 0) {
-//
-//			$username = $_POST['username'];
-//			$firstName = $_POST['first_name'];
-//			$lastName = $_POST['last_name'];
-//			$email = $_POST['email'];
-//			$password = $_POST['password'];
-//			$query = 'INSERT INTO users(username, first_name, last_name, email, pass, reg_date) VALUES("' . $username . '", "'
-//				. $firstName . '", "' . $lastName . '", "' . $email . '", "' . $password . '", Now())';
-//
-//			# Execute the query
-//			$results = mysqli_query($dbc, $query);
-//			check_results($results);
-//
-//		} else {
-//			echo '<p> Please make sure passwords match </p>';
-//		}
-//	}
-//	mysqli_free_result($results);
-//}
 ?>
-<!-- Navbar include statement: -->
+
+<!-- Navbar at top of page: -->
 <div id="admin-navbar">
 	<ul>
 		<a href="admin.php"><li>Administrator Panel</li></a>
@@ -52,9 +30,11 @@ require('includes/admin_tools.php');
 
 	</ul>
 </div>
-<!-- Main white form for pages: -->
+
+<!-- Main page content: -->
 <div id="mainForm">
 
+<!-- User input form to create a new admin -->
 <form action="new_admin.php" method="POST">
 
 	<p><?php make_new_admin($dbc);?></p>

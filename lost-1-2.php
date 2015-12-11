@@ -9,10 +9,12 @@ session_start();
     <link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-    <!-- Navbar and database include statements: -->
+
     <?php
-    require('/includes/helpers.php');
+    # Connect/populate database and include helper functions
     require('/includes/init.php');
+    require('/includes/helpers.php');
+    
 
 # Set sticky variables to the empty string initially:
     $item = "";
@@ -24,6 +26,7 @@ session_start();
     $email = "";
     $status = "";
 
+    # Store GET variables, if applicable
     if (isset($_GET['type'])) {
         $type = $_GET['type'];
     }
@@ -40,6 +43,7 @@ session_start();
         $date = $_GET['date'];
     }
 
+    # Store POST variables, if applicable
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $item = $_POST['listing-name'];
         $location = $_POST['location'];
@@ -52,6 +56,8 @@ session_start();
     }
 
     ?>
+
+    <!-- Navbar at top of page -->
     <div id="navbar">
         <ul>
             <a href="index.php"><li>LIMBO Lost & Found
@@ -60,10 +66,10 @@ session_start();
     </li></a><a href="lost.php"><li class="current">Lost Something?</li></a>
 </ul>
 </div>
-<!-- Main white form for pages: -->
+
+<!-- Main page content: -->
 <div id="mainForm">
 
-    <!-- Header and description -->
     <h1>New Listing Creation</h1>
     <h3>Create a new listing to help find your lost item.</h3>
 
@@ -74,16 +80,19 @@ session_start();
     <form action="lost-1-2.php" method="post" enctype="multipart/form-data" class="itemform">
         <?php
 
+        // Listing creation and image upload logic
         if($_SERVER['REQUEST_METHOD']=="POST"){
-            if(validate_listing($item, $location, $type, $color, $date, $email)){
 
-                // Image uploading and listing creation logic
+            // Validate user input
+            if(validate_listing($item, $location, $type, $color, $date, $email)){
 
                 $filename =  $_FILES["imgfile"]["name"];
                 $image = "uploads/$filename";
 
+                // Make sure the image file type is valid
                 if (($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg"))
                 {
+                    // Checks for redundant filename
                     if(file_exists($_FILES["imgfile"]["name"]))
                     {
                         echo "Image file name exists.";
@@ -91,7 +100,7 @@ session_start();
                     }
                     else
                     {
-                        echo "blah";
+                        // Uploads file and inserts listing since everything is valid
                         move_uploaded_file($_FILES["imgfile"]["tmp_name"], "uploads/$filename");
                         echo "Image upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
 
@@ -103,6 +112,7 @@ session_start();
                 }
                 else if (empty($_FILES["imgfile"]["name"]))
                 {
+                    // Inserts the listing if valid (no image)
                     insert_item($dbc, $item, $location, $category, $color, $descr, $date, $email, $status, $image);
                     $_SESSION['inserted'] = true;
                     header('Location: index.php');
@@ -159,12 +169,19 @@ session_start();
             <p><input type="text" name="email" placeholder="E-Mail Address">
 
                 <span class="required" style= "margin-right:45px;">*</span>
+
+                <!-- File browser for picking an image to upload -->
                 Upload an Image:<input type="file" name="imgfile"><br></p>
+
+                <!-- Textarea for description of item -->
                 <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
-                <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
+
+                
+                <!-- Hidden values to be used in HTTP request -->
                 <input type="text" name="status" value="Lost" hidden>
 
-                <!-- submit button-->
+                <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
+
                 <button type="submit" name="submit" onclick="return confirm('Are you sure all the information is correct?')">Submit</button>
             </form>
         </div>

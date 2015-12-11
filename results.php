@@ -10,6 +10,7 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 	<script type="text/javascript">
 
+	// Prompt the user and obtain his/her email address
 	function getEmailAddress(id){
  		
 		var emailForm = document.createElement("form");
@@ -38,15 +39,21 @@ session_start();
 </script>
 </head>
 <body>
-<!-- Navbar include statement: -->
+
 <?php 
+	
+	// Connect/populate database and include helper functions
 	require('includes/init.php'); 
 	require('includes/helpers.php');
+	// Include basic template navbar at the top
 	require('templates/navbar.php');
 	
+	// Store id from GET, if applicable
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
 	}
+
+	// Store POST variables, if applicable
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$item = $_POST['listing-name'];
 		$location = $_POST['location'];
@@ -57,37 +64,16 @@ session_start();
 		$email = $_POST['email'];
 		$status = $_POST['status'];
 	}
-	
-	// if(isset($_REQUEST['submit'])){
- //    	$filename =  $_FILES["imgfile"]["name"];
- //    	$image = "uploads/$filename";
-
- //    		if ((($_FILES["imgfile"]["type"] == "image/gif")|| ($_FILES["imgfile"]["type"] == "image/jpeg") || ($_FILES["imgfile"]["type"] == "image/png")  || ($_FILES["imgfile"]["type"] == "image/pjpeg")) && ($_FILES["imgfile"]["size"] < 2000000))
- //    		{
- //        		if(file_exists($_FILES["imgfile"]["name"]))
- //        		{
- //            		echo "Image file name exists.";
- //        		}
- //        	else
- //        	{
- //        		echo "blah";
- //            	move_uploaded_file($_FILES["imgfile"]["tmp_name"], _DIR_ . "/uploads/$filename");
- //            	echo "Image upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
-	// 	    }
- //    		}
- //   			 else
- //    		{
- //        		echo "invalid file.";
- //    		}
-	// }
 
 		
 
 	
 ?>
-<!-- Main white form for pages: -->
+
+<!-- Main page content: -->
 <div id="mainForm">
 <?php
+	// Upon GET, display the listing of the item with specified id
 	if($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
     	if(isset($_GET['id'])) {
       		show_listing($dbc, $id);
@@ -96,9 +82,13 @@ session_start();
 	
 ?>
 <br><br>
+
 <input action="action" type="button" value="Back" onclick="history.go(-1);" />
+
 <input type="button" onclick="location.href='index.php';" value="Home" />
+
 <?php
+	// Create the "Claim Item" button to send an email
 	if (isset($_GET['id'])) {
 		buildEmailButton($dbc, $id);
 	}

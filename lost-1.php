@@ -10,8 +10,9 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Navbar and database include statements: -->
+
 <?php 
+	// Connect/populate database and include helper functions
 	require('includes/init.php');
 	require('includes/helpers.php');
 
@@ -85,6 +86,7 @@ session_start();
 	# echo $location;
 	
 ?>
+<!-- Navbar at top of page -->
 <div id="navbar">
     <ul>
         <a href="index.php"><li>LIMBO Lost & Found
@@ -93,14 +95,17 @@ session_start();
         </li></a><a href="lost.php"><li class="current">Lost Something?</li></a>
     </ul>
 </div>
-<!-- Main white form for pages: -->
+
+<!-- Main page content: -->
 <div id="mainForm">
-	<!-- Header and description -->
+
     <h1>Is Your Item Here?</h1>
     <h3>If you think the item you lost matches one of these, click it to find out more about the item and confirm that it is yours. Otherwise, click "None of These Match" to post a new listing.</h3>
     <!-- start form -->
     <form id="table" action="lost-1-2.php" method="get">
+    	
     <?php
+    // Display search results on page
     show_possible_matches($dbc, $type, $color, $location, $opposite_status);
     ?>
 
@@ -111,7 +116,9 @@ session_start();
     <input type="hidden" name="date" value="<?php echo $date; ?>">
 
     </form>
+
     <input action="action" class="back-button" type="button" value="Back" onclick="history.go(-1);" style="width:75px;" />
+    
     <button type="submit" style="margin-left:200px;" form="table">None of These Match</button>
 </div>
 </body>

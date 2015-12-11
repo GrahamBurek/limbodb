@@ -74,6 +74,7 @@ session_start();
                     
                     <!-- Hidden values used for the HTTP request -->
                     <input type="hidden" name="submitted" value="yes">
+                    
                     <input type="button" class="back-button" onclick="window.location.href='index.php'" value="Back to Home" />
                     
                     <button type="submit">Submit</button>
