@@ -43,6 +43,23 @@ input{
   outline:none;
 }
 
+.new_admin_form input:not([type="button"]),
+.new_admin_form select {
+	padding: 5px;
+	margin-bottom: 50px;
+	border: none;
+	border-bottom: solid 2px #c9c9c9;
+	transition: border 0.3s;
+}
+
+.new_admin_form input:not([type="button"]):focus,
+.new_admin_form input:not([type="button"]).focus,
+.new_admin_form select:focus,
+.new_admin_form select.focus{
+	border-bottom: solid 2px #969696;
+	outline:none;
+}
+
 input[type="button"] {
 	padding: 5px;
 }
@@ -231,7 +248,7 @@ textarea{
 
 @import url(http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css);
 
-button{
+button, input[type=button], input[type=submit]{
 	background: #ECECEC;
 	border-radius: 15px;
 	padding: 10px 20px;
@@ -250,19 +267,19 @@ button{
 	box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
 	-webkit-transition:box-shadow 0.5s;
 }
-button i{
+button i, input[type=button] i, input[type=submit] i{
 	float: right;
 	margin-top: 2px;
 }
-button:hover{
+button:hover, input[type=button]:hover, input[type=submit]:hover{
 	box-shadow: 0px 2px 1px white inset, 0px -2px 20px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
 }
-button:active{
+button:active, input[type=button]:active, input[type=submit]:active{
 	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
 	background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
 }
 
-input[type=button]{
+button:disabled{
 	background: #ECECEC;
 	border-radius: 15px;
 	padding: 10px 20px;
@@ -273,24 +290,19 @@ input[type=button]{
 	text-decoration: none;
 	text-shadow:0px 1px 0px #fff;
 	border:1px solid #a7a7a7;
-	width: 145px;
+	width: initial;
+	outline: none;
 	margin:0px auto;
 	margin-top:10px;
 	margin-left: 50px;
-	box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 0px white inset, 0px 0px 0px white, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0);
 	-webkit-transition:box-shadow 0.5s;
 }
-input[type=button] i{
+button:disabled i{
 	float: right;
 	margin-top: 2px;
 }
-input[type=button]:hover{
-	box-shadow: 0px 2px 1px white inset, 0px -2px 20px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
-}
-input[type=button]:active{
-	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
-	background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
-}
+
 .required{
 	color:red;
 }
