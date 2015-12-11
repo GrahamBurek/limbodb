@@ -10,8 +10,9 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Navbar and database include statements: -->
-<?php 
+
+	<?php 
+	# Connect/populate database and include helper functions
 	require('includes/init.php');
 	require('includes/helpers.php');
 
@@ -73,7 +74,7 @@ session_start();
 			header('Location: ' . $link);
 			exit("Redirecting to found.php...");
 		}
-		 
+
 		
 		
 	}
@@ -86,35 +87,39 @@ session_start();
 	# echo $color;
 	# echo $location;
 	
-?>
-<div id="navbar">
-    <ul>
-        <a href="index.php"><li>LIMBO Lost & Found
-        </li></a><a href="index.php"><li>Home
-        </li></a><a href="found.php"><li class="current">Found Something?
-        </li></a><a href="lost.php"><li>Lost Something?</li></a>
-    </ul>
+	?>
+	<!-- Navbar at top of page -->
+	<div id="navbar">
+		<ul>
+			<a href="index.php"><li>LIMBO Lost & Found
+			</li></a><a href="index.php"><li>Home
+		</li></a><a href="found.php"><li class="current">Found Something?
+	</li></a><a href="lost.php"><li>Lost Something?</li></a>
+</ul>
 </div>
-<!-- Main white form for pages: -->
+
+<!-- Main page content: -->
 <div id="mainForm">
-	<!-- Header and description -->
-    <h1>Is Someone Looking for Your Item?</h1>
-    <h3>If you think the item you found matches one of these, click it to find out more about the item and confirm you found it. Otherwise, click "None of These Match" to post a new listing.</h3>
-    <!-- start form -->
-    <form id="table" action="found-1-2.php" method="get">
-    <?php
-    show_possible_matches($dbc, $type, $color, $location, $opposite_status);
-    ?>
 
-    <!-- Send GET variables along to found-1-2.php -->
-    <input type="hidden" name="type" value="<?php echo $type; ?>">
-    <input type="hidden" name="color" value="<?php echo $color; ?>">
-    <input type="hidden" name="location" value="<?php echo $location; ?>">
-    <input type="hidden" name="date" value="<?php echo $date; ?>">
+	<h1>Is Someone Looking for Your Item?</h1>
+	<h3>If you think the item you found matches one of these, click it to find out more about the item and confirm you found it. Otherwise, click "None of These Match" to post a new listing.</h3>
+	
+	<!-- start form -->
+	<form id="table" action="found-1-2.php" method="get">
+		<?php
+		# Display search results on the page
+		show_possible_matches($dbc, $type, $color, $location, $opposite_status);
+		?>
 
-    </form>
-    <input action="action" class="back-button" type="button" value="Back" onclick="history.go(-1);" style="width:75px;" />
-    <button type="submit" style="margin-left:200px;" form="table">None of These Match</button>
+		<!-- Send GET variables along to found-1-2.php -->
+		<input type="hidden" name="type" value="<?php echo $type; ?>">
+		<input type="hidden" name="color" value="<?php echo $color; ?>">
+		<input type="hidden" name="location" value="<?php echo $location; ?>">
+		<input type="hidden" name="date" value="<?php echo $date; ?>">
+
+	</form>
+	<input action="action" class="back-button" type="button" value="Back" onclick="history.go(-1);" style="width:75px;" />
+	<button type="submit" style="margin-left:200px;" form="table">None of These Match</button>
 </div>
 </body>
 </html>

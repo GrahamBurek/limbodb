@@ -13,11 +13,14 @@ if($_SESSION['logged_in'] == true){
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Navbar include statement: -->
+
 <?php 
+    // Populate database and include admin helper functions
 	require('includes/init.php'); 
     require('includes/admin_tools.php');
 ?>
+
+<!-- The navbar at the top of the page -->
 <div id="admin-navbar">
     <ul>
         <a href="admin.php" ><li class="admin-current">Administrator Panel</li></a>
@@ -27,9 +30,9 @@ if($_SESSION['logged_in'] == true){
 
     </ul>
 </div>
-<!-- Main white form for pages: -->
+
+<!-- Main content of page: -->
 <div id="mainForm">
-<!-- Header -->
 <h1>Administrator Panel</h1>
 <h3>Welcome <?php echo(getAdmin($dbc, $pid)); ?>!</h3>
 
@@ -37,6 +40,7 @@ if($_SESSION['logged_in'] == true){
 
 </body>
 </html>
+
 <?php
 
 } else {

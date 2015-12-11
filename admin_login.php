@@ -14,8 +14,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     <link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Navbar include statement: -->
 
+<!-- Navbar at top of page: -->
 <div id="navbar">
     <ul>
         <a href="index.php"><li>Limbo Lost & Found</li></a>
@@ -24,16 +24,17 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
         <a href="lost.php"><li>Lost Something?</li></a>
     </ul>
 </div>
-<!-- Main white form for pages: -->
+<!-- Main content of page: -->
 <div id="mainForm">
     <?php
-    # Connect to MySQL server and the database
+    # Connect and populate database
     require( 'includes/init.php' );
 
     # Includes helper functions for login
     require( 'includes/admin_tools.php' );
 ?>
-<!-- Get inputs from the user. -->
+
+
 <h1>Admin Login</h1>
 <?php
     # If method is POST, try to validate the submitted credentials.
@@ -42,13 +43,14 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
         $username = $_POST['username'] ;
         $password = $_POST['password'] ;
 
+
         $pid = validate($dbc, $username, $password);
         
-
+        # If validation fails, notify the user
         if($pid == -1){
             echo '<P style=color:red>Login failed, please check your credentials.</P>';
         }
-
+        # Otherwise, log the user in and redirect to the admin panel
         else {
 
             $_SESSION['logged_in'] = true;
@@ -58,6 +60,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     }
 
 ?>
+<!-- Get inputs from the user. -->
 <form action="admin_login.php" method="POST">
     <table id="admin-login">
         <tr>

@@ -11,54 +11,62 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Require statements: -->
-<?php
+
+	<?php
+	// Connects/populates database and includes helper functions
 	require('includes/init.php'); 
 	require('includes/helpers.php');
 
-?>
-<div id="navbar">
-	<ul>
-		<a href="index.php"><li>LIMBO Lost & Found
-		</li></a><a href="index.php"><li class="current">Home
+	?>
+
+	<!-- Navbar at top of page -->
+	<div id="navbar">
+		<ul>
+			<a href="index.php"><li>LIMBO Lost & Found
+			</li></a><a href="index.php"><li class="current">Home
 		</li></a><a href="found.php"><li>Found Something?
-		</li></a><a href="lost.php"><li>Lost Something?</li></a>
-	</ul>
+	</li></a><a href="lost.php"><li>Lost Something?</li></a>
+</ul>
 </div>
+
+<!-- Main page content -->
 <div id="mainForm">
 	<h1>Welcome to Limbo!</h1>
 	<br>
 	<h3>Lost something? Found something? Reunite owners with their items by posting in Limbo!</h3>
-	<?php if (isset($_SESSION['inserted']) && $_SESSION['inserted'] == true) {
+	<?php 
+
+	// If being redirected from item insertion, notify user of success
+	if (isset($_SESSION['inserted']) && $_SESSION['inserted'] == true) {
 		$_SESSION['inserted'] = false;
 		echo '<p style="color:green">Item successfully inserted!</p>';
-		}
-
-		if(isset($_SESSION['emailed']) && $_SESSION['emailed'] == true){
-			$_SESSION['emailed'] = false;
+	}
+	// If being redirected from claiming an itme, notify user that an email has been sent
+	if(isset($_SESSION['emailed']) && $_SESSION['emailed'] == true){
+		$_SESSION['emailed'] = false;
 		echo '<p style="color:green">Email sent!</p>';
-		}
+	}
 	?>
 	<br>
-<div id="table">
-<?php
+	<div id="table">
+		<?php
 	# Generate table of lost and found items
-	if (isset($_GET['time'])) {
-		$time = $_GET['time'];
-		show_recent_quicklinks($dbc,$time);
-	} else {
-		show_quicklinks($dbc);
-	}
-?>
+		if (isset($_GET['time'])) {
+			$time = $_GET['time'];
+			show_recent_quicklinks($dbc,$time);
+		} else {
+			show_quicklinks($dbc);
+		}
+		?>
 
-<script type="text/javascript">
-	function reload(select){
-		var url = "index.php";
-		url = url + "?time=" + select.value;
-		window.location.assign(url);
-	}
-</script>
-</div>
+		<script type="text/javascript">
+		function reload(select){
+			var url = "index.php";
+			url = url + "?time=" + select.value;
+			window.location.assign(url);
+		}
+		</script>
+	</div>
 </div>
 </body>
 </html>
