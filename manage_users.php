@@ -44,6 +44,7 @@ require('includes/admin_tools.php');
     ?>
     </form>
     <button onclick= "location.href='new_admin.php'">Add New Admin</button>
+    <br><br><br><br><br>
     <form action="manage_users.php" method="POST">
         <?php
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
