@@ -46,7 +46,6 @@ require('includes/admin_tools.php');
             show_all_stuff_admin($dbc);
         }
         ?>
-        <input type="button" onclick="location.href='index.php';" value="Home" style="width:75px;" />
         <!-- <button type="submit" name="submit">Submit Changes</button> -->
         <button type="submit" onclick="return confirm('Are you sure you wish to submit these changes?')">Submit Changes</button>
 
