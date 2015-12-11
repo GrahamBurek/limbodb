@@ -217,7 +217,7 @@ function update_users($dbc){
     if($results){
         while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
             # Goes through all admins in the table...
-            for ($i = 0; $i < mysqli_num_rows($results); $i++){
+            for ($i = 0; $i < mysqli_num_rows($results) - 1; $i++){
                 $buttonPressed = $_POST['delete' . $i];
                 $id = $_POST['admin_id' . $i];
 
@@ -324,6 +324,8 @@ function make_new_admin($dbc)
                 # Execute the query
                 $results = mysqli_query($dbc, $query);
                 check_results($results);
+                header("Location: manage_users.php");
+                exit("Redirecting to user panel");
 
                 } else {
                      echo '<p> Please make sure passwords match </p>';
