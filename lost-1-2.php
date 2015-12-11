@@ -104,7 +104,7 @@ session_start();
                         move_uploaded_file($_FILES["imgfile"]["tmp_name"], "uploads/$filename");
                         echo "Image upload Successful . <a href='uploads/$filename'>Click here</a> to view the uploaded image";
 
-                        insert_item($dbc, $item, $location, $category, $color, $descr, $date, $email, $status, $image);
+                        insert_item($dbc, $item, $location, $type, $color, $descr, $date, $email, $status, $image);
                         $_SESSION['inserted'] = true;
                         header('Location: index.php');
                         die("Unauthorized User!");
@@ -113,7 +113,7 @@ session_start();
                 else if (empty($_FILES["imgfile"]["name"]))
                 {
                     // Inserts the listing if valid (no image)
-                    insert_item($dbc, $item, $location, $category, $color, $descr, $date, $email, $status, $image);
+                    insert_item($dbc, $item, $location, $type, $color, $descr, $date, $email, $status, $image);
                     $_SESSION['inserted'] = true;
                     header('Location: index.php');
                     die("Unauthorized User!");

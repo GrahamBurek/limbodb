@@ -488,16 +488,16 @@ function validate_listing($item, $location, $category, $color, $date, $email){
     echo "<p style='color:red;'>Please fill out all required fields.</p>";
     return false;
   } 
-  // Makes sure the submitted email is a valid email address
-  else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-    echo "<p style='color:red;'>Invalid email.</p>";
-    return false;
-  } 
   // Makes sure that the date entered is not in the future
   else if(strtotime($date) > time()) {
     echo "<p style='color:red;'>Please enter a past date.</p>";
     return false;
-  } else {
+  }
+  // Makes sure the submitted email is a valid email address
+  else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    echo "<p style='color:red;'>Invalid email.</p>";
+    return false;
+  }  else {
     return true;
   }
 
