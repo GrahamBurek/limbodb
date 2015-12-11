@@ -40,6 +40,9 @@ function buildEmailButton($dbc, $id){
  */
 function sendEmail($dbc, $address, $id){
 
+  ini_set("smtp_port", 465);
+  ini_set("SMTP", "smtp.gmail.com");
+
   // Create query to get all listings
   $query = 'SELECT * FROM stuff WHERE id=' . $id;
 
