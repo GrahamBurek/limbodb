@@ -33,7 +33,7 @@ require('includes/admin_tools.php');
 
 <!-- Main page content: -->
 <div id="mainForm">
-    <h3>Here you can manage administrators or change your password.</h3>
+    <h3>Here you can manage administrators or change your password. (Superuser "admin" cannot be deleted.)</h3>
 
     <!-- Manage users table -->
     <form action="manage_users.php" method="POST">
