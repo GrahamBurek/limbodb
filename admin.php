@@ -35,6 +35,7 @@ if($_SESSION['logged_in'] == true){
 <div id="mainForm">
 <h1>Administrator Panel</h1>
 <h3>Welcome <?php echo(getAdmin($dbc, $pid)); ?>!</h3>
+<p> Click the tabs above to manage administrator accounts or manage listings.</p>
 
 </div>
 
