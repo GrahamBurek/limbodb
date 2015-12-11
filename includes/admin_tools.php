@@ -277,7 +277,7 @@ function show_users($dbc) {
             echo '<TD>' . $row['reg_date'] . '</TD>' ;
             echo '<TD>' . '<button onclick="return confirm(\'Are you sure you wish to delete this admin?\')" type="submit" name="delete' . $num . '" ';
             if($row['user_id'] == $_SESSION['pid'] || $row['user_id'] == 1)
-                echo 'style="display:none;"';
+                echo 'disabled style=""';
             echo '>Delete User</button>' . '</TD>' ;
             echo '</TR>';
             echo '<input type="hidden" name="admin_id' . $num . '" value="' . $row['user_id'] . '">';
