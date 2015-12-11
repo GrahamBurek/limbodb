@@ -101,9 +101,15 @@ session_start();
                         die("Unauthorized User!");
                     }
                 }
-                else
+                else if (empty($_FILES["imgfile"]["name"]))
                 {
-                    echo "invalid file.";
+                    insert_item($dbc, $item, $location, $category, $color, $descr, $date, $email, $status, $image);
+                    $_SESSION['inserted'] = true;
+                    header('Location: index.php');
+                    die("Unauthorized User!");
+                }
+                else {
+                    echo "Invalid image file type.";
                 }
                 
 
