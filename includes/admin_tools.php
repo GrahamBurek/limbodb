@@ -10,7 +10,7 @@ require('helpers.php') ;
  * @return the first name of the admin
  */
 function getAdmin($dbc, $id){
-  # Make database query:
+  # Make database query to get admin name:
   $query = "SELECT first_name FROM users WHERE user_id='" . $id . "'";
 
   # Execute the query
@@ -81,7 +81,7 @@ function validate($dbc, $username, $password)
 
 
 /**
- * @desc changes the status of all items in the database the status set in the admin panel
+ * @desc Changes the status of all items in the database the status set in the admin panel
  * @param $dbc - the database connection object
  */
 function update_all_stuff_admin($dbc){
@@ -112,7 +112,7 @@ function update_all_stuff_admin($dbc){
 }
 
 /**
- * @desc generates a table of all listings with a dropdown to change status
+ * @desc Generates a table of all listings with a dropdown to change status
  * @param $dbc - the database connection object
  */
 function show_all_stuff_admin($dbc) {
@@ -137,7 +137,7 @@ function show_all_stuff_admin($dbc) {
       echo '</TR>';
 
       $num = 0;
-      # For each row result, generate a table row with a link
+      # For each row result, generate a table row with a link and a drop down list
       while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
       {
         $alink = '<A HREF = results.php?id=' . $row['id'] . '>' . $row['item'] . ' </A>';
@@ -147,6 +147,7 @@ function show_all_stuff_admin($dbc) {
         echo '<TR>';
         echo '<TD>' . $row['item_date'] . '</TD>';
 
+        # Make sure the correct status is selected in the dropdown
         if ($row['status'] == 'Lost') {
         echo '<TD>' . '<select name="item-status' . $num . '">
                 <option value="Lost" selected>Lost</option>
@@ -185,12 +186,13 @@ function show_all_stuff_admin($dbc) {
 }
 
 /**
- * @desc changes the password of the currently logged in admin
+ * @desc Changes the password of the currently logged in admin
  * @param $dbc - the database connection object
  * @param $admin_id - the id of the logged in admin
  * @param $newpass - the new password
  */
 function change_password($dbc, $admin_id, $newpass){
+    # Create query to change password
     $query = 'UPDATE users SET pass ="' . $newpass . '" WHERE user_id=' . $admin_id;
 
     # Execute the query
@@ -200,24 +202,26 @@ function change_password($dbc, $admin_id, $newpass){
     mysqli_free_result($results);
 }
 
-# Checks to see if an admin should be deleted.
 /**
- * @desc deletes the selected admin the corresponding delete button is pressed
+ * @desc Deletes the selected admin the corresponding delete button is pressed
  * @param $dbc - the database connection object
  */
-function update_users($dbc){
+function update_users($dbc)
+    # Create query to get all admins
     $query = 'SELECT * FROM users';
 
+    # Execute query
     $results = mysqli_query($dbc, $query);
     check_results($results);
 
     if($results){
         while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
+            # Goes through all admins in the table...
             for ($i = 0; $i < mysqli_num_rows($results); $i++){
                 $buttonPressed = $_POST['delete' . $i];
                 $id = $_POST['admin_id' . $i];
 
-
+                # ...And deletes the ones that the user selected
                 if(isset($buttonPressed)){
                     $deleteQuery = 'DELETE FROM users WHERE user_id=' . $id;
                     $results_delete = mysqli_query($dbc, $deleteQuery);
@@ -232,7 +236,7 @@ function update_users($dbc){
 }
 
 /**
- * @desc generates a table of admins with corresponding delete buttons
+ * @desc Generates a table of admins with corresponding delete buttons
  * @param $dbc - the database connection object
  */
 function show_users($dbc) {
@@ -284,10 +288,16 @@ function show_users($dbc) {
         mysqli_free_result( $results ) ;
     }
 }
+
+/**
+* @desc Creates a new admin based on user input
+* @param $dbc - the database connection object
+**/
 function make_new_admin($dbc)
 {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        # Validates the user input
         if (isset($_POST['new_admin_submit']) &&
             !empty($_POST['username']) &&
             !empty($_POST['first_name']) &&
@@ -303,6 +313,8 @@ function make_new_admin($dbc)
                 $lastName = $_POST['last_name'];
                 $email = $_POST['email'];
                 $password = $_POST['password'];
+
+                # Create query to insert new admin into database
                 $query = 'INSERT INTO users(username, first_name, last_name, email, pass, reg_date) VALUES("' . $username . '", "'
                     . $firstName . '", "' . $lastName . '", "' . $email . '", "' . $password . '", Now())';
 

@@ -1,5 +1,6 @@
 <?php
 
+// Include third-party PHP email library
 require("php-mailer/class.phpmailer.php");
 
 
