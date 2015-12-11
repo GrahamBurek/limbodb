@@ -148,24 +148,25 @@ session_start();
                 <?php 
                 echo "<option value='' disabled selected>Location</option>";
                 dropdown_locations_selected($dbc, $location); ?>
-            </select></p>
+            </select>
+            <span class="required">*</span></p></p>
 
 
             <!-- date field for when item was lost -->
-            <p>Date lost: <input name="date" type="date" value="<?php echo $date; ?>">
+            <p>Date lost: <input name="date" type="date" value="<?php echo $date; ?>"><span class="required">*</span></p>
 
-                <!-- text field for email address-->
-                <p><input type="text" name="email" placeholder="E-Mail Address">
+            <!-- text field for email address-->
+            <p><input type="text" name="email" placeholder="E-Mail Address">
 
-                    <span class="required" style= "margin-right:45px;">*</span>
-                    Upload an Image:<input type="file" name="imgfile"><br></p>
-                    <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
-                    <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
-                    <input type="text" name="status" value="Lost" hidden>
+                <span class="required" style= "margin-right:45px;">*</span>
+                Upload an Image:<input type="file" name="imgfile"><br></p>
+                <p><textarea name="further-description" placeholder="Further Description"></textarea></p>
+                <input action="action" type="button" class="back-button" value="Back" onclick="history.go(-1);" style="width:75px;"/>
+                <input type="text" name="status" value="Lost" hidden>
 
-                    <!-- submit button-->
-                    <button type="submit" name="submit" onclick="return confirm('Are you sure all the information is correct?')">Submit</button>
-                </form>
-            </div>
-        </body>
-        </html>
+                <!-- submit button-->
+                <button type="submit" name="submit" onclick="return confirm('Are you sure all the information is correct?')">Submit</button>
+            </form>
+        </div>
+    </body>
+    </html>
