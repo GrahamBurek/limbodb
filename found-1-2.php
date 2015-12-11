@@ -93,7 +93,7 @@ session_start();
                     // Checks for redundant filename
                     if(file_exists($_FILES["imgfile"]["name"]))
                     {
-                        echo "<p style="color:red;">Image file name exists.</p>";
+                        echo "<p style='color:red;'>Image file name exists.</p>";
 
                     }
                     else
@@ -117,7 +117,7 @@ session_start();
                     die("Unauthorized User!");
                 }
                 else {
-                    echo "<p style="color:red;">Invalid image file type.</p>";
+                    echo "<p style='color:red;'>Invalid image file type.</p>";
                 }
                 
 
