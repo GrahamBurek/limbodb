@@ -60,6 +60,7 @@ session_start();
 		?>
 
 		<script type="text/javascript">
+		// Reloads page with correct dropdown time selected
 		function reload(select){
 			var url = "index.php";
 			url = url + "?time=" + select.value;
