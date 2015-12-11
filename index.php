@@ -34,7 +34,7 @@ session_start();
 		echo '<p style="color:green">Item successfully inserted!</p>';
 		}
 
-		if(isset($_SESSION['emailed'])){
+		if($_SESSION['emailed'] == true){
 			$_SESSION['emailed'] = false;
 		echo '<p style="color:green">Email sent!</p>';
 		}
