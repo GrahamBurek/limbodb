@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start(); 
 if (isset($_POST['id']) && isset($_POST['address'])) {
 ?>
 
@@ -27,11 +28,9 @@ if (isset($_POST['id']) && isset($_POST['address'])) {
 
 		echo "<h1>" . $error . "</h1>";
 
-		// if($result){
-		// 	echo "<h1>Email was sent successfully. Wait for other user to contact you.</h1>";
-		// } else {
-		// 	echo "<h1>Email was not sent successfully. Try going back and entering your address again. If that doesn't work, contact a webmaster.</h1>";
-		// }
+		$_SESSION['emailed'] = true;
+		header('Location: index.php');
+    	die("Redirecting to index.php!");
 	 }
 
 ?>

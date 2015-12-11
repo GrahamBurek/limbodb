@@ -30,8 +30,6 @@ session_start();
 		hiddenIdField.setAttribute("value", id);
 		emailForm.appendChild(hiddenIdField);
 
-
-
 		document.body.appendChild(emailForm);
 		emailForm.submit();
 
@@ -56,6 +54,7 @@ session_start();
 		$color = $_POST['item-color'];
 		$descr = $_POST['further-description'];
 		$date = $_POST['date'];
+		$email = $_POST['email'];
 		$status = $_POST['status'];
 	}
 	
@@ -95,9 +94,11 @@ session_start();
     	}
 	}
 	else if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		insert_item($dbc, $item, $location, $category, $color, $descr, $date, $status, $image);
+		insert_item($dbc, $item, $location, $category, $color, $descr, $date, $email, $status, $image);
+		$_SESSION['inserted'] = true;
+		header('Location: index.php');
+    	die("Unauthorized User!");
 
-		echo "<b>Success!</b>";
 	}
 ?>
 <br><br>
