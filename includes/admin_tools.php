@@ -309,7 +309,6 @@ function make_new_admin($dbc)
                 # Execute the query
                 $results = mysqli_query($dbc, $query);
                 check_results($results);
-                mysqli_free_result($results);
 
                 } else {
                      echo '<p> Please make sure passwords match </p>';

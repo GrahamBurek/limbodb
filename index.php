@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +29,20 @@
 	<h1>Welcome to Limbo!</h1>
 	<br>
 	<h3>Lost something? Found something? Reunite owners with their items by posting in Limbo!</h3>
+	<?php if (isset($_SESSION['inserted']) && $_SESSION['inserted'] == true) {
+		$_SESSION['inserted'] = false;
+		echo '<p style="color:green">Item successfully inserted!</p>';
+		}
+
+		if(isset($_SESSION['emailed'])){
+			$_SESSION['emailed'] = false;
+		echo '<p style="color:green">Email sent!</p>';
+		}
+	?>
 	<br>
 <div id="table">
 <?php
+	# Generate table of lost and found items
 	if (isset($_GET['time'])) {
 		$time = $_GET['time'];
 		show_recent_quicklinks($dbc,$time);

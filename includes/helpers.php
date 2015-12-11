@@ -487,9 +487,9 @@ else
  * @param $image - an image of the item
  * @return bool|mysqli_result - the result of the query
  */
-function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $status, $image) {
-  $query = 'INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, status, image) 
-  VALUES ("' . $item . '" , ' . $location . ' , "' . $category . '" , "' . $color . '" , "' . $descr . '" , STR_TO_DATE("' . $date . '","%Y-%m-%d"), Now(), Now(),"'. $status . '", "'. $image . '" )' ;
+function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $email, $status, $image) {
+  $query = 'INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, uploaderEmail, status, image) 
+  VALUES ("' . $item . '" , ' . $location . ' , "' . $category . '" , "' . $color . '" , "' . $descr . '" , STR_TO_DATE("' . $date . '","%Y-%m-%d"), Now(), Now(),"'. $email . '", "' . $status . '", "'. $image . '" )' ;
 
   $results = mysqli_query($dbc, $query) ;
   check_results($results) ;
