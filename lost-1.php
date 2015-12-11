@@ -20,29 +20,60 @@ session_start();
 	$color = "";
 	$location = "";
 	$date = "";
+	
+	# Variable to hold possible link data if redirect occurs:
+	$appendToLink = array();
 
 	# Set value of variables if GET variables are set:
 	if(isset($_GET['item-type'])){
 		$type = $_GET['item-type'];
+		$appendToLink['item-type'] = $type;
 	}
 
 	if(isset($_GET['item-color'])){
 		$color = $_GET['item-color'];
+		$appendToLink['item-color'] = $color;
 	}
 
 	if(isset($_GET['location'])){
 		$location = $_GET['location'];
+		$appendToLink['location'] = $location;
 	}
 
 	if(isset($_GET['date'])){
 		$date = $_GET['date'];
+		$appendToLink['date'] = $date;
 	}
 
-	# If none of type, color, or location fields are set, send user back to lost.php:
-	if(empty($type) && empty($color) && empty($location)){
-		$_SESSION['emptyFields'] = true;
-		header('Location: lost.php');
-		exit("No fields set, redirecting to lost.php...");
+
+	# If all type, color, and location fields are not set, send user back to found.php:
+	if(empty($type) || empty($color) || empty($location)){
+		if(empty($appendToLink)){
+			# Tell lost.php that the user is there because of empty fields:
+			$_SESSION['emptyFields'] = true;
+			header('Location: lost.php');
+			exit("No fields set, redirecting to lost.php...");
+		} else {
+			# Get amount of arguments to append to link for sticky form:
+			$count = count($appendToLink);
+			$link = "lost.php";
+			# Build link:
+			for($i = 0; $i < $count; $i++){
+				if($i == 0){
+					$link = $link . "?item-type=" . $appendToLink['item-type'];
+				} else if($i == 1) {
+					$link = $link . "&item-color=" . $appendToLink['item-color']; 
+				} else if($i == 2) {
+					$link = $link . "&location=" . $appendToLink['location'];
+				} else if($i == 3) {
+					$link = $link . "&date=" . $appendToLink['date'];
+				}
+			}
+			$_SESSION['emptyFields'] = true;
+			header('Location: ' . $link);
+			exit("Redirecting to lost.php...");
+		}	
+		
 	}
 
 	$opposite_status = "Found";

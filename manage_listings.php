@@ -13,7 +13,6 @@ $pid = $_SESSION['pid'];
     <link rel="stylesheet" type="text/css" href="templates/sharedStyle.css">
 </head>
 <body>
-<!-- Navbar include statement: -->
 <?php
 require('includes/init.php');
 require('includes/admin_tools.php');
@@ -32,21 +31,6 @@ require('includes/admin_tools.php');
     <h3>Here you can change any of the item statuses. Change any statuses, then press Submit Changes.</h3>
     <form action="manage_listings.php" method="post">
         <?php
-
-        // if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
-        //     load('admin_login.php', $pid);
-        // }
-
-        // if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
-
-        //     $username = $_POST['username'] ;
-        //     $password = $_POST['password'] ;
-
-        //     $pid = validate($username, $password) ;
-
-        //     if($pid == -1)
-        //         load('admin_login.php', $pid);
-        // }
 
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['fromHere']) && $_POST['fromHere'] == 'yes'){
 

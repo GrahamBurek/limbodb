@@ -2,9 +2,14 @@
 
 require("php-mailer/class.phpmailer.php");
 
+
+/* @desc Builds an a button that will lead to sending an email the listing poster.
+ * The button displays different text depending on whether it is a lost or found listing
+ * @param $dbc the database connection object
+ * @param $id id of the listing
+ */
 function buildEmailButton($dbc, $id){
 
-  // Build button differently if user is looking at a lost or a found item:
   // Create query to find item status
   $query = 'SELECT status FROM stuff WHERE id =' . $id; 
   
@@ -21,9 +26,15 @@ function buildEmailButton($dbc, $id){
      } 
       
   }
-
+    mysqli_free_result($results);
 }
 
+/* @dec sends an email to the the poster of the listing in order to notify them their item has been claimed/found.
+ * @param $dbc - the database variable
+ * @param $address - the destination email address
+ * @param $id - the id of the claimed listing
+ * @return string - success or failure with error
+ */
 function sendEmail($dbc, $address, $id){
 
   $query = 'SELECT * FROM stuff WHERE id=' . $id;
@@ -107,9 +118,13 @@ function sendEmail($dbc, $address, $id){
   }
 }
 }
+    mysqli_free_result($results);
 }
 
-
+/* @ desc pulls from the database any listings from a the time period selected
+ * @param $dbc - the database connection object
+ * @param $time - how far back to search for listings. Chosen from a dropdown (day/week/month)
+ */
 function show_recent_quicklinks($dbc, $time){
   if ($time == 'day') {
     $query = 'SELECT id, item, item_date, status FROM stuff WHERE item_date >= DATE_SUB(Now(), INTERVAL 1 DAY) ORDER BY item_date DESC';
@@ -160,11 +175,14 @@ function show_recent_quicklinks($dbc, $time){
       echo '</TABLE>';
 
       # Free up the results in memory
-      mysqli_free_result( $results ) ;
+
   }
+    mysqli_free_result( $results ) ;
   }
 
-
+/* @desc generates a table of "quick links" with some information about each item and a link to the full listing page
+ * @param $dbc - the database connection object
+ */
 function show_quicklinks($dbc) {
   # Create a query to show item quicklinks
   $query = 'SELECT id, item, item_date, status FROM stuff ORDER BY item_date DESC';
@@ -208,13 +226,18 @@ function show_quicklinks($dbc) {
 
       # End the table
       echo '</TABLE>';
-
-      # Free up the results in memory
-      mysqli_free_result( $results ) ;
   }
+  # Free up the results in memory
+    mysqli_free_result( $results ) ;
 }
 
-# Searches the database to find items matching the criteria given by the user
+/* @desc Searches the database to find items matching the criteria given by the user
+ * @param $dbc - he database connection object
+ * @param $type - item type
+ * @param $color - item color
+ * @param $location - location where item was lost
+ * @param $opposite_status - the status opposite the status of the item user is searching for
+ */
 function show_possible_matches($dbc, $type, $color, $location, $opposite_status) {
   # Create a query to get partially matching items from database:
   $query = "SELECT stuff.id, item, location_name, category, color, item_date FROM stuff INNER JOIN locations ON stuff.location_id=locations.id WHERE status = '" . $opposite_status . "' AND (location_id ='" . $location . "'" .
@@ -256,13 +279,18 @@ function show_possible_matches($dbc, $type, $color, $location, $opposite_status)
         # End the table
         echo '</TABLE>';
 
-        # Free up the results in memory
-        mysqli_free_result( $results ) ;
+
     }
   }
+  # Free up the results in memory
+    mysqli_free_result( $results ) ;
 }
 
-# Shows a single listing from a quicklink
+/**
+ * @desc Shows a single listing from a quicklink
+ * @param $dbc - the database connection object
+ * @param $id - item ID
+ */
 function show_listing($dbc, $id) {
   # Create a query to 
   $query = 'SELECT * FROM stuff LEFT JOIN locations ON stuff.location_id=locations.id WHERE stuff.id = ' . $id;
@@ -291,13 +319,16 @@ function show_listing($dbc, $id) {
         echo '<p>Item Description: ' . $row['description'] . '</p>';
       }
 
-      # Free up the results in memory
-      mysqli_free_result( $results ) ;
   }
+  # Free up the results in memory
+    mysqli_free_result( $results ) ;
 }
 
-#pull all location names from database and generate a dropdown option for each
-#should be put inside a <select> tag
+
+/**
+ * @desc pull all location names from database and generate a dropdown option for each. Should be put inside a <select> tag
+ * @param $dbc - the database connection object
+ */
 function dropdown_locations($dbc)
 {
     # Create a query to
@@ -316,13 +347,52 @@ function dropdown_locations($dbc)
             echo '<option value='. $i . '>' . $row['location_name'] . '</option>';
             $i++;
         }
+
+
+    }
+    # Free up the results in memory
+    mysqli_free_result($results);
+}
+
+/**
+ * @desc pull all location names from database and generate a dropdown option for each. Should be put inside a <select> tag. Applies sticky fields to form.
+ * @param $dbc - the database connection object
+ */
+function dropdown_locations_sticky($dbc)
+{
+    # Create a query to
+    $query = 'SELECT location_name FROM locations';
+
+    # Execute the query
+    $results = mysqli_query($dbc, $query);
+    check_results($results);
+
+    # Show results
+    if ($results) {
+        # But...wait until we know the query succeed before
+        # For each row result, generate a dropdown option with location name
+      $i = 1;
+        while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
+          if($_GET['location'] == $i){
+            echo '<option value='. $i . ' selected>' . $row['location_name'] . '</option>';
+            $i++;
+          } else {
+            echo '<option value='. $i . '>' . $row['location_name'] . '</option>';
+            $i++;
+            }
+        }
             # Free up the results in memory
             mysqli_free_result($results);
 
     }
 }
 
-# Same as above, but creates a sticky dropdown form.
+
+/**
+ * @desc pull all location names from database and generate a sticky dropdown option for each. Should be put inside a <select> tag
+ * @param $dbc - the database connection object
+ * @param $location - location of item
+ */
 function dropdown_locations_selected($dbc, $location)
 {
     # Create a query to
@@ -345,13 +415,17 @@ function dropdown_locations_selected($dbc, $location)
           }
             $i++;
         }
-            # Free up the results in memory
-            mysqli_free_result($results);
 
     }
+    # Free up the results in memory
+    mysqli_free_result($results);
 }
 
-# Checks the query results as a debugging aid
+
+/**
+ * @desc Checks the query results as a debugging aid
+ * @param $results - the result of a query
+ */
 function check_results($results) {
   global $dbc;
 
@@ -359,6 +433,9 @@ function check_results($results) {
     echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>'  ;
 }
 
+/**
+ * @desc checks if an image file has been added to the form and uploads it to the database if it has
+ */
 function image_upload(){
 
 if(isset($_REQUEST['submit']))
@@ -396,7 +473,20 @@ else
 
 }
 
-# Inserts a record into the stuff table
+
+/**
+ * @desc Inserts a record into the stuff table
+ * @param $dbc - the database connection object
+ * @param $item - the name of the item
+ * @param $location - location the item was lost/found as selected from the dropdown
+ * @param $category - the type of item
+ * @param $color - the color of the item
+ * @param $descr - the description added by the listing poster
+ * @param $date - the date the item was lost/found
+ * @param $status - the status of the item (lost/found)
+ * @param $image - an image of the item
+ * @return bool|mysqli_result - the result of the query
+ */
 function insert_item($dbc, $item, $location, $category, $color, $descr, $date, $status, $image) {
   $query = 'INSERT INTO stuff(item, location_id, category, color, description, item_date, create_date, update_date, status, image) 
   VALUES ("' . $item . '" , ' . $location . ' , "' . $category . '" , "' . $color . '" , "' . $descr . '" , STR_TO_DATE("' . $date . '","%Y-%m-%d"), Now(), Now(),"'. $status . '", "'. $image . '" )' ;
