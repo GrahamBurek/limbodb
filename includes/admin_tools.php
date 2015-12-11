@@ -206,7 +206,7 @@ function change_password($dbc, $admin_id, $newpass){
  * @desc Deletes the selected admin the corresponding delete button is pressed
  * @param $dbc - the database connection object
  */
-function update_users($dbc)
+function update_users($dbc){
     # Create query to get all admins
     $query = 'SELECT * FROM users';
 
@@ -221,7 +221,7 @@ function update_users($dbc)
                 $buttonPressed = $_POST['delete' . $i];
                 $id = $_POST['admin_id' . $i];
 
-                # ...And deletes the ones that the user selected
+                # ...And deletes the one that the user selected
                 if(isset($buttonPressed)){
                     $deleteQuery = 'DELETE FROM users WHERE user_id=' . $id;
                     $results_delete = mysqli_query($dbc, $deleteQuery);
@@ -236,7 +236,7 @@ function update_users($dbc)
 }
 
 /**
- * @desc Generates a table of admins with corresponding delete buttons
+ * @desc Generates a table of admins with corresponding delete buttons (except for logged in admin and superadmin)
  * @param $dbc - the database connection object
  */
 function show_users($dbc) {
@@ -275,7 +275,10 @@ function show_users($dbc) {
             echo '<TD>' . $row['first_name'] . ' ' . $row['last_name'] . '</TD>' ;
             echo '<TD>' . $row['email'] . '</TD>' ;
             echo '<TD>' . $row['reg_date'] . '</TD>' ;
-            echo '<TD>' . '<button onclick="return confirm(\'Are you sure you wish to delete this admin?\')" type="submit" name="delete' . $num . '">Delete User</button>' . '</TD>' ;
+            echo '<TD>' . '<button onclick="return confirm(\'Are you sure you wish to delete this admin?\')" type="submit" name="delete' . $num . '" ';
+            if($row['user_id'] == $_SESSION['pid'] || $row['user_id'] == 1)
+                echo 'style="display:none;"';
+            echo '>Delete User</button>' . '</TD>' ;
             echo '</TR>';
             echo '<input type="hidden" name="admin_id' . $num . '" value="' . $row['user_id'] . '">';
             $num++;
