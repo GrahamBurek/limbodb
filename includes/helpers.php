@@ -304,12 +304,13 @@ function show_listing($dbc, $id) {
   {
       # But...wait until we know the query succeed before
       # rendering the table start.
-    echo '<H1>Listing</H1>' ;
+    
 
       # For the result, generate a table row
     if( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
     {
-      if($row['image'])
+      echo '<H1>'. $row['status'] . '</H1>' ;
+      if(!($row['image'] == 'uploads/'))
         echo '<img src="' . $row['image'] . '" style="width:200px; height: auto; margin:50px" />';
 
       echo '<p><b>Item Name:</b> ' . $row['item'] . '</p>';
@@ -318,6 +319,7 @@ function show_listing($dbc, $id) {
       if($row['location_name']) 
         echo '<p><b>Location where ' . strtolower($row['status']) . ':</b> ' . $row['location_name'] . '</p>';
       echo '<p><b>Date ' . strtolower($row['status']) . ':</b> ' . $row['item_date'] .'</p>';
+      if(trim($row['description']))
       echo '<p><b>Item Description:</b> ' . $row['description'] . '</p>';
     }
 
